@@ -12,6 +12,10 @@ public abstract class HumanTypes implements UserInterface{
         this.persontype = peopleType;
     }
 
+    public HumanTypes() {
+
+    }
+
     public TypeOfPeople getPeopleType() {
         return persontype;
     }
@@ -38,6 +42,7 @@ public abstract class HumanTypes implements UserInterface{
 
     @Override
     public String toString() {
+<<<<<<< HEAD
         return  "\nName: " + name +
                 "\nSurname: " + surname;
     }
@@ -55,5 +60,9 @@ public abstract class HumanTypes implements UserInterface{
             return flag;
 
         return true;
+=======
+        return  "Name:'" + name + '\'' +
+                " Surname: '" + surname + '\'';
+>>>>>>> 0b6c4ef0af0f1256785a0a5c1b2b30261b0faeee
     }
 }

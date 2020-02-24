@@ -24,6 +24,7 @@ public class Cargo {
      */
     private Branch endBranch;
 
+<<<<<<< HEAD
     /**
      * No parameter constructor of cargo class
      */
@@ -35,6 +36,20 @@ public class Cargo {
      * Getting sender of cargo
      * @return Customer who Sender of cargo
      */
+=======
+    public Cargo() {
+    }
+
+    public Cargo(Customer sender, Customer receiver, int cargoNo, StatusOfCargo statusOfCargo, Branch startBranch, Branch endBranch) {
+        this.sender = sender;
+        this.receiver = receiver;
+        this.cargoNo = cargoNo;
+        this.statusOfCargo = statusOfCargo;
+        this.startBranch = startBranch;
+        this.endBranch = endBranch;
+    }
+
+>>>>>>> 0b6c4ef0af0f1256785a0a5c1b2b30261b0faeee
     public Customer getSender() {
         return sender;
     }
@@ -97,6 +112,7 @@ public class Cargo {
 
     @Override
     public String toString() {
+<<<<<<< HEAD
         return  "\nCargoNo:" + cargoNo+
                 "\nSender:" + sender +
                 "\nReceiver:" + receiver +
@@ -121,6 +137,14 @@ public class Cargo {
         this.statusOfCargo = statusOfCargo;
         this.startBranch = startBranch;
         this.endBranch = endBranch;
+=======
+        return  "Sender:" + sender +
+                " ,Receiver:" + receiver +
+                " ,CargoNo:" + cargoNo +
+                " ,StatusOfCargo:" + statusOfCargo +
+                " ,StartBranch:" + startBranch +
+                " ,EndBranch:" + endBranch;
+>>>>>>> 0b6c4ef0af0f1256785a0a5c1b2b30261b0faeee
     }
 
     /**

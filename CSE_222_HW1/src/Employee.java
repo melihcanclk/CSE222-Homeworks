@@ -13,6 +13,10 @@ public abstract class Employee extends HumanTypes {
         return super.getPeopleType();
     }
 
+    public Employee() {
+        super();
+    }
+
     @Override
     public void setPeopleType(TypeOfPeople peopleType) {
         super.setPeopleType(peopleType);
@@ -45,7 +49,7 @@ public abstract class Employee extends HumanTypes {
 
     public static String getInput(String var){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter "+ var + ":");
+        System.out.println("Enter "+ var);
         return sc.nextLine();
     }
 

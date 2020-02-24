@@ -20,7 +20,11 @@ public class DynamicArray<T> {
             ensureCapacity(2);
         }
         array[size] = element;
+<<<<<<< HEAD
         System.out.println(element + " added as " + element.getClass().getName() + "\n");
+=======
+        System.out.println(element + " added to " + element.getClass().getName());
+>>>>>>> 0b6c4ef0af0f1256785a0a5c1b2b30261b0faeee
         size++;
     }
 
@@ -77,7 +81,15 @@ public class DynamicArray<T> {
                 System.out.println(getElement(i));
             }
         }
+<<<<<<< HEAD
 
+=======
+        System.out.println("Elements in " + getType().getName() + ":\n");
+        for(int i = 0; i< size(); ++i){
+            System.out.print(i+1 + "->");
+            System.out.println(getElement(i));
+        }
+>>>>>>> 0b6c4ef0af0f1256785a0a5c1b2b30261b0faeee
         System.out.println();
     }
 
@@ -91,6 +103,7 @@ public class DynamicArray<T> {
                 System.out.println(getElement(i));
                 ++j;
                 flag = true;
+                ++j;
             }
         }
         if(!flag){

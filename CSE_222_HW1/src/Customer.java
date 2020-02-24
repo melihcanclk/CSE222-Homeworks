@@ -1,8 +1,17 @@
 public class Customer extends HumanTypes{
 
+<<<<<<< HEAD
     public Customer(String name, String surname, TypeOfPeople peopleType, CustomerType type) {
         super(name, surname, peopleType);
         this.type = type;
+=======
+    private CustomerType type;
+
+    @Override
+    public String toString() {
+        return  super.toString() +
+                "Type: " + getType();
+>>>>>>> 0b6c4ef0af0f1256785a0a5c1b2b30261b0faeee
     }
 
     /**

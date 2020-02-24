@@ -21,8 +21,20 @@ public class Admin extends Employee{
      */
     public static void addBranch(DynamicArray<Branch> branchArray){
         String name = getInput("Name");
+<<<<<<< HEAD
         Branch branch = new Branch(name);
         branchArray.addElement(new Branch(name));
+=======
+        boolean flag = false;
+        for (int i = 0; i< branchArray.size();i++){
+            if(branchArray.getElement(i).getName().equals(name)){
+                flag = true;
+            }
+        }
+        if(!flag){
+            branchArray.addElement(new Branch(name));
+        }else System.out.println(name + " already inside of branches.\n");
+>>>>>>> 0b6c4ef0af0f1256785a0a5c1b2b30261b0faeee
     }
 
     /**
@@ -67,6 +79,7 @@ public class Admin extends Employee{
         String surname = getInput("Surname");
 
         if(typeOfPerson.name().equals(BranchEmployee.class.getName())){
+<<<<<<< HEAD
             BranchEmployee branchEmployee = new BranchEmployee(name,surname,typeOfPerson,branch);
             Object temp = (Object) employeeArray;
             @SuppressWarnings("unchecked")
@@ -74,9 +87,24 @@ public class Admin extends Employee{
             if(!HumanTypes.isInclude(branchEmployee,castArray)){
                 employeeArray.addElement(branchEmployee);
             }
+=======
+            BranchEmployee branchEmployee = new BranchEmployee(name,surname,typeOfPerson, branch);
+            Object temp = (Object) employeeArray;
+            @SuppressWarnings("unchecked")
+            DynamicArray<HumanTypes> castArray = (DynamicArray<HumanTypes>) temp;
+
+                employeeArray.addElement(branchEmployee);
+
+>>>>>>> 0b6c4ef0af0f1256785a0a5c1b2b30261b0faeee
 
         }else if(typeOfPerson.name().equals(TransportationPersonnel.class.getName())){
-            employeeArray.addElement(new TransportationPersonnel(name,surname,typeOfPerson));
+            TransportationPersonnel transportationPersonnel = new TransportationPersonnel(name,surname,typeOfPerson);
+            Object temp = (Object) employeeArray;
+            @SuppressWarnings("unchecked")
+            DynamicArray<HumanTypes> castArray = (DynamicArray<HumanTypes>) temp;
+
+                employeeArray.addElement(transportationPersonnel);
+
         }
 
     }
@@ -87,6 +115,7 @@ public class Admin extends Employee{
      * @param typeOfPeople type of person to check whether person is Branch Employee or Transportation Personnel
      */
     public static void removeEmployee( DynamicArray<Employee> employeeArray, TypeOfPeople typeOfPeople){
+<<<<<<< HEAD
         if(employeeArray.size()== 0){
             System.out.println( "No element to remove!!");
             return;
@@ -105,6 +134,29 @@ public class Admin extends Employee{
                 }
             }
         }
+=======
+
+        employeeArray.printElements(typeOfPeople);
+        int i = Integer.parseInt(getInput("employee will be deleted(0 for exit):"));
+        int  k=0;
+        boolean flag = false;
+        if(i == 0)
+            flag = true;
+        for (int j = 0; j< employeeArray.size();++j ){
+            if(employeeArray.getElement(j).getPeopleType() == typeOfPeople){
+                if(k==i-1 ) {
+                    System.out.println(employeeArray.getElement(j).getName() + " " + employeeArray.getElement(j).getSurname() + " deleted.");
+                    employeeArray.remove(j);
+                    flag = true;
+                }
+                ++k;
+            }
+        }
+        if(!flag){
+            System.out.println("Out Of Bound!!!\n");
+        }
+
+>>>>>>> 0b6c4ef0af0f1256785a0a5c1b2b30261b0faeee
     }
 
     /**
@@ -113,6 +165,6 @@ public class Admin extends Employee{
      */
     @Override
     public String toString() {
-        return "Admin" + super.toString();
+        return super.toString();
     }
 }

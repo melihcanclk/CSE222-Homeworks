@@ -6,6 +6,7 @@ public class TransportationPersonnel extends Employee{
 
     @Override
     public String toString() {
+<<<<<<< HEAD
         return  super.toString();
     }
 
@@ -27,5 +28,8 @@ public class TransportationPersonnel extends Employee{
     @Override
     public void setName(String name) {
 
+=======
+        return super.toString();
+>>>>>>> 0b6c4ef0af0f1256785a0a5c1b2b30261b0faeee
     }
 }
