@@ -2,9 +2,11 @@ import java.util.Scanner;
 
 public abstract class Employee extends HumanTypes {
 
+
     public Employee(String name, String surname, TypeOfPeople peopleType) {
         super(name, surname, peopleType);
     }
+
 
     @Override
     public TypeOfPeople getPeopleType() {
@@ -38,7 +40,7 @@ public abstract class Employee extends HumanTypes {
 
     @Override
     public String toString() {
-        return "Employee " + super.toString();
+        return super.toString();
     }
 
     public static String getInput(String var){

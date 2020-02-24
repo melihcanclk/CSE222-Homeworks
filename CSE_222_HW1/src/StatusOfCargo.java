@@ -1,3 +1,3 @@
 public enum StatusOfCargo {
-    arrived, notArrived
+    Arrived, Not_Arrived
 }

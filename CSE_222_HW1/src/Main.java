@@ -10,36 +10,78 @@ public class Main {
         DynamicArray<Cargo> cargoArray = new DynamicArray<>(Cargo.class);
         DynamicArray<Branch> branchArray = new DynamicArray<>(Branch.class);
         DynamicArray<Customer> customerArray = new DynamicArray<>(Customer.class);
+        /*
+         * Adding Branches To branchArray
+         */
         branchArray.addElement(new Branch("Gebze"));
         branchArray.addElement(new Branch("İstanbul"));
         branchArray.addElement(new Branch("Karabük"));
+        branchArray.addElement(new Branch("Ankara"));
+        branchArray.addElement(new Branch("İzmir"));
+        System.out.println();
+        /*
+         * Adding Employees To employeeArray
+         */
         employeeArray.addElement(new Admin("Melihcan", "Çilek", TypeOfPeople.Admin));
         employeeArray.addElement(new BranchEmployee("Batuhan", "Sami", TypeOfPeople.BranchEmployee,branchArray.getElement(0)));
         employeeArray.addElement(new BranchEmployee("Mert", "Çilek", TypeOfPeople.BranchEmployee,branchArray.getElement(0)));
         employeeArray.addElement(new BranchEmployee("Abdullah", "Küsgülü", TypeOfPeople.BranchEmployee,branchArray.getElement(1)));
         employeeArray.addElement(new BranchEmployee("Buğra Eren", "Yılmaz", TypeOfPeople.BranchEmployee,branchArray.getElement(1)));
+        employeeArray.addElement(new TransportationPersonnel("Emre", "Özbay", TypeOfPeople.TransportationPersonnel));
+        employeeArray.addElement(new TransportationPersonnel("Ali", "Bakan", TypeOfPeople.TransportationPersonnel));
+        employeeArray.addElement(new TransportationPersonnel("Veli", "Bakan", TypeOfPeople.TransportationPersonnel));
+        System.out.println();
+        /*
+         * Adding Customers To customerArray
+         */
+        customerArray.addElement(new Customer("Abdurrahman", "Yenidoğan",TypeOfPeople.Customer,CustomerType.Sender));
+        customerArray.addElement(new Customer("Sevinç", "Varaürer", TypeOfPeople.Customer, CustomerType.Receiver));
+        customerArray.addElement(new Customer("Rümeysa", "Dayı",TypeOfPeople.Customer,CustomerType.Sender));
+        customerArray.addElement(new Customer("Sultan", "Usul", TypeOfPeople.Customer, CustomerType.Receiver));
+        customerArray.addElement(new Customer("Timuçin", "Koptur",TypeOfPeople.Customer,CustomerType.Sender));
+        customerArray.addElement(new Customer("Gülistan", "Özülkü", TypeOfPeople.Customer, CustomerType.Receiver));
+        customerArray.addElement(new Customer("Sedef", "Kendirli", TypeOfPeople.Customer, CustomerType.Sender));
+        customerArray.addElement(new Customer("Hakak", "Işılak", TypeOfPeople.Customer, CustomerType.Receiver));
+        System.out.println();
+        /*
+         * Adding Cargo's to cargoArray that customer's have
+         */
+        cargoArray.addElement(new Cargo(customerArray.getElement(0),customerArray.getElement(1),10001,StatusOfCargo.Not_Arrived,
+                branchArray.getElement(0),branchArray.getElement(1)));
+
+        cargoArray.addElement(new Cargo(customerArray.getElement(2), customerArray.getElement(3),10002,StatusOfCargo.Not_Arrived,
+                branchArray.getElement(1),branchArray.getElement(3)));
+
+        cargoArray.addElement(new Cargo(customerArray.getElement(4), customerArray.getElement(5),10003,StatusOfCargo.Not_Arrived,
+                branchArray.getElement(1),branchArray.getElement(3)));
+
+        cargoArray.addElement(new Cargo(customerArray.getElement(6),customerArray.getElement(7),10004,StatusOfCargo.Not_Arrived,
+                branchArray.getElement(4),branchArray.getElement(2)));
+        System.out.println();
+
+
         int selection = Menus.mainMenu();
         while(selection != 0){
             switch (selection) {
                 case 1:
                     /*Upcasting by using Dynamic cast from employee array to HumanTypes Array*/
-                    /*Object temp = (Object) employeeArray;
+                    Object temp = (Object) employeeArray;
                     @SuppressWarnings("unchecked")
                     DynamicArray<HumanTypes> castArray = (DynamicArray<HumanTypes>) temp;
-                    int index = checkPerson( castArray,TypeOfPeople.Admin);*/
-                    int index = 1;
+                    int index = checkPerson( castArray,TypeOfPeople.Admin);
                     if(index >= 0){
-                        Menus.amdinDecissionMenu(branchArray,employeeArray);
+                        Menus.adminDecissionMenu(branchArray,employeeArray);
                     }
                     break;
                 case 2:
                     Menus.branchEmployeeDecisionMenu(cargoArray,customerArray,branchArray);
                     break;
                 case 3:
-                    System.out.println("1->Transportation Menu");
+                    Menus.transportationMenu();
+                    BranchEmployee.changeStatusOfCargo(cargoArray);
                     break;
                 case 4:
-                    System.out.println("1->Customer Menu");
+                    Menus.CustomerDecisionMenu(cargoArray);
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + selection);

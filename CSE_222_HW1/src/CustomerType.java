@@ -1,3 +1,3 @@
 public enum CustomerType {
-    receiver, sender
+    Receiver, Sender
 }

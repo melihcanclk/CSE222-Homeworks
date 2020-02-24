@@ -1,6 +1,6 @@
 
 
-public abstract class HumanTypes{
+public abstract class HumanTypes implements UserInterface{
 
     private String name;
     private String surname;
@@ -38,10 +38,22 @@ public abstract class HumanTypes{
 
     @Override
     public String toString() {
-        return "{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", peopleType=" + persontype +
-                '}';
+        return  "\nName: " + name +
+                "\nSurname: " + surname;
+    }
+    public static boolean isInclude(HumanTypes humanTypes, DynamicArray<HumanTypes> array){
+        boolean flag = false;
+        for (int i = 0; i< array.size();++i){
+            if(humanTypes.getName().equals(array.getElement(i).getName()) && humanTypes.getSurname().equals(array.getElement(i).getSurname())
+                    && humanTypes.getPeopleType().equals(array.getElement(i).getPeopleType())){
+                flag = true;
+            }
+        }
+        if(flag){
+            System.out.println("\n" + humanTypes.getName() + " is already in  "+ humanTypes.getPeopleType() +" List so not add to system.");
+        }else
+            return flag;
+
+        return true;
     }
 }

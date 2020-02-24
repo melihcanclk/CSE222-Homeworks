@@ -1,4 +1,4 @@
-public class DynamicArray<T>{
+public class DynamicArray<T> {
     private T array[];
     // holds the current size of array
     private int size;
@@ -13,7 +13,6 @@ public class DynamicArray<T>{
         this.setType(type);
     }
 
-
     // to add an element at the end
     public void addElement(T element){
         // double the capacity if all the allocated space is utilized
@@ -21,12 +20,16 @@ public class DynamicArray<T>{
             ensureCapacity(2);
         }
         array[size] = element;
+        System.out.println(element + " added as " + element.getClass().getName() + "\n");
         size++;
     }
 
     // to get an element at an index
     public T getElement(int index){
-        return array[index];
+        if(index < size())
+            return array[index];
+        else
+            return null;
     }
 
     // to remove an element at a particular index
@@ -67,21 +70,26 @@ public class DynamicArray<T>{
     public void printElements(){
         if(this.size() == 0){
             System.out.println("There's no element!!!");
+        }else{
+            System.out.println("Elements in " + getType().getName() + ":");
+            for(int i = 0; i< size(); ++i){
+                System.out.print(i+1 + "->");
+                System.out.println(getElement(i));
+            }
         }
-        System.out.println("elements in " + getType().getName() + ":");
-        for(int i = 0; i< size(); ++i){
-            System.out.print(i+1 + "->");
-            System.out.println(getElement(i));
-        }
+
         System.out.println();
     }
 
     // method to print elements in array
     public void printElements(Object object){
         boolean flag = false;
+        int j = 1;
         for(int i = 0; i< size(); ++i){
             if( getElement(i).getClass().getTypeName().equals(object.toString())){
+                System.out.print(j + "->");
                 System.out.println(getElement(i));
+                ++j;
                 flag = true;
             }
         }
@@ -97,5 +105,6 @@ public class DynamicArray<T>{
     public void setType(Class<T> type) {
         this.type = type;
     }
+
 }
 
