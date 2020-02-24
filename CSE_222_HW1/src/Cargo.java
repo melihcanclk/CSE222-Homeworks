@@ -6,6 +6,18 @@ public class Cargo {
     private Branch startBranch;
     private Branch endBranch;
 
+    public Cargo() {
+    }
+
+    public Cargo(Customer sender, Customer receiver, int cargoNo, StatusOfCargo statusOfCargo, Branch startBranch, Branch endBranch) {
+        this.sender = sender;
+        this.receiver = receiver;
+        this.cargoNo = cargoNo;
+        this.statusOfCargo = statusOfCargo;
+        this.startBranch = startBranch;
+        this.endBranch = endBranch;
+    }
+
     public Customer getSender() {
         return sender;
     }
@@ -40,14 +52,12 @@ public class Cargo {
 
     @Override
     public String toString() {
-        return "Cargo{" +
-                "sender=" + sender +
-                ", receiver=" + receiver +
-                ", cargoNo=" + cargoNo +
-                ", statusOfCargo=" + statusOfCargo +
-                ", startBranch=" + startBranch +
-                ", endBranch=" + endBranch +
-                '}';
+        return  "Sender:" + sender +
+                " ,Receiver:" + receiver +
+                " ,CargoNo:" + cargoNo +
+                " ,StatusOfCargo:" + statusOfCargo +
+                " ,StartBranch:" + startBranch +
+                " ,EndBranch:" + endBranch;
     }
 
     public int getCargoNo() {

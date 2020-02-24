@@ -21,6 +21,7 @@ public class DynamicArray<T>{
             ensureCapacity(2);
         }
         array[size] = element;
+        System.out.println(element + " added to " + element.getClass().getName());
         size++;
     }
 
@@ -68,7 +69,7 @@ public class DynamicArray<T>{
         if(this.size() == 0){
             System.out.println("There's no element!!!");
         }
-        System.out.println("elements in " + getType().getName() + ":");
+        System.out.println("Elements in " + getType().getName() + ":\n");
         for(int i = 0; i< size(); ++i){
             System.out.print(i+1 + "->");
             System.out.println(getElement(i));
@@ -79,10 +80,13 @@ public class DynamicArray<T>{
     // method to print elements in array
     public void printElements(Object object){
         boolean flag = false;
+        int j = 1;
         for(int i = 0; i< size(); ++i){
             if( getElement(i).getClass().getTypeName().equals(object.toString())){
+                System.out.print(j + "->");
                 System.out.println(getElement(i));
                 flag = true;
+                ++j;
             }
         }
         if(!flag){

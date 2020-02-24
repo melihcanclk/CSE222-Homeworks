@@ -4,12 +4,8 @@ public class Customer extends HumanTypes{
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "name" + getName()+
-                "surname" + getSurname()+
-                "type=" + getType() +
-                ", persontype=" + getPeopleType() +
-                '}';
+        return  super.toString() +
+                "Type: " + getType();
     }
 
     public CustomerType getType() {

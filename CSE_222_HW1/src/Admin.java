@@ -8,7 +8,15 @@ public class Admin extends Employee{
 
     public static void addBranch(DynamicArray<Branch> branchArray){
         String name = getInput("Name");
-        branchArray.addElement(new Branch(name));
+        boolean flag = false;
+        for (int i = 0; i< branchArray.size();i++){
+            if(branchArray.getElement(i).getName().equals(name)){
+                flag = true;
+            }
+        }
+        if(!flag){
+            branchArray.addElement(new Branch(name));
+        }else System.out.println(name + " already inside of branches.\n");
     }
 
     public static void removeBranch(DynamicArray<Branch> branchArray, DynamicArray<Employee> employeeArray){
@@ -41,38 +49,52 @@ public class Admin extends Employee{
         String surname = getInput("Surname");
 
         if(typeOfPerson.name().equals(BranchEmployee.class.getName())){
-            employeeArray.addElement(new BranchEmployee(name,surname,typeOfPerson, branch));
+            BranchEmployee branchEmployee = new BranchEmployee(name,surname,typeOfPerson, branch);
+            Object temp = (Object) employeeArray;
+            @SuppressWarnings("unchecked")
+            DynamicArray<HumanTypes> castArray = (DynamicArray<HumanTypes>) temp;
+
+                employeeArray.addElement(branchEmployee);
+
+
         }else if(typeOfPerson.name().equals(TransportationPersonnel.class.getName())){
-            employeeArray.addElement(new TransportationPersonnel(name,surname,typeOfPerson));
+            TransportationPersonnel transportationPersonnel = new TransportationPersonnel(name,surname,typeOfPerson);
+            Object temp = (Object) employeeArray;
+            @SuppressWarnings("unchecked")
+            DynamicArray<HumanTypes> castArray = (DynamicArray<HumanTypes>) temp;
+
+                employeeArray.addElement(transportationPersonnel);
+
         }
 
     }
 
     public static void removeEmployee( DynamicArray<Employee> employeeArray, TypeOfPeople typeOfPeople){
-        if(employeeArray.size()== 0){
-            System.out.println( "No element to remove!!");
-            return;
-        }
-        employeeArray.printElements(TypeOfPeople.BranchEmployee);
-        String name = getInput("Name");
-        String surname = getInput("Surname");
-        int flag = 0;
 
-        for(int i = 0; i< employeeArray.size(); ++i){
-            if(employeeArray.getElement(i).getName().equals(name) && employeeArray.getElement(i).getSurname().equals(surname) && employeeArray.getElement(i).getPeopleType().equals(typeOfPeople)){
-                System.out.println( employeeArray.getElement(i).getName() + " " + employeeArray.getElement(i).getSurname() + " deleted.");
-                employeeArray.remove(i);
-                flag = 1;
+        employeeArray.printElements(typeOfPeople);
+        int i = Integer.parseInt(getInput("employee will be deleted(0 for exit):"));
+        int  k=0;
+        boolean flag = false;
+        if(i == 0)
+            flag = true;
+        for (int j = 0; j< employeeArray.size();++j ){
+            if(employeeArray.getElement(j).getPeopleType() == typeOfPeople){
+                if(k==i-1 ) {
+                    System.out.println(employeeArray.getElement(j).getName() + " " + employeeArray.getElement(j).getSurname() + " deleted.");
+                    employeeArray.remove(j);
+                    flag = true;
+                }
+                ++k;
             }
         }
-        if(flag == 0){
-            System.out.println( "There is no element named " + name);
+        if(!flag){
+            System.out.println("Out Of Bound!!!\n");
         }
 
     }
 
     @Override
     public String toString() {
-        return "Admin" + super.toString();
+        return super.toString();
     }
 }

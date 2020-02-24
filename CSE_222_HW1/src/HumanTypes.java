@@ -12,6 +12,10 @@ public abstract class HumanTypes{
         this.persontype = peopleType;
     }
 
+    public HumanTypes() {
+
+    }
+
     public TypeOfPeople getPeopleType() {
         return persontype;
     }
@@ -38,10 +42,7 @@ public abstract class HumanTypes{
 
     @Override
     public String toString() {
-        return "{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", peopleType=" + persontype +
-                '}';
+        return  "Name:'" + name + '\'' +
+                " Surname: '" + surname + '\'';
     }
 }

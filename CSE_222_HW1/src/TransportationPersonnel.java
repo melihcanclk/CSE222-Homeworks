@@ -5,6 +5,6 @@ public class TransportationPersonnel extends Employee{
     }
     @Override
     public String toString() {
-        return "TransportationPersonnel" + super.toString();
+        return super.toString();
     }
 }

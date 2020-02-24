@@ -11,9 +11,7 @@ public class Branch {
 
     @Override
     public String toString() {
-        return "Branch{" +
-                "name='" + name + '\'' +
-                '}';
+        return name;
     }
 
     public void setName(String name) {

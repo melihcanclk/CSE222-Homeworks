@@ -5,6 +5,7 @@ public class Menus {
     static int mainMenu(){
         selection = 0;
         Scanner sc = new Scanner(System.in);
+        System.out.println("---------Main Menu--------");
         System.out.println("1->Administrator Login");
         System.out.println("2->Branch Employee Login");
         System.out.println("3->Transportation Personnel Login");
@@ -14,9 +15,10 @@ public class Menus {
         return selection;
     }
 
-    static int amdinMenu(){
+    static int adminMenu(){
         selection = 0;
         Scanner sc = new Scanner(System.in);
+        System.out.println("---------Admin Menu--------");
         System.out.println("1->Add Branch");
         System.out.println("2->Remove Branch");
         System.out.println("3->Show Branch(s)");
@@ -34,7 +36,7 @@ public class Menus {
     static void amdinDecissionMenu(DynamicArray<Branch> branchArray, DynamicArray<Employee> employeeArray){
         while(selection != 0) {
             Scanner sc = new Scanner(System.in);
-            selection = Menus.amdinMenu();
+            selection = Menus.adminMenu();
             if (selection == 1) {
                 Admin.addBranch(branchArray);
             } else if (selection == 2) {
@@ -62,9 +64,11 @@ public class Menus {
     static int branchEmployeeMenu(){
         selection = 0;
         Scanner sc = new Scanner(System.in);
+        System.out.println("---------Branch Employee Menu--------");
         System.out.println("1->Enter Information About Cargo(Customer Will Be Added To System)");
         System.out.println("2->Remove Information About Cargo(Customer Will Be Deleted From System)");
         System.out.println("3->Change Status of a Cargo");
+        System.out.println("4->Show Cargo(s)");
         System.out.println("0->Exit from Branch Employee Menu");
         selection = sc.nextInt();
         return selection;
@@ -79,6 +83,27 @@ public class Menus {
                 BranchEmployee.removeInfoFromSystem(cargoArray,customerArray);
             } else if (selection == 3) {
                 BranchEmployee.changeStatusOfCargo(cargoArray);
+            }else if (selection == 4) {
+                cargoArray.printElements();
+            }
+        }
+    }
+
+    static void customerMenu(DynamicArray<Cargo> cargoArray, DynamicArray<Customer> customerArray, DynamicArray<Branch> branchArray){
+        while(selection != 0) {
+            boolean flag = false;
+            selection = Integer.parseInt(Employee.getInput("Tracking Number of the Cargo:(0 for exit)"));
+            for (int i = 0; i< cargoArray.size(); ++i){
+                if(cargoArray.getElement(i).getCargoNo() == selection){
+                    Cargo cargo = new Cargo();
+                    cargo = cargoArray.getElement(i);
+                    System.out.println("Cargo No:" + cargo.getCargoNo() + "\n" +cargo.getSender() + cargo.getReceiver() + "\n"
+                    + "Current Status: " + cargo.getStatusOfCargo());
+                    flag = true;
+                }
+            }
+            if(!flag && selection != 0){
+                System.out.println("No Cargo with tracking number " + selection);
             }
         }
     }
