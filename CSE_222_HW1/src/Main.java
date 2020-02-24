@@ -10,8 +10,14 @@ public class Main {
         DynamicArray<Cargo> cargoArray = new DynamicArray<>(Cargo.class);
         DynamicArray<Branch> branchArray = new DynamicArray<>(Branch.class);
         DynamicArray<Customer> customerArray = new DynamicArray<>(Customer.class);
-
+        branchArray.addElement(new Branch("Gebze"));
+        branchArray.addElement(new Branch("İstanbul"));
+        branchArray.addElement(new Branch("Karabük"));
         employeeArray.addElement(new Admin("Melihcan", "Çilek", TypeOfPeople.Admin));
+        employeeArray.addElement(new BranchEmployee("Batuhan", "Sami", TypeOfPeople.BranchEmployee,branchArray.getElement(0)));
+        employeeArray.addElement(new BranchEmployee("Mert", "Çilek", TypeOfPeople.BranchEmployee,branchArray.getElement(0)));
+        employeeArray.addElement(new BranchEmployee("Abdullah", "Küsgülü", TypeOfPeople.BranchEmployee,branchArray.getElement(1)));
+        employeeArray.addElement(new BranchEmployee("Buğra Eren", "Yılmaz", TypeOfPeople.BranchEmployee,branchArray.getElement(1)));
         int selection = Menus.mainMenu();
         while(selection != 0){
             switch (selection) {

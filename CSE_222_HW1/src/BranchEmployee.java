@@ -41,10 +41,10 @@ public class BranchEmployee extends Employee{
     public static void removeInfoFromSystem(DynamicArray<Cargo> cargoArray, DynamicArray<Customer> customerArray) {
         if(cargoArray.size()>0){
             cargoArray.printElements();
-            int i = Integer.parseInt(getInput("Cargo Number That Will Be Deleted"));
-            cargoArray.remove(i-1);
-            customerArray.remove(i-1);
-            customerArray.remove(i);
+            int i = Integer.parseInt(getInput("Cargo Number That Will Be Deleted")) - 1;
+            cargoArray.remove(i);
+            customerArray.remove((i * 2) -1);
+            customerArray.remove((i * 2));
         }
     }
 

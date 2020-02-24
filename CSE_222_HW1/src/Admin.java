@@ -23,12 +23,11 @@ public class Admin extends Employee{
         for(int j = 0; j< employeeArray.size();++j){
             if(employeeArray.getElement(j).getPeopleType().equals(TypeOfPeople.BranchEmployee)){
                 BranchEmployee branchEmployee = (BranchEmployee) employeeArray.getElement(j);
-                System.out.println(branchEmployee.getBranchWorked());
-                System.out.println(branchArray.getElement(i - 1));
                 if(branchEmployee.getBranchWorked().equals(branchArray.getElement(i - 1))){
                     System.out.println( employeeArray.getElement(j).getName() + " deleted.Because "+
                             employeeArray.getElement(j).getName() + " was working at " + branchArray.getElement(i-1));
                     employeeArray.remove(j);
+                    --j;
                 }
             }
         }
