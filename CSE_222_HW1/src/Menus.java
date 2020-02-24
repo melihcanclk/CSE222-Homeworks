@@ -1,15 +1,19 @@
 import java.util.Scanner;
 
+/**
+ * Class for holding Menu's
+ */
 public class Menus {
     private static int selection;
+
+    /**
+     * Main menu
+     * @return Selection of user
+     */
     static int mainMenu(){
         selection = 0;
         Scanner sc = new Scanner(System.in);
-<<<<<<< HEAD
-        System.out.println("-------Main Menu------");
-=======
         System.out.println("---------Main Menu--------");
->>>>>>> 0b6c4ef0af0f1256785a0a5c1b2b30261b0faeee
         System.out.println("1->Administrator Login");
         System.out.println("2->Branch Employee Login");
         System.out.println("3->Transportation Personnel Login");
@@ -19,11 +23,11 @@ public class Menus {
         return selection;
     }
 
-<<<<<<< HEAD
-    private static int amdinMenu(){
-=======
+    /**
+     * Administrator menu
+     * @return Selection of user
+     */
     static int adminMenu(){
->>>>>>> 0b6c4ef0af0f1256785a0a5c1b2b30261b0faeee
         selection = 0;
         Scanner sc = new Scanner(System.in);
         System.out.println("---------Admin Menu--------");
@@ -41,14 +45,15 @@ public class Menus {
         return selection;
     }
 
+    /**
+     * After getting decission, according to the selection, there will be some choice
+     * @param branchArray Branch array that holding branches
+     * @param employeeArray employeeArray that holding employees
+     */
     static void adminDecissionMenu(DynamicArray<Branch> branchArray, DynamicArray<Employee> employeeArray){
         while(selection != 0) {
             Scanner sc = new Scanner(System.in);
-<<<<<<< HEAD
-            selection = amdinMenu();
-=======
             selection = Menus.adminMenu();
->>>>>>> 0b6c4ef0af0f1256785a0a5c1b2b30261b0faeee
             if (selection == 1) {
                 Admin.addBranch(branchArray);
             } else if (selection == 2) {
@@ -57,14 +62,8 @@ public class Menus {
                 branchArray.printElements();
             }else if(selection == 4){
                 branchArray.printElements();
-                int input = sc.nextInt();
-                while (input <= 0 || input > branchArray.size()){
-                    branchArray.printElements();
-                    input = sc.nextInt();
-                }
-                Branch branch = branchArray.getElement( input- 1);
+                Branch branch = branchArray.getElement(sc.nextInt() - 1);
                 Admin.addEmployee(employeeArray,TypeOfPeople.BranchEmployee,branch);
-
             }else if(selection == 5){
                 Admin.removeEmployee(employeeArray,TypeOfPeople.BranchEmployee);
             }else if(selection == 6){
@@ -79,7 +78,11 @@ public class Menus {
         }
     }
 
-    private static int branchEmployeeMenu(){
+    /**
+     * Branch Employee Menu
+     * @return Selection of user
+     */
+    static int branchEmployeeMenu(){
         selection = 0;
         Scanner sc = new Scanner(System.in);
         System.out.println("---------Branch Employee Menu--------");
@@ -92,6 +95,12 @@ public class Menus {
         return selection;
     }
 
+    /**
+     * After getting decission, according to the selection, there will be some choice
+     * @param branchArray Branch array that holding branches
+     * @param cargoArray cargoArray that holding cargo's
+     * @param customerArray  customerArray that holding customers
+     */
     static void branchEmployeeDecisionMenu(DynamicArray<Cargo> cargoArray, DynamicArray<Customer> customerArray, DynamicArray<Branch> branchArray){
         while(selection != 0) {
             selection = Menus.branchEmployeeMenu();
@@ -101,16 +110,18 @@ public class Menus {
                 BranchEmployee.removeInfoFromSystem(cargoArray,customerArray);
             } else if (selection == 3) {
                 BranchEmployee.changeStatusOfCargo(cargoArray);
-<<<<<<< HEAD
-            } else if (selection == 4) {
-                cargoArray.printElements();
-=======
             }else if (selection == 4) {
                 cargoArray.printElements();
             }
         }
     }
 
+    /**
+     * Customer Menu
+     * @param branchArray Branch array that holding branches
+     * @param cargoArray cargoArray that holding cargo's
+     * @param customerArray  customerArray that holding customers
+     */
     static void customerMenu(DynamicArray<Cargo> cargoArray, DynamicArray<Customer> customerArray, DynamicArray<Branch> branchArray){
         while(selection != 0) {
             boolean flag = false;
@@ -126,19 +137,7 @@ public class Menus {
             }
             if(!flag && selection != 0){
                 System.out.println("No Cargo with tracking number " + selection);
->>>>>>> 0b6c4ef0af0f1256785a0a5c1b2b30261b0faeee
             }
         }
-    }
-
-    static void transportationMenu(){
-        System.out.println("---------Transportation Personnel Menu--------");
-    }
-    static void CustomerDecisionMenu(DynamicArray<Cargo> cargoArray){
-
-        System.out.println("---------Customer Menu--------");
-        selection = Integer.parseInt(Employee.getInput("Tracking Number of Cargo"));
-        Customer.lookCargo(selection, cargoArray);
-
     }
 }

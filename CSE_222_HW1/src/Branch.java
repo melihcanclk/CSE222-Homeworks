@@ -1,36 +1,37 @@
 /**
- * Branch Class for hold information about branches
+ * Class for Branch's
  */
 public class Branch {
     /**
-     * Name of Branch
+     * Name of branch field
      */
     private String name;
 
     /**
-     * Branch Constructor
-     * @param name Name of Branch
+     * Constructor of Branch Class
+     * @param name name of branch
      */
     public Branch(String name) {
         this.name = name;
     }
 
     /**
-     * Getting name of Branch
-     * @return Name of Branch
+     * Getting name of branch
+     * @return String type name
      */
     public String getName() {
         return name;
     }
 
     @Override
+
     public String toString() {
         return name;
     }
 
     /**
-     * Setting name of Branch
-     * @param name Name of Branch
+     * Setting name of branch
+     * @param name name of branch will be set
      */
     public void setName(String name) {
         this.name = name;

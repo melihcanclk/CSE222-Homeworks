@@ -1,45 +1,47 @@
+/**
+ * Class for Cargo's
+ */
 public class Cargo {
     /**
-     * Sender Customer that send the cargo
+     * Customer type sender
      */
     private Customer sender;
     /**
-     * Receiver Customer that take the cargo
+     * Customer Type receiver
      */
     private Customer receiver;
     /**
-     * Cargo Number to allow Customer check its cargo
+     * int type CargoNumber
      */
     private int cargoNo;
     /**
-     * Status of cargo
+     * StatusOfCargo type statusOfCargo
      */
     StatusOfCargo statusOfCargo;
     /**
-     * Starting branch of cargo
+     * Branch Type startBranch
      */
     private Branch startBranch;
     /**
-     * Ending branch of cargo
+     * Branch Type endBranch
      */
     private Branch endBranch;
 
-<<<<<<< HEAD
     /**
-     * No parameter constructor of cargo class
+     * No Parameter Cargo constructor
      */
     public Cargo() {
-
     }
 
     /**
-     * Getting sender of cargo
-     * @return Customer who Sender of cargo
+     * 6 parameter Cargo constructor
+     * @param sender Customer type sender
+     * @param receiver Customer Type receiver
+     * @param cargoNo int type CargoNumber
+     * @param statusOfCargo StatusOfCargo type statusOfCargo
+     * @param startBranch Branch Type startBranch
+     * @param endBranch Branch Type endBranch
      */
-=======
-    public Cargo() {
-    }
-
     public Cargo(Customer sender, Customer receiver, int cargoNo, StatusOfCargo statusOfCargo, Branch startBranch, Branch endBranch) {
         this.sender = sender;
         this.receiver = receiver;
@@ -49,62 +51,61 @@ public class Cargo {
         this.endBranch = endBranch;
     }
 
->>>>>>> 0b6c4ef0af0f1256785a0a5c1b2b30261b0faeee
+    /**
+     * Getter for sender
+     * @return Customer type sender
+     */
     public Customer getSender() {
         return sender;
     }
-
     /**
-     * Setting sender of the cargo
-     * @param sender Sender of the cargo
+     * Setter for sender
+     * @param sender Customer type Sender
      */
     public void setSender(Customer sender) {
         this.sender = sender;
     }
-
     /**
-     * Getting Receiver of the cargo
-     * @return Customer who Receiver of the cargo
+     * Getter for receiver
+     * @return Customer type receiver
      */
     public Customer getReceiver() {
         return receiver;
     }
 
     /**
-     * Setting Receiver of the cargo
-     * @param receiver Receiver of the cargo
+     * Setter for receiver
+     * @param receiver Customer type receiver
      */
     public void setReceiver(Customer receiver) {
         this.receiver = receiver;
     }
-
     /**
-     * Getting Start Branch of Cargo
-     * @return Branch that Start Point of cargo
+     * Getter for startBranch
+     * @return Branch type startBranch
      */
     public Branch getStartBranch() {
         return startBranch;
     }
 
     /**
-     * Setting Start branch of the cargo
-     * @param start Starting branch
+     * Setting startBranch
+     * @param start Branch type startBranch
      */
     public void setStartBranch(Branch start) {
         this.startBranch = start;
     }
-
     /**
-     * Getting End of the branch
-     * @return Branch that cargo end
+     * Getter for startBranch
+     * @return Branch type endBranch
      */
     public Branch getEndBranch() {
         return endBranch;
     }
 
     /**
-     * Setting end branch
-     * @param end end branch will be set
+     * Setting endbranch
+     * @param end Branch type endBranch
      */
     public void setEndBranch(Branch end) {
         this.endBranch = end;
@@ -112,68 +113,39 @@ public class Cargo {
 
     @Override
     public String toString() {
-<<<<<<< HEAD
-        return  "\nCargoNo:" + cargoNo+
-                "\nSender:" + sender +
-                "\nReceiver:" + receiver +
-                "\nStatusOfCargo:" + statusOfCargo +
-                "\nStartBranch:" + startBranch +
-                "\nEndBranch:" + endBranch;
-    }
-
-    /**
-     * 6 Parameter Constructor
-     * @param sender Customer type sender that sends cargo
-     * @param receiver Customer type receiver that sends cargo
-     * @param cargoNo Cargo no for following cargo
-     * @param statusOfCargo status of cargo(whether it is arrived or not)
-     * @param startBranch Branch type start branch
-     * @param endBranch Branch type end branch
-     */
-    public Cargo(Customer sender, Customer receiver, int cargoNo, StatusOfCargo statusOfCargo, Branch startBranch, Branch endBranch) {
-        this.sender = sender;
-        this.receiver = receiver;
-        this.cargoNo = cargoNo;
-        this.statusOfCargo = statusOfCargo;
-        this.startBranch = startBranch;
-        this.endBranch = endBranch;
-=======
         return  "Sender:" + sender +
                 " ,Receiver:" + receiver +
                 " ,CargoNo:" + cargoNo +
                 " ,StatusOfCargo:" + statusOfCargo +
                 " ,StartBranch:" + startBranch +
                 " ,EndBranch:" + endBranch;
->>>>>>> 0b6c4ef0af0f1256785a0a5c1b2b30261b0faeee
     }
-
     /**
-     * Getting Cargo Number
-     * @return int type Cargo number
+     * Getter for cargoNo
+     * @return int type cargoNo
      */
     public int getCargoNo() {
         return cargoNo;
     }
-
     /**
-     * Setting Cargo Number
-     * @param cargoNo int setting Cargo Number
+     * Setter for startBranch
+     * @param cargoNo int type cargoNo
      */
     public void setCargoNo(int cargoNo) {
         this.cargoNo = cargoNo;
     }
 
     /**
-     * Getting Status of Cargo
-     * @return StatusOfCargo type status of cargo if it is arrived or not
+     * getting Status of cargo
+     * @return StatusOfCargo type status of cargo
      */
     public StatusOfCargo getStatusOfCargo() {
         return statusOfCargo;
     }
 
     /**
-     * Setting Status of Cargo
-     * @param statusOfCargo StatusOfCargo type status of cargo
+     * Setting Status of cargo
+     * @param statusOfCargo StatusOfCargo type statusOfCargo
      */
     public void setStatusOfCargo(StatusOfCargo statusOfCargo) {
         this.statusOfCargo = statusOfCargo;

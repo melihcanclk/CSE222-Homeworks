@@ -1,35 +1,74 @@
+/**
+ * Class for holding Transportation Personnel's
+ */
 public class TransportationPersonnel extends Employee{
-
+    /**
+     * Constructor for Transportation Personnel
+     * @param name Name of Transportation Personnel
+     * @param surname Surname of Transportation Personnel
+     * @param peopleType PeopleType type of Transportation Personnel
+     */
     public TransportationPersonnel(String name, String surname, TypeOfPeople peopleType) {
         super(name, surname, peopleType);
     }
 
     @Override
-    public String toString() {
-<<<<<<< HEAD
-        return  super.toString();
-    }
-
-    @Override
+    /**
+     * getting people type
+     */
     public TypeOfPeople getPeopleType() {
-        return null;
+        return super.getPeopleType();
+    }
+
+    /**
+     * no-parameter constructor of Transportation Personnel
+     */
+    public TransportationPersonnel() {
+        super();
     }
 
     @Override
+    /**
+     * Setting TypeOfPeople type peopletype
+     */
     public void setPeopleType(TypeOfPeople peopleType) {
-
+        super.setPeopleType(peopleType);
     }
 
     @Override
+    /**
+     * Getting name of Transportation Personnel
+     */
     public String getName() {
-        return null;
+        return super.getName();
     }
 
     @Override
+    /**
+     * Setting name of Transportation Personnel
+     */
     public void setName(String name) {
+        super.setName(name);
+    }
 
-=======
+    @Override
+    /**
+     * Setting surname of Transportation Personnel
+     */
+    public void setSurname(String surname) {
+        super.setSurname(surname);
+    }
+
+    @Override
+    /**
+     * Getting surname of Transportation Personnel
+     */
+    public String getSurname() {
+        return super.getSurname();
+    }
+
+    @Override
+    public String toString() {
         return super.toString();
->>>>>>> 0b6c4ef0af0f1256785a0a5c1b2b30261b0faeee
     }
 }
