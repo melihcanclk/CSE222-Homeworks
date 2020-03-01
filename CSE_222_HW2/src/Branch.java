@@ -25,12 +25,6 @@ public class Branch {
         return name;
     }
 
-    @Override
-
-    public String toString() {
-        return name;
-    }
-
     /**
      * Setting name of branch
      * @param name name of branch will be set

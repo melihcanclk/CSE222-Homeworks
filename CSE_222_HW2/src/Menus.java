@@ -139,6 +139,11 @@ public class Menus {
             }
         }
     }
+
+    /**
+     * Printing arrays that is send as parameter
+     * @param arrayList Array that will be printed
+     */
     public static void print(ArrayList arrayList){
         int counter = 1;
         for(Object instance : arrayList){
@@ -147,6 +152,11 @@ public class Menus {
         }
     }
 
+    /**
+     * Printing arrays that is send as parameter according to type of people
+     * @param arrayList Array that will be printed
+     * @param typeOfPeople Type of people that will be filtered
+     */
     public static void print(ArrayList arrayList,TypeOfPeople typeOfPeople){
         int counter = 1;
         for(Object instance : arrayList){

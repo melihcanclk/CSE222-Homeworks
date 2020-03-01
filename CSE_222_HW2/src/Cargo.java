@@ -113,15 +113,6 @@ public class Cargo {
         this.endBranch = end;
     }
 
-    @Override
-    public String toString() {
-        return  "Sender:" + sender +
-                " ,Receiver:" + receiver +
-                " ,CargoNo:" + cargoNo +
-                " ,StatusOfCargo:" + statusOfCargo +
-                " ,StartBranch:" + startBranch +
-                " ,EndBranch:" + endBranch;
-    }
     /**
      * Getter for cargoNo
      * @return int type cargoNo
@@ -153,5 +144,14 @@ public class Cargo {
         this.statusOfCargo = statusOfCargo;
     }
 
+    @Override
+    public String toString() {
+        return  "Sender:" + sender +
+                " ,Receiver:" + receiver +
+                " ,CargoNo:" + cargoNo +
+                " ,StatusOfCargo:" + statusOfCargo +
+                " ,StartBranch:" + startBranch +
+                " ,EndBranch:" + endBranch;
+    }
 
 }

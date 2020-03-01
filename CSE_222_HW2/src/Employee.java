@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /***
  * Abstract class for holding Employees
  */

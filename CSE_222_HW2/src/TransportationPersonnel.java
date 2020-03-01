@@ -12,11 +12,4 @@ public class TransportationPersonnel extends Employee {
     public TransportationPersonnel(String name, String surname, TypeOfPeople peopleType) {
         super(name, surname, peopleType);
     }
-
-    /**
-     * no-parameter constructor of Transportation Personnel
-     */
-    public TransportationPersonnel() {
-        super();
-    }
 }
