@@ -107,12 +107,12 @@ public class DynamicArray<T> implements Cloneable{
         for(T temp : array){
             if(temp != null)
                 x.append(temp.toString());
-            x.append(" ");
+            x.append(" , ");
         }
 
         return "DynamicArray{" +
                 "array=" + x +
-                ", size=" + size +
+                " size=" + size +
                 ", capacity=" + capacity +
                 '}' + "\n";
     }
