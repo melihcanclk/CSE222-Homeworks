@@ -1,69 +1,93 @@
 import java.util.Iterator;
+import java.util.ListIterator;
 
 class Main {
     public static void main(String[] args) throws CloneNotSupportedException {
-        LinkedList<Integer> linkedList = new LinkedList<>(3);
-        linkedList.add(0);
-        linkedList.add(1);
-        linkedList.add(2);
-        linkedList.add(3);
-        linkedList.add(4);
-        linkedList.add(5);
-        linkedList.add(6);
-        linkedList.add(7);
-        System.out.println(linkedList);
-        linkedList.remove("hakan");
 
-        System.out.println(linkedList);
-        linkedList.remove(4.5);
-        System.out.println(linkedList);
+        final int CAPACITY_OF_ARRAYS = 3;
 
-        Iterator iterator = linkedList.iterator();
-        while (iterator.hasNext()){
-            System.out.println(iterator.next());
-        }
-        System.out.println("\n");
-        iterator = linkedList.iterator();
+        LinkedArrayList<Integer> linkedArrayList = new LinkedArrayList<>(CAPACITY_OF_ARRAYS);
+        linkedArrayList.add(0);
+        linkedArrayList.add(1);
+        linkedArrayList.add(2);
+        linkedArrayList.add(3);
+        linkedArrayList.add(4);
+        linkedArrayList.add(5);
+        linkedArrayList.add(6);
+        linkedArrayList.add(7);
+        System.out.println(linkedArrayList);
+
+        linkedArrayList.remove("hakan");
+        System.out.println(linkedArrayList);
+        linkedArrayList.remove(4.5);
+        System.out.println(linkedArrayList);
+
+        linkedArrayList.remove(Integer.valueOf(5));
+        System.out.println(linkedArrayList);
+
+        ListIterator iterator = linkedArrayList.listIterator();
         iterator.next();
         iterator.remove();
-        iterator = linkedList.iterator();
-        while (iterator.hasNext()){
-            System.out.println(iterator.next());
-        }
+        System.out.println(linkedArrayList);
 
-        System.out.println(linkedList);
-        linkedList.add(9);
-        System.out.println(linkedList);
+        linkedArrayList.add(9);
+        System.out.println(linkedArrayList);
 
         //we have to give object
-        linkedList.remove(Integer.valueOf(9));
-        System.out.println(linkedList);
-        System.out.println("Size Of list is " + linkedList.size());
-        linkedList.remove(Integer.valueOf(7));
-        System.out.println(linkedList);
-        System.out.println("Size Of list is " + linkedList.size());
-        linkedList.remove(Integer.valueOf(6));
-        System.out.println(linkedList);
-        System.out.println("Size Of list is " + linkedList.size());
+        linkedArrayList.remove(Integer.valueOf(9));
+        System.out.println(linkedArrayList);
+        System.out.println("Size Of list is " + linkedArrayList.size());
+        linkedArrayList.remove(Integer.valueOf(7));
+        System.out.println(linkedArrayList);
+        System.out.println("Size Of list is " + linkedArrayList.size());
+        linkedArrayList.remove(Integer.valueOf(7));
+        System.out.println(linkedArrayList);
+        System.out.println("Size Of list is " + linkedArrayList.size());
+        linkedArrayList.remove(Integer.valueOf(6));
+        System.out.println(linkedArrayList);
+        System.out.println("Size Of list is " + linkedArrayList.size());
 
-        System.out.println(linkedList.indexOf(4));
+        System.out.println(linkedArrayList.indexOf(4));
 
-        System.out.println(linkedList.isEmpty());
+        System.out.println(linkedArrayList.isEmpty());
 
-        linkedList.add(0,76);
-        System.out.println(linkedList);
+        linkedArrayList.add(0,76);
+        System.out.println(linkedArrayList);
 
-        linkedList.add(0,84);
-        System.out.println(linkedList);
+        linkedArrayList.add(0,84);
+        System.out.println(linkedArrayList);
 
 
-        iterator = linkedList.iterator();
+        iterator = linkedArrayList.listIterator();
+        iterator.next();
+        iterator.add(11);
         while (iterator.hasNext()){
-            System.out.println(linkedList);
+            System.out.println(linkedArrayList);
             iterator.remove();
         }
-        System.out.println(linkedList);
-        System.out.println(linkedList.isEmpty());
+        System.out.println(linkedArrayList);
+        System.out.println(linkedArrayList.isEmpty());
 
+        linkedArrayList.add(6);
+        linkedArrayList.add(7);
+        System.out.println(linkedArrayList);
+        DynamicArray<Integer> dynamicArray = new DynamicArray<>(CAPACITY_OF_ARRAYS);
+        dynamicArray.addElement(12);
+        dynamicArray.addElement(13);
+
+        iterator = linkedArrayList.listIterator();
+        iterator.set(dynamicArray);
+        System.out.println(linkedArrayList);
+        linkedArrayList.add(6);
+        linkedArrayList.add(7);
+        linkedArrayList.add(6);
+        linkedArrayList.add(7);
+        linkedArrayList.add(6);
+        linkedArrayList.add(7);
+        System.out.println(linkedArrayList);
+        iterator = linkedArrayList.listIterator(1);
+        System.out.println(iterator);
+        linkedArrayList.remove(0);
+        System.out.println(linkedArrayList);
     }
 }

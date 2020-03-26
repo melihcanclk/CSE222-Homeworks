@@ -1,6 +1,10 @@
-import java.util.*;
+import java.util.AbstractList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
+import java.util.Iterator;
 
-class LinkedList<T> extends AbstractList<T> implements List<T>
+class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 {
 
     private Node head, last;
@@ -21,9 +25,18 @@ class LinkedList<T> extends AbstractList<T> implements List<T>
         public Node() {
 
         }
+
+        public void setData(DynamicArray<T> data) {
+            this.data = data;
+        }
+
+        @Override
+        public String toString() {
+            return data.toString();
+        }
     }
 
-    public class LinkedArrayListIterator implements java.util.Iterator<T> {
+    protected class LinkedArrayListIterator implements java.util.ListIterator<T> {
 
         private int current = 0;
 
@@ -35,38 +48,103 @@ class LinkedList<T> extends AbstractList<T> implements List<T>
 
         @Override
         public boolean hasNext() {
-            if(node == null){
-                return false;
-            }
-            if(current < node.data.size())
-                return true;
-            else if(current >= node.data.size() && node.next != null){
-                current = 0;
-                node = node.next;
-                return true;
-            } else
-                return false;
+            return node.next != null;
         }
 
         @Override
         public T next() {
             if(!hasNext())
                 throw new NoSuchElementException();
-            return (T) node.data.getElement(current++);
+            ++current;
+            Node temp;
+            temp = node;
+            node = node.next;
+            return (T) temp;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return node.before != null;
+        }
+
+        @Override
+        public T previous() {
+            if(!hasPrevious())
+                throw new NoSuchElementException();
+            --current;
+            Node temp;
+            temp = node;
+            node = node.before;
+            return (T) temp;
+        }
+
+        @Override
+        public int nextIndex() {
+            return ((current == size()) ? 0 : current+1);
+        }
+
+        @Override
+        public int previousIndex() {
+            return ((current < 0) ? capacity_of_all_arrays-1 : current-1);
         }
 
         @Override
         public void remove() {
-            node.data.remove(current);
-            if(node.data.size() == 0){
+            if(node == head) {
                 head = node.next;
                 node = node.next;
+                if(head == last)
+                    last = null;
+            }else if(node == last){
+                last = node.before;
+                last.next = null;
+                node.before = null;
+            }else {
+                node.before.next = node.next;
+                node.next.before = node.before;
+                node = node.before;
+            }
+        }
+
+        @Override
+        public void set(T t) {
+            if(t.getClass().getName().equals(DynamicArray.class.getName()))
+                node.setData((DynamicArray<T>) t);
+            else
+                throw new ClassCastException();
+        }
+
+        @Override
+        public void add(T t) {
+            DynamicArray<T> dynamicArray = new DynamicArray<>(capacity_of_all_arrays);
+            dynamicArray.addElement(t);
+            Node temp = new Node(dynamicArray);
+            if(node == last){
+                temp.before = node;
+                node.next = temp;
+                last = temp;
+            }else if(node == head){
+                temp.next = node;
+                node.before = temp;
+                head = temp;
+            }else {
+                temp.next = node.next;
+                node.next.before = temp;
+                temp.before = node;
+                node.next = temp;
             }
 
         }
+
+        @Override
+        public String toString() {
+            return this.node.toString();
+        }
     }
 
-    public LinkedList(int capacity_of_all_arrays)
+
+
+    public LinkedArrayList(int capacity_of_all_arrays)
     {
         head = null;
         last = null;
@@ -164,6 +242,27 @@ class LinkedList<T> extends AbstractList<T> implements List<T>
         return -1;
     }
 
+    /**
+     * Deleting Any Given indexed node
+     * @param index Index of any given node that will be deleted
+     * @return null because Class that I removed is a Node which is private class inside of
+     * my class hierarchy so I decided to not return what I removed because I can't return
+     * any T type.
+     */
+    @Override
+    public T remove(int index) {
+        ListIterator iterator = listIterator(index);
+        if(!iterator.hasNext()){
+            iterator.remove();
+        }else {
+            Object node = iterator.next();
+            iterator.previous();
+            iterator.remove();
+
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder("");
@@ -221,12 +320,20 @@ class LinkedList<T> extends AbstractList<T> implements List<T>
 
     @Override
     public ListIterator<T> listIterator() {
-        return super.listIterator();
+        return new LinkedArrayListIterator();
     }
 
     @Override
     public ListIterator<T> listIterator(int index) {
-        return super.listIterator(index);
+
+        LinkedArrayListIterator linkedArrayListIterator = new LinkedArrayListIterator();
+        for (int i = 0; i< index; i++){
+            if(linkedArrayListIterator.hasNext())
+                linkedArrayListIterator.next();
+            else
+                throw new IndexOutOfBoundsException();
+        }
+        return linkedArrayListIterator;
     }
 
     @Override
@@ -237,11 +344,6 @@ class LinkedList<T> extends AbstractList<T> implements List<T>
     @Override
     public boolean equals(Object o) {
         return super.equals(o);
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
     }
 
     @Override
@@ -286,13 +388,15 @@ class LinkedList<T> extends AbstractList<T> implements List<T>
                     if(traverse.data.size() == 0){
                         traverse.before.next = null;
                         last = traverse.before;
-                        return true;
                     }
+                    System.out.println(o + " deleted.");
+                    return true;
                 }
             }
             traverse = traverse.next;
 
         }
+        System.out.println("No element such as " + o);
         return false;
     }
 
