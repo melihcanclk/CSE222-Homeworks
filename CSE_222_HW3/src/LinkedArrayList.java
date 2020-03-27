@@ -97,8 +97,6 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
     protected class LinkedArrayListIterator<E> extends LinkedArrayIterator<E> implements ListIterator<E>{
 
-        Node node;
-
         LinkedArrayListIterator(){
             node = head;
             current = 0;
