@@ -45,6 +45,7 @@ public class DynamicArray<T> implements Cloneable{
     }
 
     public void setIndex(T element, int index){
+        System.out.println("Object at " + index + " will be replaced by " + element);
         array[index] = element;
     }
 

@@ -66,6 +66,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
             if(!hasNext())
                 throw new NoSuchElementException();
             return (E) node.data.getElement(current++);
+
         }
 
         @Override
@@ -88,13 +89,15 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
             }
 
         }
+        @Override
+        public String toString() {
+            return node.data.getElement(current).toString();
+        }
     }
 
     protected class LinkedArrayListIterator<E> extends LinkedArrayIterator<E> implements ListIterator<E>{
 
-        private int current = 0;
-
-        Node node;
+        private Node node;
         LinkedArrayListIterator(){
             node = head;
             current = 0;
@@ -174,10 +177,6 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
         }
 
-        @Override
-        public String toString() {
-            return this.node.toString();
-        }
     }
 
     public LinkedArrayList(int capacity_of_all_arrays)
@@ -190,7 +189,13 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
     @Override
     public boolean add(T a)
     {
-        if(last == null)
+        if (head == null){
+            DynamicArray<T> dynamicArray = new DynamicArray<>(capacity_of_all_arrays);
+            Node t = new Node(dynamicArray);
+            head = t;
+            last = t;
+        }
+        else if(last == null)
         {
             clear();
         }
@@ -204,6 +209,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
             }
         }
+        System.out.println("Item that will be add is " + a);
         last.data.addElement(a);
         return true;
     }
@@ -265,15 +271,17 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
     {
         Node traverse = new Node();
         traverse = head;
+        int node_number = 1;
         while (traverse != null){
 
             for (int i = 0; i< traverse.data.size(); ++i){
                 if(traverse.data.getElement(i).equals(a)){
+                    System.out.println("Index of " + a + " is " + i + " where node " + node_number);
                     return i;
                 }
             }
             traverse = traverse.next;
-
+            ++node_number;
         }
         return -1;
     }
@@ -288,6 +296,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
     @Override
     public T remove(int index) {
         ListIterator<T> iterator = listIterator(index);
+        System.out.println("Index " + index + " will be deleted by using iterator");
         iterator.remove();
         return null;
     }
@@ -308,12 +317,12 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
     public void add(int index, T element) {
         try {
             if(index >= 0 && index < size()){
-                Node node = new Node();
-                node = head;
+                Node node = head;
                 for (int i = 0; i< index; i++){
                     node = node.next;
                 }
                 if(node.data.size() != capacity_of_all_arrays){
+                    System.out.println("Object will be added to node" + (index+1));
                     node.data.addElement(element);
                 }else {
                     System.out.println(element + " couldn't be added to index " + index + "." +
@@ -355,12 +364,12 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
     @Override
     public ListIterator<T> listIterator(int index) {
 
-        LinkedArrayListIterator linkedArrayListIterator = new LinkedArrayListIterator();
+        LinkedArrayListIterator<T> linkedArrayListIterator = new LinkedArrayListIterator<>();
         for (int i = 0; i< index; i++){
             if(linkedArrayListIterator.hasNext())
                 linkedArrayListIterator.next();
             else
-                throw new IndexOutOfBoundsException();
+                throw new IndexOutOfBoundsException("Out of Bounds");
         }
         return linkedArrayListIterator;
     }
