@@ -17,7 +17,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         Node before;
         public Node(Object n)
         {
-            data = (DynamicArray) n;
+            data = (DynamicArray<T>) n;
             next = null;
             before = null;
         }
@@ -26,8 +26,8 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
         }
 
-        public void setData(DynamicArray<T> data) {
-            this.data = data;
+        public void setData(T t, int current) {
+            data.setIndex(t,current);
         }
 
         @Override
@@ -36,7 +36,61 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         }
     }
 
-    protected class LinkedArrayListIterator implements java.util.ListIterator<T> {
+    protected class LinkedArrayIterator<E> implements java.util.Iterator<E> {
+
+        public int current = 0;
+        public Node node;
+
+        LinkedArrayIterator(){
+            node = head;
+            current = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            if(node == null){
+                return false;
+            }
+            if(current < node.data.size())
+                return true;
+            else if(current >= node.data.size() && node.next != null){
+                current = 0;
+                node = node.next;
+                return true;
+            } else
+                return false;
+        }
+
+        @Override
+        public E next() {
+            if(!hasNext())
+                throw new NoSuchElementException();
+            return (E) node.data.getElement(current++);
+        }
+
+        @Override
+        public void remove() {
+            node.data.remove(current);
+            if(node.data.size() == 0){
+                if(node == head)
+                    if(head.next != null){
+                        head = head.next;
+                        node = head;
+                    }else{
+                        head = null;
+                    }
+                else if(node == last){
+                    last = node.before;
+                    last.next = null;
+                } else {
+                    node.before.next = node.next;
+                }
+            }
+
+        }
+    }
+
+    protected class LinkedArrayListIterator<E> extends LinkedArrayIterator<E> implements ListIterator<E>{
 
         private int current = 0;
 
@@ -48,34 +102,34 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
         @Override
         public boolean hasNext() {
-            return node.next != null;
+            return super.hasNext();
         }
 
         @Override
-        public T next() {
-            if(!hasNext())
-                throw new NoSuchElementException();
-            ++current;
-            Node temp;
-            temp = node;
-            node = node.next;
-            return (T) temp;
+        public E next() {
+            return super.next();
         }
 
         @Override
         public boolean hasPrevious() {
-            return node.before != null;
+            if(node == null){
+                return false;
+            }
+            if(current < node.data.size())
+                return true;
+            else if(current < 0 && node.before != null){
+                current = 0;
+                node = node.before;
+                return true;
+            } else
+                return false;
         }
 
         @Override
-        public T previous() {
+        public E previous() {
             if(!hasPrevious())
                 throw new NoSuchElementException();
-            --current;
-            Node temp;
-            temp = node;
-            node = node.before;
-            return (T) temp;
+            return (E) node.data.getElement(current--);
         }
 
         @Override
@@ -90,33 +144,17 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
         @Override
         public void remove() {
-            if(node == head) {
-                head = node.next;
-                node = node.next;
-                if(head == last)
-                    last = null;
-            }else if(node == last){
-                last = node.before;
-                last.next = null;
-                node.before = null;
-            }else {
-                node.before.next = node.next;
-                node.next.before = node.before;
-                node = node.before;
-            }
+            super.remove();
         }
 
         @Override
-        public void set(T t) {
-            if(t.getClass().getName().equals(DynamicArray.class.getName()))
-                node.setData((DynamicArray<T>) t);
-            else
-                throw new ClassCastException();
+        public void set(E t) {
+            node.setData((T) t,current);
         }
 
         @Override
-        public void add(T t) {
-            DynamicArray<T> dynamicArray = new DynamicArray<>(capacity_of_all_arrays);
+        public void add(E t) {
+            DynamicArray<E> dynamicArray = new DynamicArray<>(capacity_of_all_arrays);
             dynamicArray.addElement(t);
             Node temp = new Node(dynamicArray);
             if(node == last){
@@ -142,8 +180,6 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         }
     }
 
-
-
     public LinkedArrayList(int capacity_of_all_arrays)
     {
         head = null;
@@ -158,7 +194,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         {
             clear();
         }
-        else if(last != null){
+        else {
             if(last.data.size() == last.data.capacity()){
                 DynamicArray<T> dynamicArray = new DynamicArray<>(capacity_of_all_arrays);
                 Node t = new Node(dynamicArray);
@@ -204,7 +240,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         if(it!=null)
         {
             aux = it;
-            it.data = (DynamicArray) a;
+            it.data = (DynamicArray<T>) a;
             return aux;
         }
         else
@@ -251,15 +287,8 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
      */
     @Override
     public T remove(int index) {
-        ListIterator iterator = listIterator(index);
-        if(!iterator.hasNext()){
-            iterator.remove();
-        }else {
-            Object node = iterator.next();
-            iterator.previous();
-            iterator.remove();
-
-        }
+        ListIterator<T> iterator = listIterator(index);
+        iterator.remove();
         return null;
     }
 
@@ -315,7 +344,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
     @Override
     public Iterator<T> iterator() {
-        return new LinkedArrayListIterator();
+        return new LinkedArrayIterator<>();
     }
 
     @Override
@@ -398,10 +427,5 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         }
         System.out.println("No element such as " + o);
         return false;
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
     }
 }

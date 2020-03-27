@@ -44,6 +44,10 @@ public class DynamicArray<T> implements Cloneable{
         }
     }
 
+    public void setIndex(T element, int index){
+        array[index] = element;
+    }
+
     /**
      * to get an element at an index
      * @param index index of element that will be taken

@@ -25,7 +25,7 @@ class Main {
         linkedArrayList.remove(Integer.valueOf(5));
         System.out.println(linkedArrayList);
 
-        ListIterator iterator = linkedArrayList.listIterator();
+        ListIterator<Integer> iterator = linkedArrayList.listIterator();
         iterator.next();
         iterator.remove();
         System.out.println(linkedArrayList);
@@ -60,7 +60,7 @@ class Main {
 
         iterator = linkedArrayList.listIterator();
         iterator.next();
-        iterator.add(11);
+
         while (iterator.hasNext()){
             System.out.println(linkedArrayList);
             iterator.remove();
@@ -71,12 +71,8 @@ class Main {
         linkedArrayList.add(6);
         linkedArrayList.add(7);
         System.out.println(linkedArrayList);
-        DynamicArray<Integer> dynamicArray = new DynamicArray<>(CAPACITY_OF_ARRAYS);
-        dynamicArray.addElement(12);
-        dynamicArray.addElement(13);
-
         iterator = linkedArrayList.listIterator();
-        iterator.set(dynamicArray);
+        iterator.set(1);
         System.out.println(linkedArrayList);
         linkedArrayList.add(6);
         linkedArrayList.add(7);
@@ -87,7 +83,11 @@ class Main {
         System.out.println(linkedArrayList);
         iterator = linkedArrayList.listIterator(1);
         System.out.println(iterator);
-        linkedArrayList.remove(0);
+        linkedArrayList.remove(2);
+        System.out.println(linkedArrayList);
+        linkedArrayList.remove(3);
+        System.out.println(linkedArrayList);
+        linkedArrayList.remove(7);
         System.out.println(linkedArrayList);
     }
 }
