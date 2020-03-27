@@ -97,7 +97,8 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
     protected class LinkedArrayListIterator<E> extends LinkedArrayIterator<E> implements ListIterator<E>{
 
-        private Node node;
+        Node node;
+
         LinkedArrayListIterator(){
             node = head;
             current = 0;
@@ -216,41 +217,19 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
     @Override
     public T get(int a)
     {
-        Node it = head;
-        int contor = 0;
-        while(it!=null && contor<a)
-        {
-            it = it.next;
-            contor++;
-        }
-
-        if(it!=null)
-        {
-            return (T) it;
-        }
-        else
-            return null;
+        ListIterator<T> listIterator = listIterator(a);
+        T t = listIterator.next();
+        return t;
     }
 
     @Override
     public Object set(int i, Object a)
     {
-        Node it = head;
-        int contor = 0;
-        Node aux;
-        while(it!=null && contor<i)
-        {
-            it = it.next;
-
-        }
-        if(it!=null)
-        {
-            aux = it;
-            it.data = (DynamicArray<T>) a;
-            return aux;
-        }
-        else
-            return null;
+        ListIterator<T> listIterator = listIterator(i);
+        T t = listIterator.next();
+        listIterator.previous();
+        listIterator.set((T) a);
+        return t;
     }
 
     @Override
@@ -269,8 +248,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
     @Override
     public int indexOf(Object a)
     {
-        Node traverse = new Node();
-        traverse = head;
+        Node traverse= head;
         int node_number = 1;
         while (traverse != null){
 
@@ -369,7 +347,11 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
             if(linkedArrayListIterator.hasNext())
                 linkedArrayListIterator.next();
             else
-                throw new IndexOutOfBoundsException("Out of Bounds");
+                try {
+                    throw new Exception();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
         }
         return linkedArrayListIterator;
     }
@@ -418,6 +400,13 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
     public boolean remove(Object o) {
         Node traverse = new Node();
         traverse = head;
+        if(traverse == null)
+            try {
+                throw new Exception();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         while (traverse != null){
 
             for (int i = 0; i< traverse.data.size(); ++i){
@@ -434,6 +423,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
             traverse = traverse.next;
 
         }
+
         System.out.println("No element such as " + o);
         return false;
     }
