@@ -30,7 +30,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         Node next;
         Node before;
 
-        public Node(int capacity) {
+        private Node(int capacity) {
             next = null;
             before = null;
             array = (T[])new Object[capacity];
@@ -40,7 +40,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
             System.out.println("Object at " + index + " will be replaced by " + element);
             array[index] = element;
         }
-        public void setData(T t, int current) {
+        private void setData(T t, int current) {
             setIndex(t,current);
         }
         /**
@@ -48,14 +48,14 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
          * @return size of array
          */
 
-        public int size(){
+        private int size(){
             return size;
         }
         /**
          *  to get the current capacity
          * @return capacity of array
          */
-        public int capacity(){
+        private int capacity(){
             return capacity;
         }
 
@@ -63,7 +63,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
          *  to add an element at the end
          * @param element element will be add
          */
-        public void addElement(T element) throws ArrayIndexOutOfBoundsException{
+        private void addElement(T element) throws ArrayIndexOutOfBoundsException{
             try{
                 array[size] = element;
                 size++;
@@ -76,7 +76,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
          * @param index index of element that will be taken
          * @return T type
          */
-        public T getElement(int index){
+        private T getElement(int index){
             return array[index];
         }
 
@@ -84,7 +84,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
          * to remove an element at a particular index
          * @param index index of array
          */
-        public void remove(int index){
+        private void remove(int index){
             if(index>=size || index<0){
                 System.out.println("No element at this index");
             }else{
@@ -105,8 +105,8 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
     protected class LinkedArrayIterator<E> implements java.util.Iterator<E> {
 
-        public int current = 0;
-        public Node node;
+        protected int current = 0;
+        protected Node node;
 
         LinkedArrayIterator(){
             node = head;
@@ -165,8 +165,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
     protected class LinkedArrayListIterator<E> extends LinkedArrayIterator<E> implements ListIterator<E> {
 
         LinkedArrayListIterator(){
-            node = head;
-            current = 0;
+            super();
         }
 
         @Override
@@ -246,8 +245,6 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
     public LinkedArrayList(int capacity_of_all_arrays)
     {
-        Node node = new Node(capacity_of_all_arrays);
-
         head = null;
         last = null;
         this.capacity_of_all_arrays = capacity_of_all_arrays;
@@ -344,18 +341,6 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
     }
 
     @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder("");
-        Node currNode = this.head;
-        while (currNode != null){
-            stringBuilder.append(currNode.toString());
-            currNode = currNode.next;
-        }
-
-        return stringBuilder.toString();
-    }
-
-    @Override
     public void add(int index, T element) {
         try {
             if(index >= 0 && index < size()){
@@ -431,7 +416,11 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
     @Override
     protected void removeRange(int fromIndex, int toIndex) {
-        super.removeRange(fromIndex, toIndex);
+        try {
+            throw new NotImplementedException();
+        } catch (NotImplementedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -488,5 +477,17 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
         System.out.println("No element such as " + o);
         return false;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder("");
+        Node currNode = this.head;
+        while (currNode != null){
+            stringBuilder.append(currNode.toString());
+            currNode = currNode.next;
+        }
+
+        return stringBuilder.toString();
     }
 }
