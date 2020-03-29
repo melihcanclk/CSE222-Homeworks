@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.Iterator;
+import java.util.Arrays;
 
 class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 {
@@ -12,27 +13,93 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
     private class Node
     {
-        DynamicArray<T> data;
+        /**
+         * Array that holds T type
+         */
+        private T[] array;
+
+        /**
+         * holds the current size of array
+         */
+        private int size;
+        /**
+         * holds the total capacity of array
+         */
+        private int capacity;
+
         Node next;
         Node before;
-        public Node(Object n)
-        {
-            data = (DynamicArray<T>) n;
+
+        public Node(int capacity) {
             next = null;
             before = null;
+            array = (T[])new Object[capacity];
+            this.capacity = capacity_of_all_arrays;
         }
-
-        public Node() {
-
+        private void setIndex(T element, int index){
+            System.out.println("Object at " + index + " will be replaced by " + element);
+            array[index] = element;
         }
-
         public void setData(T t, int current) {
-            data.setIndex(t,current);
+            setIndex(t,current);
         }
+        /**
+         * to get the current size
+         * @return size of array
+         */
+
+        public int size(){
+            return size;
+        }
+        /**
+         *  to get the current capacity
+         * @return capacity of array
+         */
+        public int capacity(){
+            return capacity;
+        }
+
+        /**
+         *  to add an element at the end
+         * @param element element will be add
+         */
+        public void addElement(T element) throws ArrayIndexOutOfBoundsException{
+            try{
+                array[size] = element;
+                size++;
+            }catch (ArrayIndexOutOfBoundsException exception){
+                System.out.println(exception);
+            }
+        }
+        /**
+         * to get an element at an index
+         * @param index index of element that will be taken
+         * @return T type
+         */
+        public T getElement(int index){
+            return array[index];
+        }
+
+        /**
+         * to remove an element at a particular index
+         * @param index index of array
+         */
+        public void remove(int index){
+            if(index>=size || index<0){
+                System.out.println("No element at this index");
+            }else{
+                for(int i=index;i<size-1;i++){
+                    array[i] = array[i+1];
+                }
+                array[size-1]=null;
+                size--;
+            }
+        }
+
 
         @Override
         public String toString() {
-            return data.toString();
+            return Arrays.toString(array);
         }
     }
 
@@ -51,9 +118,9 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
             if(node == null){
                 return false;
             }
-            if(current < node.data.size())
+            if(current < node.size())
                 return true;
-            else if(current >= node.data.size() && node.next != null){
+            else if(current >= node.size() && node.next != null){
                 current = 0;
                 node = node.next;
                 return true;
@@ -65,14 +132,14 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         public E next() {
             if(!hasNext())
                 throw new NoSuchElementException();
-            return (E) node.data.getElement(current++);
+            return (E) node.getElement(current++);
 
         }
 
         @Override
         public void remove() {
-            node.data.remove(current);
-            if(node.data.size() == 0){
+            node.remove(current);
+            if(node.size() == 0){
                 if(node == head)
                     if(head.next != null){
                         head = head.next;
@@ -91,11 +158,11 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         }
         @Override
         public String toString() {
-            return node.data.getElement(current).toString();
+            return node.getElement(current).toString();
         }
     }
 
-    protected class LinkedArrayListIterator<E> extends LinkedArrayIterator<E> implements ListIterator<E>{
+    protected class LinkedArrayListIterator<E> extends LinkedArrayIterator<E> implements ListIterator<E> {
 
         LinkedArrayListIterator(){
             node = head;
@@ -117,7 +184,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
             if(node == null){
                 return false;
             }
-            if(current < node.data.size())
+            if(current < node.size())
                 return true;
             else if(current < 0 && node.before != null){
                 current = 0;
@@ -131,7 +198,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         public E previous() {
             if(!hasPrevious())
                 throw new NoSuchElementException();
-            return (E) node.data.getElement(current--);
+            return (E) node.getElement(current--);
         }
 
         @Override
@@ -156,9 +223,8 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
         @Override
         public void add(E t) {
-            DynamicArray<E> dynamicArray = new DynamicArray<>(capacity_of_all_arrays);
-            dynamicArray.addElement(t);
-            Node temp = new Node(dynamicArray);
+            Node temp = new Node(capacity_of_all_arrays);
+            temp.addElement((T) t);
             if(node == last){
                 temp.before = node;
                 node.next = temp;
@@ -180,6 +246,8 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
     public LinkedArrayList(int capacity_of_all_arrays)
     {
+        Node node = new Node(capacity_of_all_arrays);
+
         head = null;
         last = null;
         this.capacity_of_all_arrays = capacity_of_all_arrays;
@@ -189,8 +257,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
     public boolean add(T a)
     {
         if (head == null){
-            DynamicArray<T> dynamicArray = new DynamicArray<>(capacity_of_all_arrays);
-            Node t = new Node(dynamicArray);
+            Node t = new Node(capacity_of_all_arrays);
             head = t;
             last = t;
         }
@@ -199,9 +266,8 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
             clear();
         }
         else {
-            if(last.data.size() == last.data.capacity()){
-                DynamicArray<T> dynamicArray = new DynamicArray<>(capacity_of_all_arrays);
-                Node t = new Node(dynamicArray);
+            if(last.size() == last.capacity()){
+                Node t = new Node(capacity_of_all_arrays);
                last.next = t;
                t.before = last;
                last = t;
@@ -209,7 +275,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
             }
         }
         System.out.println("Item that will be add is " + a);
-        last.data.addElement(a);
+        last.addElement(a);
         return true;
     }
     @Override
@@ -250,8 +316,8 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         int node_number = 1;
         while (traverse != null){
 
-            for (int i = 0; i< traverse.data.size(); ++i){
-                if(traverse.data.getElement(i).equals(a)){
+            for (int i = 0; i< traverse.size(); ++i){
+                if(traverse.getElement(i).equals(a)){
                     System.out.println("Index of " + a + " is " + i + " where node " + node_number);
                     return i;
                 }
@@ -282,7 +348,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         StringBuilder stringBuilder = new StringBuilder("");
         Node currNode = this.head;
         while (currNode != null){
-            stringBuilder.append(currNode.data.toString());
+            stringBuilder.append(currNode.toString());
             currNode = currNode.next;
         }
 
@@ -297,9 +363,9 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
                 for (int i = 0; i< index; i++){
                     node = node.next;
                 }
-                if(node.data.size() != capacity_of_all_arrays){
+                if(node.size() != capacity_of_all_arrays){
                     System.out.println("Object will be added to node" + (index+1));
-                    node.data.addElement(element);
+                    node.addElement(element);
                 }else {
                     System.out.println(element + " couldn't be added to index " + index + "." +
                             " So element added to end of the LinkedArrayList.");
@@ -319,8 +385,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
     @Override
     public void clear() {
-        DynamicArray<T> dynamicArray = new DynamicArray<>(this.capacity_of_all_arrays);
-        Node t = new Node(dynamicArray);
+        Node t = new Node(capacity_of_all_arrays);
         head = t;
         last = t;
         last.next = null;
@@ -396,8 +461,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
      */
     @Override
     public boolean remove(Object o) {
-        Node traverse = new Node();
-        traverse = head;
+        Node traverse = head;
         if(traverse == null)
             try {
                 throw new Exception();
@@ -407,10 +471,10 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
         while (traverse != null){
 
-            for (int i = 0; i< traverse.data.size(); ++i){
-                if(traverse.data.getElement(i).equals(o)){
-                    traverse.data.remove(i);
-                    if(traverse.data.size() == 0){
+            for (int i = 0; i< traverse.size(); ++i){
+                if(traverse.getElement(i).equals(o)){
+                    traverse.remove(i);
+                    if(traverse.size() == 0){
                         traverse.before.next = null;
                         last = traverse.before;
                     }
