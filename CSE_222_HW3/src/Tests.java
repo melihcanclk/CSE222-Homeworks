@@ -1,11 +1,9 @@
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ListIterator;
 
 public class Tests {
     static final int CAPACITY_OF_ARRAYS = 3;
 
-    public static void add(@NotNull LinkedArrayList<Integer> linkedArrayList){
+    public static void add( LinkedArrayList<Integer> linkedArrayList){
         linkedArrayList.add(0);
         linkedArrayList.add(1);
         linkedArrayList.add(2);
@@ -16,10 +14,10 @@ public class Tests {
         linkedArrayList.add(7);
     }
 
-    public static void printSize(@NotNull LinkedArrayList<Integer> linkedArrayList){
+    public static void printSize( LinkedArrayList<Integer> linkedArrayList){
         System.out.println("Size Of list is " + linkedArrayList.size());
     }
-    public static void printIsEmpty(@NotNull LinkedArrayList<Integer> linkedArrayList){
+    public static void printIsEmpty( LinkedArrayList<Integer> linkedArrayList){
         System.out.println("Is LinkedArrayList Empty: " + linkedArrayList.isEmpty());
     }
 
