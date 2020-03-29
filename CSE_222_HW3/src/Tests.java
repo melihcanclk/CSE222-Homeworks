@@ -285,7 +285,7 @@ public class Tests {
         print(linkedArrayList);
     }
     /**
-     * Get Method
+     * Get Method test
      */
     public static void test19(){
         printTestName(19);
@@ -297,8 +297,9 @@ public class Tests {
 
     }
 
+
     /**
-     * Set method
+     * Set method test
      */
     public static void test20(){
         printTestName(20);
@@ -310,5 +311,64 @@ public class Tests {
 
     }
 
+    /**
+     * Adding element at the end of the linkedarraylist
+     */
+    public static void test21() {
+        printTestName(21);
+        LinkedArrayList<Integer> linkedArrayList = new LinkedArrayList<>(CAPACITY_OF_ARRAYS);
+        add(linkedArrayList);
+        ListIterator<Integer> iterator = linkedArrayList.listIterator();
+        print(linkedArrayList);
+        iterator.add(5);
+        print(linkedArrayList);
+    }
 
+    /**
+     * Removing Empty LinkedArrayList
+     */
+    public static void test22(){
+        printTestName(22);
+        LinkedArrayList<Integer> linkedArrayList = new LinkedArrayList<>(CAPACITY_OF_ARRAYS);
+        print(linkedArrayList);
+        linkedArrayList.remove(Integer.valueOf(5));
+    }
+
+    /**
+     * Testing removeRange(int fromIndex, int toIndex) Method
+     */
+    public static void test23(){
+        printTestName(23);
+        LinkedArrayList<Integer> linkedArrayList = new LinkedArrayList<>(CAPACITY_OF_ARRAYS);
+        add(linkedArrayList);
+        linkedArrayList.removeRange(0,2);
+    }
+    /**
+     * Testing contains(Object o) Method
+     */
+    public static void test24(){
+        printTestName(24);
+        LinkedArrayList<Integer> linkedArrayList = new LinkedArrayList<>(CAPACITY_OF_ARRAYS);
+        add(linkedArrayList);
+        System.out.println("Does list contains value 3 : " + linkedArrayList.contains(Integer.valueOf(3)));
+    }
+    /**
+     * Testing contains(Object o) Method
+     */
+    public static void test25(){
+        printTestName(25);
+        LinkedArrayList<Integer> linkedArrayList = new LinkedArrayList<>(CAPACITY_OF_ARRAYS);
+        add(linkedArrayList);
+        System.out.println(linkedArrayList.subList(0, 2));
+    }
+    /**
+     * Testing contains(Object o) Method
+     */
+    public static void test26(){
+        printTestName(26);
+        LinkedArrayList<Integer> linkedArrayList = new LinkedArrayList<>(CAPACITY_OF_ARRAYS);
+        add(linkedArrayList);
+        linkedArrayList.add(Integer.valueOf(3));
+        System.out.println("Last Index of number 3 is " + linkedArrayList.lastIndexOf(Integer.valueOf(3)));
+    }
 }

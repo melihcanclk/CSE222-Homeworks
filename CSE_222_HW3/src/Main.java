@@ -18,12 +18,18 @@ class Main {
         Tests.test14();
         Tests.test15();
         //Exception will be thrown
-        Tests.test16();
+        //Tests.test16();
         //Exception will be thrown
-        Tests.test17();
+        //Tests.test17();
         Tests.test18();
         Tests.test19();
         Tests.test20();
+        Tests.test21();
+        //Tests.test22();
+        //Tests.test23();
+        Tests.test24();
+        Tests.test25();
+        Tests.test26();
     }
 
 }

@@ -4,6 +4,8 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.Iterator;
 import java.util.Arrays;
+//Arraylist for sublist method implementation
+import java.util.ArrayList;
 
 class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 {
@@ -34,7 +36,7 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
             next = null;
             before = null;
             array = (T[])new Object[capacity];
-            this.capacity = capacity_of_all_arrays;
+            this.capacity = capacity;
         }
         private void setIndex(T element, int index){
             System.out.println("Object at " + index + " will be replaced by " + element);
@@ -222,43 +224,23 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
         @Override
         public void add(E t) {
-            Node temp = new Node(capacity_of_all_arrays);
-            temp.addElement((T) t);
-            if(node == last){
-                temp.before = node;
-                node.next = temp;
-                last = temp;
-            }else if(node == head){
-                temp.next = node;
-                node.before = temp;
-                head = temp;
-            }else {
-                temp.next = node.next;
-                node.next.before = temp;
-                temp.before = node;
-                node.next = temp;
-            }
-
+            LinkedArrayList.this.add((T) t);
         }
 
     }
 
     public LinkedArrayList(int capacity_of_all_arrays)
     {
-        head = null;
-        last = null;
+        Node t = new Node(capacity_of_all_arrays);
+        head = t;
+        last = t;
         this.capacity_of_all_arrays = capacity_of_all_arrays;
     }
 
     @Override
     public boolean add(T a)
     {
-        if (head == null){
-            Node t = new Node(capacity_of_all_arrays);
-            head = t;
-            last = t;
-        }
-        else if(last == null)
+        if(last == null)
         {
             clear();
         }
@@ -365,7 +347,17 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
     @Override
     public int lastIndexOf(Object o) {
-        return super.lastIndexOf(o);
+        int lastIndex = 0;
+        int counter = 0;
+        T element = (T) o;
+        Iterator<T> iterator = iterator();
+        while(iterator.hasNext()){
+            T element_of_index = (T) iterator.next();
+            if(element == element_of_index)
+                lastIndex = counter;
+            counter++;
+        }
+        return lastIndex;
     }
 
     @Override
@@ -406,7 +398,10 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
-        return super.subList(fromIndex, toIndex);
+        List<T> list = new ArrayList<>() ;
+        for(int i = fromIndex; i< toIndex; i++)
+            list.add(i,get(i));
+        return list;
     }
 
     @Override
@@ -451,31 +446,30 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
     @Override
     public boolean remove(Object o) {
         Node traverse = head;
-        if(traverse == null)
+        if(traverse.size() == 0){
             try {
                 throw new Exception();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-        while (traverse != null){
-
-            for (int i = 0; i< traverse.size(); ++i){
-                if(traverse.getElement(i).equals(o)){
-                    traverse.remove(i);
-                    if(traverse.size() == 0){
-                        traverse.before.next = null;
-                        last = traverse.before;
+        }else {
+            while (traverse != null){
+                for (int i = 0; i< traverse.size(); ++i){
+                    if(traverse.getElement(i).equals(o)){
+                        traverse.remove(i);
+                        if(traverse.size() == 0){
+                            traverse.before.next = null;
+                            last = traverse.before;
+                        }
+                        System.out.println(o + " deleted.");
+                        return true;
                     }
-                    System.out.println(o + " deleted.");
-                    return true;
                 }
+                traverse = traverse.next;
+
             }
-            traverse = traverse.next;
-
+            System.out.println("No element such as " + o);
         }
-
-        System.out.println("No element such as " + o);
         return false;
     }
 
