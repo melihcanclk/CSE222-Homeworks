@@ -31,8 +31,9 @@ public abstract class SimpleTextEditor {
     }
     public void read_with_iterator(String pathName) throws IOException {
         TextFileReader fileIteratorCharByChar = new TextFileReader(pathName);
-        for (Character character : fileIteratorCharByChar) {
-            list.add(character);
+        TextFileReader.ListIterator listIterator = fileIteratorCharByChar.listIterator();
+        while (listIterator.hasNext()){
+            list.add(listIterator.next());
         }
     }
     public void add_without_iterator(int position,String nameWillBeAdded) throws IOException {

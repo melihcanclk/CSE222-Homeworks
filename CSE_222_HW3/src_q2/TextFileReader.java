@@ -5,11 +5,36 @@ import java.util.Scanner;
 
 
 class TextFileReader implements Iterable<Character> {
-    private class BufferedReader_Extend extends BufferedReader implements Cloneable{
+    @Override
+    public Iterator<Character> iterator() {
+        return new Iterator<Character>() {
+            int value;
+            int index = -1;
+            BufferedReader_Extend bufferedReader;
 
-        public BufferedReader_Extend(Reader in, int sz) {
-            super(in, sz);
-        }
+            public boolean hasNext() {
+                try {
+                    value = bufferedReader.read();
+                    if (value != -1) {
+                        return true;
+                    } else {
+                        bufferedReader.close();
+                        return false;
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            public Character next() {
+                ++index;
+                return (char) value;
+
+            }
+        };
+    }
+
+    private class BufferedReader_Extend extends BufferedReader implements Cloneable{
 
         public BufferedReader_Extend(Reader in) {
             super(in);
@@ -86,9 +111,9 @@ class TextFileReader implements Iterable<Character> {
 
         @Override
         public void add(Character s) {
-            Scanner scanner = null;
+
             try {
-                scanner = new Scanner(file).useDelimiter("\0");
+                Scanner scanner = new Scanner(file).useDelimiter("\0");
                 String line = scanner.next();
                 String newLine = line.substring(0, index) + s + line.substring(index);
                 index++;
@@ -118,33 +143,6 @@ class TextFileReader implements Iterable<Character> {
             bufferedReader = (BufferedReader_Extend) reader.clone();
             return listIterator;
         }
-    }
-    @Override
-    public Iterator<Character> iterator() {
-        return new Iterator<>() {
-            private int value;
-            private int index;
-
-
-            public boolean hasNext() {
-                try {
-                    value = reader.read();
-                    if (value != -1) {
-                        return true;
-                    } else {
-                        reader.close();
-                        return false;
-                    }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-
-            public Character next() {
-                ++index;
-                return (char) value;
-            }
-        };
     }
 
     public ListIterator listIterator() {
