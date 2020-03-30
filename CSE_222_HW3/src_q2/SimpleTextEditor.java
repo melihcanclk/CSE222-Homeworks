@@ -40,7 +40,7 @@ public abstract class SimpleTextEditor {
 
         char [] charArray = convertStringToCharArray(nameWillBeAdded);
         for(int i = 0; i< nameWillBeAdded.length(); i++){
-            list.add(position, charArray[i]);
+            list.add(position - 1, charArray[i]);
             position++;
         }
         StringBuilder stringBuilder = new StringBuilder();
