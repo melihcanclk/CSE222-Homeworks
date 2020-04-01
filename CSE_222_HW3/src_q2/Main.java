@@ -71,6 +71,7 @@ public class Main {
         stopTime = System.nanoTime();
         time = (double) (stopTime - startTime);
         logger.info("Execution time of find method without iterator is " + ((time) / 1_000_000_000) + " seconds.\n");
+        
 
         logger.info("Text before replacing is \n" + simpleTextEditor_with_iterator);
         startTime = System.nanoTime();
@@ -87,5 +88,6 @@ public class Main {
         time = (double) (stopTime - startTime);
         logger.info("Execution time of replace method without iterator is " + ((time) / 1_000_000_000) + " seconds.\n");
         logger.info("Text after replacing is \n" + simpleTextEditor_without_iterator);
+
     }
 }

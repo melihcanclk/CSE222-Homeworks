@@ -30,9 +30,8 @@ public abstract class SimpleTextEditor {
     }
     public void read_with_iterator(String pathName) throws IOException {
         TextFileReader fileIteratorCharByChar = new TextFileReader(pathName);
-        TextFileReader.ListIterator listIterator = fileIteratorCharByChar.listIterator();
-        while (listIterator.hasNext()){
-            list.add(listIterator.next());
+        for (Character character : fileIteratorCharByChar) {
+            list.add(character);
         }
     }
     public void add_without_iterator(int position,String nameWillBeAdded) throws IOException {
@@ -42,25 +41,19 @@ public abstract class SimpleTextEditor {
             list.add(position - 1, charArray[i]);
             position++;
         }
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Character character : list) {
-            stringBuilder.append(character);
-        }
-        writeToFile(stringBuilder.toString());
-
+        writeToFile();
     }
     public void add_with_iterator(int position,String nameWillBeAdded) throws IOException {
 
         char [] charArray = convertStringToCharArray(nameWillBeAdded);
-        TextFileReader textFileReader = new TextFileReader(file.getPath());
-        ListIterator<Character> iterator = textFileReader.listIterator();
-        for(int i = 0; i< position; i++){
-            iterator.next();
+        ListIterator<Character> listIterator = list.listIterator();
+        for(int i = 0; i< position - 1; i++){
+            listIterator.next();
         }
         for (char c : charArray) {
-            iterator.add(c);
+            listIterator.add(c);
         }
-        scanFile(file.getPath());
+        writeToFile();
     }
     public int find_without_iterator(char [] groupOfCharacters){
         String stringOfList = this.toString();
@@ -69,20 +62,18 @@ public abstract class SimpleTextEditor {
         return position; //true
     }
 
-    public int find_with_iterator(char [] groupOfCharacters) throws IOException, CloneNotSupportedException {
-        String groupOfChar = String.valueOf(groupOfCharacters);
-        TextFileReader textFileReader = new TextFileReader(file.getPath());
-        ListIterator<Character> iterator = textFileReader.listIterator();
-        char value;
-        while(iterator.hasNext()){
+    public int find_with_iterator(char [] groupOfCharacters) throws CloneNotSupportedException {
+        ListIterator<Character> listIterator = list.listIterator();
+        char value = ' ';
+        int index = 0;
+        while(listIterator.hasNext()){
             int counter = 0;
-            value = iterator.next();
-            ListIterator<Character> temp =  ((TextFileReader.ListIterator) iterator).clone();
-            if(value == groupOfChar.charAt(0)){
-                for(int i = 1; i < groupOfChar.length() ;++i){
-                    if(iterator.hasNext()){
-                        value =  iterator.next();
-                        if(value == groupOfChar.charAt(i)){
+            value = listIterator.next();
+            if(value == groupOfCharacters[0]){
+                for(int i = 1; i < groupOfCharacters.length;++i){
+                    if(listIterator.hasNext()){
+                        value =  listIterator.next();
+                        if(value == groupOfCharacters[i]){
                             counter++;
                         }else {
                             break;
@@ -90,37 +81,32 @@ public abstract class SimpleTextEditor {
                     }
 
                 }
-                if(counter == groupOfChar.length() - 1){
-                    return ((TextFileReader.ListIterator) iterator).index - (groupOfChar.length() - 1) ;
+                if(counter == groupOfCharacters.length - 1){
+                    return index ;
                 }
             }
-            iterator = temp;
+            ++index;
+            listIterator = list.listIterator(index);
         }
         return -1;
+
     }
 
     public void replace_without_iterator(char before, char after) throws IOException {
-        StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i< list.size(); ++i){
             if(before == list.get(i))
                 list.set(i,after);
-            stringBuilder.append(list.get(i));
         }
-        writeToFile(stringBuilder.toString());
+        writeToFile();
     }
     public void replace_with_iterator(char before, char after) throws IOException {
-        TextFileReader textFileReader = new TextFileReader(file.getPath());
-        ListIterator<Character> iterator = textFileReader.listIterator();
-        StringBuilder stringBuilder = new StringBuilder();
-        while(iterator.hasNext()){
-            ListIterator<Character> temp = iterator;
-            char value = iterator.next();
-            if(before == value){
-                iterator.set(after);
-            }
-            stringBuilder.append(temp.next());
+        ListIterator<Character> listIterator = list.listIterator();
+        while (listIterator.hasNext()){
+            char value = listIterator.next();
+            if(value == before)
+                listIterator.set(after);
         }
-        writeToFile(stringBuilder.toString());
+        writeToFile();
     }
 
     @Override
@@ -147,11 +133,14 @@ public abstract class SimpleTextEditor {
             e.printStackTrace();
         }
     }
-    private void writeToFile(String newLine) throws IOException {
+    private void writeToFile() throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Character character : list) {
+            stringBuilder.append(character);
+        }
         FileWriter writer = new FileWriter(file);
-        writer.write(newLine);
+        writer.write(stringBuilder.toString());
         writer.close();
     }
-
 
 }
