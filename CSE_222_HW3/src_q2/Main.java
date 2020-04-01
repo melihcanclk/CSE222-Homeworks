@@ -1,6 +1,8 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Scanner;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,7 +11,14 @@ public class Main {
     private static FileHandler fileHandler;
     private static Logger logger =
             Logger.getLogger(Main.class.getName());
-    public static void main(String[] args) throws IOException, CloneNotSupportedException {
+
+    final static String arraylist = "ARRAYLIST";
+    final static String linkedlist = "LINKEDLIST";
+
+    public static void main(String[] args) throws IOException {
+
+
+        String value = "";
 
         fileHandler = new
                 FileHandler(Main.class.getName() + ".log");
@@ -21,20 +30,37 @@ public class Main {
                 " \nwhich is same as class name: "
                 + Main.class.getName());
 
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("1-> Arraylist implementation test");
+        System.out.println("2-> LinkedList implementation test");
+
         File file_with_iterator = new File("txtWithIterator.txt");
         File file_without_iterator = new File("txtWithoutIterator.txt");
         long startTime;
         long stopTime;
+        SimpleTextEditor simpleTextEditor_with_iterator = null;
+        SimpleTextEditor simpleTextEditor_without_iterator = null;
 
-        SimpleTextEditor simpleTextEditor_with_iterator = new SimpleTextEditorArrayList(file_with_iterator);
+        int result = scanner.nextInt();
+        if(result == 1){
+            value = arraylist;
+            simpleTextEditor_with_iterator = new SimpleTextEditorArrayList(file_with_iterator);
+            simpleTextEditor_without_iterator = new SimpleTextEditorArrayList(file_without_iterator);
+        }else if(result == 2){
+            value = linkedlist;
+            simpleTextEditor_with_iterator = new SimpleTextEditorLinkedList(file_with_iterator);
+            simpleTextEditor_without_iterator = new SimpleTextEditorLinkedList(file_without_iterator);
+        }
+
+        logger.info(value + " IMPLEMENTATION TEST STARTING \n");
 
         startTime = System.nanoTime();
+        assert simpleTextEditor_with_iterator != null;
         simpleTextEditor_with_iterator.read_with_iterator(file_with_iterator.getPath());
         stopTime = System.nanoTime();
         double time = (double)(stopTime - startTime);
         logger.info("Execution time of read method with iterator is " + ((time) / 1_000_000_000) + " seconds.\n");
 
-        SimpleTextEditor simpleTextEditor_without_iterator = new SimpleTextEditorLinkedList(file_without_iterator);
 
         startTime = System.nanoTime();
         simpleTextEditor_without_iterator.read_without_iterator(file_without_iterator.getPath());
@@ -43,13 +69,13 @@ public class Main {
         logger.info("Execution time of read method without iterator is " + ((time) / 1_000_000_000) + " seconds.\n");
 
         startTime = System.nanoTime();
-        simpleTextEditor_with_iterator.add_with_iterator(65, " THIS STRING IS FROM ADD METHOD OF WITHOUT ITERATOR ");
+        simpleTextEditor_with_iterator.add_with_iterator(65, " THIS STRING IS FROM ADD METHOD OF WIT ITERATOR BY USING " + value);
         stopTime = System.nanoTime();
         time = (double) (stopTime - startTime);
         logger.info("Execution time of add method with iterator is " + ((time) / 1_000_000_000) + " seconds.\n");
 
         startTime = System.nanoTime();
-        simpleTextEditor_without_iterator.add_without_iterator(65, " THIS STRING IS FROM ADD METHOD OF WITHOUT ITERATOR ");
+        simpleTextEditor_without_iterator.add_without_iterator(65, " THIS STRING IS FROM ADD METHOD OF NOT ITERATOR BY USING " + value);
         stopTime = System.nanoTime();
         time = (double) (stopTime - startTime);
         logger.info("Execution time of add method without iterator is " + ((time) / 1_000_000_000) + " seconds.\n");
@@ -75,7 +101,7 @@ public class Main {
 
         logger.info("Text before replacing is \n" + simpleTextEditor_with_iterator);
         startTime = System.nanoTime();
-        simpleTextEditor_with_iterator.replace_with_iterator('.', 'a');
+        simpleTextEditor_with_iterator.replace_with_iterator('a', '.');
         stopTime = System.nanoTime();
         time = (double) (stopTime - startTime);
         logger.info("Execution time of replace method with iterator is " + ((time) / 1_000_000_000) + " seconds.\n");
@@ -83,11 +109,11 @@ public class Main {
 
         logger.info("Text before replacing is \n" + simpleTextEditor_without_iterator);
         startTime = System.nanoTime();
-        simpleTextEditor_without_iterator.replace_without_iterator('.', 'a');
+        simpleTextEditor_without_iterator.replace_without_iterator('a', '.');
         stopTime = System.nanoTime();
         time = (double) (stopTime - startTime);
         logger.info("Execution time of replace method without iterator is " + ((time) / 1_000_000_000) + " seconds.\n");
         logger.info("Text after replacing is \n" + simpleTextEditor_without_iterator);
-
     }
+
 }

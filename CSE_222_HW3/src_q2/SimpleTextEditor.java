@@ -13,11 +13,10 @@ public abstract class SimpleTextEditor {
         this.file = new File(file.getPath());
     }
     /**
-     * Method for Reading files
+     * Method for Reading files without iterator
      * @param pathName Pathname
-     * @throws IOException input output exception
      */
-    public void read_without_iterator(String pathName) throws IOException {
+    public void read_without_iterator(String pathName) {
 
         try (FileReader fr = new FileReader(pathName)) {
             int content;
@@ -122,13 +121,9 @@ public abstract class SimpleTextEditor {
         return nameWillBeAdded.toCharArray();
     }
 
-    private void writeToFile() throws IOException {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Character character : list) {
-            stringBuilder.append(character);
-        }
+    public void writeToFile() throws IOException {
         FileWriter writer = new FileWriter(file);
-        writer.write(stringBuilder.toString());
+        writer.write(this.toString());
         writer.close();
     }
 
