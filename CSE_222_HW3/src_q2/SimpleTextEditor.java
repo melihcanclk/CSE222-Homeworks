@@ -62,7 +62,7 @@ public abstract class SimpleTextEditor {
         return position; //true
     }
 
-    public int find_with_iterator(char [] groupOfCharacters) throws CloneNotSupportedException {
+    public int find_with_iterator(char [] groupOfCharacters) {
         ListIterator<Character> listIterator = list.listIterator();
         char value = ' ';
         int index = 0;
@@ -122,17 +122,6 @@ public abstract class SimpleTextEditor {
         return nameWillBeAdded.toCharArray();
     }
 
-    private void scanFile(String pathName){
-        list.clear();
-        try (FileReader fr = new FileReader(pathName)) {
-            int content;
-            while ((content = fr.read()) != -1) {
-                list.add((char)content);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     private void writeToFile() throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
         for (Character character : list) {
