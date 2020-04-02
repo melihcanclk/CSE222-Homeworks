@@ -74,6 +74,11 @@ public abstract class SimpleTextEditor {
         writeToFile();
     }
 
+    /**
+     * Method for finding group of characters with iterator
+     * @param groupOfCharacters char array for group of characters
+     * @return starting position of character array
+     */
     public int find_without_iterator(char [] groupOfCharacters){
         String stringOfList = this.toString();
         String groupOfChar = String.valueOf(groupOfCharacters);
@@ -81,6 +86,11 @@ public abstract class SimpleTextEditor {
         return position; //true
     }
 
+    /**
+     * Method for finding group of characters without iterator
+     * @param groupOfCharacters char array for group of characters
+     * @return starting position of character array
+     */
     public int find_with_iterator(char [] groupOfCharacters) {
         ListIterator<Character> listIterator = list.listIterator();
         char value = ' ';
@@ -109,6 +119,12 @@ public abstract class SimpleTextEditor {
 
     }
 
+    /**
+     * Method for replacing all one character inside text to another character without iterator
+     * @param before character that will be changed from
+     * @param after character that will be changed to
+     * @throws IOException input output exception
+     */
     public void replace_without_iterator(char before, char after) throws IOException {
         for (int i = 0; i< list.size(); ++i){
             if(before == list.get(i))
@@ -116,6 +132,12 @@ public abstract class SimpleTextEditor {
         }
         writeToFile();
     }
+    /**
+     * Method for replacing all one character inside text to another character with iterator
+     * @param before character that will be changed from
+     * @param after character that will be changed to
+     * @throws IOException input output exception
+     */
     public void replace_with_iterator(char before, char after) throws IOException {
         ListIterator<Character> listIterator = list.listIterator();
         while (listIterator.hasNext()){
@@ -127,6 +149,9 @@ public abstract class SimpleTextEditor {
     }
 
     @Override
+    /**
+     * toString method override for print list
+     */
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Character character : list) {
@@ -134,11 +159,21 @@ public abstract class SimpleTextEditor {
         }
         return stringBuilder.toString();
     }
+
+    /**
+     * Converting String to char array
+     * @param nameWillBeAdded String that will be converted
+     * @return Char array that is converted
+     */
     private char [] convertStringToCharArray(String nameWillBeAdded){
         char c = nameWillBeAdded.charAt(0);  // returns 'l'
         return nameWillBeAdded.toCharArray();
     }
 
+    /**
+     * Writing to file
+     * @throws IOException input output exception
+     */
     public void writeToFile() throws IOException {
         FileWriter writer = new FileWriter(file);
         writer.write(this.toString());

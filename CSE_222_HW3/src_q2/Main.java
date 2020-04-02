@@ -27,7 +27,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         main_menu();
-        test1();
+        //tests after test1 executes test1 so it can be better to execute tests one by one
+        //test1();
         //test2();
         //test3();
         //test4();
@@ -165,7 +166,7 @@ public class Main {
 
         logger.info("Text before replacing is \n" + simpleTextEditor_with_iterator);
         startTime = System.nanoTime();
-        simpleTextEditor_with_iterator.replace_with_iterator('a', '_');
+        simpleTextEditor_with_iterator.replace_with_iterator('_', 'a');
         stopTime = System.nanoTime();
         time = (double) (stopTime - startTime);
         logger.info("Execution time of replace method with iterator is " + ((time) / 1_000_000_000) + " seconds.\n");
@@ -173,7 +174,7 @@ public class Main {
 
         logger.info("Text before replacing is \n" + simpleTextEditor_without_iterator);
         startTime = System.nanoTime();
-        simpleTextEditor_without_iterator.replace_without_iterator('a', '_');
+        simpleTextEditor_without_iterator.replace_without_iterator('_', 'a');
         stopTime = System.nanoTime();
         time = (double) (stopTime - startTime);
         logger.info("Execution time of replace method without iterator is " + ((time) / 1_000_000_000) + " seconds.\n");
