@@ -26,8 +26,8 @@ class Main {
         Tests.test20();
         Tests.test21();
         //Exception will be thrown
-        //Tests.test22();
-        //Tests.test23();
+        Tests.test22();
+        Tests.test23();
         Tests.test24();
         Tests.test25();
         Tests.test26();

@@ -27,12 +27,24 @@ public abstract class SimpleTextEditor {
             e.printStackTrace();
         }
     }
+    /**
+     * Method for Reading files with iterator
+     * @param pathName Pathname
+     */
     public void read_with_iterator(String pathName) throws IOException {
         TextFileReader fileIteratorCharByChar = new TextFileReader(pathName);
         for (Character character : fileIteratorCharByChar) {
             list.add(character);
         }
     }
+
+    /**
+     *
+     * Method for Adding a string to a specific position without iterator
+     * @param position Position that will string be added
+     * @param nameWillBeAdded String will be added
+     * @throws IOException IO Exception
+     */
     public void add_without_iterator(int position,String nameWillBeAdded) throws IOException {
 
         char [] charArray = convertStringToCharArray(nameWillBeAdded);
@@ -42,6 +54,13 @@ public abstract class SimpleTextEditor {
         }
         writeToFile();
     }
+    /**
+     *
+     * Method for Adding a string to a specific position with iterator
+     * @param position Position that will string be added
+     * @param nameWillBeAdded String will be added
+     * @throws IOException IO Exception
+     */
     public void add_with_iterator(int position,String nameWillBeAdded) throws IOException {
 
         char [] charArray = convertStringToCharArray(nameWillBeAdded);
@@ -54,6 +73,7 @@ public abstract class SimpleTextEditor {
         }
         writeToFile();
     }
+
     public int find_without_iterator(char [] groupOfCharacters){
         String stringOfList = this.toString();
         String groupOfChar = String.valueOf(groupOfCharacters);
@@ -69,20 +89,18 @@ public abstract class SimpleTextEditor {
             int counter = 0;
             value = listIterator.next();
             if(value == groupOfCharacters[0]){
-                for(int i = 1; i < groupOfCharacters.length;++i){
-                    if(listIterator.hasNext()){
-                        value =  listIterator.next();
-                        if(value == groupOfCharacters[i]){
-                            counter++;
-                        }else {
-                            break;
+                while(listIterator.hasNext()){
+                    value =  listIterator.next();
+                    if(value == groupOfCharacters[counter + 1]){
+                        counter++;
+                        if(counter == groupOfCharacters.length - 1){
+                            return index ;
                         }
+                    }else {
+                        break;
                     }
+                }
 
-                }
-                if(counter == groupOfCharacters.length - 1){
-                    return index ;
-                }
             }
             ++index;
             listIterator = list.listIterator(index);

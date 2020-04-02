@@ -3,6 +3,10 @@ import java.util.ListIterator;
 public class Tests {
     static final int CAPACITY_OF_ARRAYS = 3;
 
+    /**
+     * adding standart values to LinkedArrayList
+     * @param linkedArrayList Arraylist that will be changed
+     */
     public static void add( LinkedArrayList<Integer> linkedArrayList){
         linkedArrayList.add(0);
         linkedArrayList.add(1);
@@ -14,19 +18,37 @@ public class Tests {
         linkedArrayList.add(7);
     }
 
+    /**
+     * Printing size of LinkedArrayList
+     * @param linkedArrayList LinkedArrayList that will be counted
+     */
     public static void printSize( LinkedArrayList<Integer> linkedArrayList){
         System.out.println("Size Of list is " + linkedArrayList.size());
     }
+
+    /**
+     * Check if LinkedArrayList empty or not
+     * @param linkedArrayList LinkedArrayList that will be checked if LinkedArrayList empty or not
+     */
     public static void printIsEmpty( LinkedArrayList<Integer> linkedArrayList){
         System.out.println("Is LinkedArrayList Empty: " + linkedArrayList.isEmpty());
     }
 
+    /**
+     * Printing print functions
+     * @param linkedArrayList LinkedArrayList that will be printed
+     */
     public static void print(LinkedArrayList<Integer> linkedArrayList){
 
         System.out.println( "\n" + linkedArrayList);
         printSize(linkedArrayList);
         printIsEmpty(linkedArrayList);
     }
+
+    /**
+     * Printing test number
+     * @param number number of text
+     */
     public static void printTestName(int number){
 
         System.out.println("-----------------Test Number " + number + "----------------------");
@@ -353,7 +375,7 @@ public class Tests {
         System.out.println("Does list contains value 3 : " + linkedArrayList.contains(Integer.valueOf(3)));
     }
     /**
-     * Testing contains(Object o) Method
+     * Testing sublist(int fromIndex, int toIndex) Method
      */
     public static void test25(){
         printTestName(25);
