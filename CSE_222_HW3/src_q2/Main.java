@@ -166,7 +166,7 @@ public class Main {
 
         logger.info("Text before replacing is \n" + simpleTextEditor_with_iterator);
         startTime = System.nanoTime();
-        simpleTextEditor_with_iterator.replace_with_iterator('_', 'a');
+        simpleTextEditor_with_iterator.replace_with_iterator('a', '_');
         stopTime = System.nanoTime();
         time = (double) (stopTime - startTime);
         logger.info("Execution time of replace method with iterator is " + ((time) / 1_000_000_000) + " seconds.\n");
@@ -174,7 +174,7 @@ public class Main {
 
         logger.info("Text before replacing is \n" + simpleTextEditor_without_iterator);
         startTime = System.nanoTime();
-        simpleTextEditor_without_iterator.replace_without_iterator('_', 'a');
+        simpleTextEditor_without_iterator.replace_without_iterator('a', '_');
         stopTime = System.nanoTime();
         time = (double) (stopTime - startTime);
         logger.info("Execution time of replace method without iterator is " + ((time) / 1_000_000_000) + " seconds.\n");

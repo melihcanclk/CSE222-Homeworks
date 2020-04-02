@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * Class for reading text file that implements iterable interface
  */
-class TextFileReader implements Iterable<Character> {
+public class TextFileReader implements Iterable<Character> {
     /**
      * BufferedReader reader for read text
      */

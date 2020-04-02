@@ -7,7 +7,7 @@ import java.util.Arrays;
 //Arraylist for sublist method implementation
 import java.util.ArrayList;
 
-class LinkedArrayList<T> extends AbstractList<T> implements List<T>
+public class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 {
 
     private Node head, last;
@@ -32,24 +32,40 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         Node next;
         Node before;
 
+        /**
+         * Node for hold information
+         * @param capacity constant capacity of array
+         */
         private Node(int capacity) {
             next = null;
             before = null;
             array = (T[])new Object[capacity];
             this.capacity = capacity;
         }
+
+        /**
+         * Setting value of element that is given by index
+         * @param element element that will be changed
+         * @param index index that is given
+         */
         private void setIndex(T element, int index){
             System.out.println("Object at " + index + " will be replaced by " + element);
             array[index] = element;
         }
+
+        /**
+         * Setting data
+         * @param t element
+         * @param current current index
+         */
         private void setData(T t, int current) {
             setIndex(t,current);
         }
+
         /**
          * to get the current size
          * @return size of array
          */
-
         private int size(){
             return size;
         }
@@ -105,16 +121,27 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         }
     }
 
+    /**
+     * LinkedArrayIterator for iterate over array and linkedlist
+     * @param <E> generic tyoe
+     */
     protected class LinkedArrayIterator<E> implements java.util.Iterator<E> {
 
         protected int current = 0;
         protected Node node;
 
+        /**
+         * Constructor for LinkedArrayList class
+         */
         LinkedArrayIterator(){
             node = head;
             current = 0;
         }
 
+        /**
+         * Check if next item null or not
+         * @return if next node is not null, returns true otherwise returns false
+         */
         @Override
         public boolean hasNext() {
             if(node == null){
@@ -130,6 +157,10 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
                 return false;
         }
 
+        /**
+         * Getting next index
+         * @return next index
+         */
         @Override
         public E next() {
             if(!hasNext())
@@ -138,6 +169,9 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
         }
 
+        /**
+         * Removing last element
+         */
         @Override
         public void remove() {
             node.remove(current);
@@ -158,28 +192,50 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
             }
 
         }
+
+        /**
+         * toString method
+         * @return current index value
+         */
         @Override
         public String toString() {
             return node.getElement(current).toString();
         }
     }
 
+    /**
+     * LinkedArrayListIterator list iterator
+     * @param <E> generic type
+     */
     protected class LinkedArrayListIterator<E> extends LinkedArrayIterator<E> implements ListIterator<E> {
 
+        /**
+         * LinkedArrayListIterator constructor
+         */
         LinkedArrayListIterator(){
             super();
         }
 
+        /**
+         * Check if next item null or not
+         * @return if next node is not null, returns true otherwise returns false
+         */
         @Override
         public boolean hasNext() {
             return super.hasNext();
         }
-
+        /**
+         * Getting next index
+         * @return next index
+         */
         @Override
         public E next() {
             return super.next();
         }
-
+        /**
+         * Check if previous item null or not
+         * @return if previous node is not null, returns true otherwise returns false
+         */
         @Override
         public boolean hasPrevious() {
             if(node == null){
@@ -194,7 +250,10 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
             } else
                 return false;
         }
-
+        /**
+         * Getting previous index
+         * @return previous index
+         */
         @Override
         public E previous() {
             if(!hasPrevious())
@@ -202,26 +261,44 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
             return (E) node.getElement(current--);
         }
 
+        /**
+         * getting next index
+         * @return next index int value
+         */
         @Override
         public int nextIndex() {
             return ((current == size()) ? 0 : current+1);
         }
-
+        /**
+         * getting previous index
+         * @return previous index int value
+         */
         @Override
         public int previousIndex() {
             return ((current < 0) ? capacity_of_all_arrays-1 : current-1);
         }
 
+        /**
+         * remove current element
+         */
         @Override
         public void remove() {
             super.remove();
         }
 
+        /**
+         * Set t value to this value
+         * @param t value will be changed to
+         */
         @Override
         public void set(E t) {
             node.setData((T) t,current);
         }
 
+        /**
+         * Adding value
+         * @param t value that will be added
+         */
         @Override
         public void add(E t) {
             LinkedArrayList.this.add((T) t);
@@ -229,6 +306,10 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
 
     }
 
+    /**
+     * Constructor of LinkedArrayList
+     * @param capacity_of_all_arrays constant capacity
+     */
     public LinkedArrayList(int capacity_of_all_arrays)
     {
         Node t = new Node(capacity_of_all_arrays);
@@ -237,6 +318,11 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         this.capacity_of_all_arrays = capacity_of_all_arrays;
     }
 
+    /**
+     * LinkedArrayList add method
+     * @param a value that will be added
+     * @return if adding is successful, returns true otherwise false
+     */
     @Override
     public boolean add(T a)
     {
@@ -257,6 +343,12 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         last.addElement(a);
         return true;
     }
+
+    /**
+     * Getting value according to given index
+     * @param a index
+     * @return value
+     */
     @Override
     public T get(int a)
     {
@@ -265,6 +357,12 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         return t;
     }
 
+    /**
+     * setting value to given index
+     * @param i index
+     * @param a object will be added
+     * @return object that is set
+     */
     @Override
     public Object set(int i, Object a)
     {
@@ -275,6 +373,10 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         return t;
     }
 
+    /**
+     * Calculate size of LinkedArrayList
+     * @return Size
+     */
     @Override
     public int size()
     {
@@ -288,6 +390,11 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         return contor;
     }
 
+    /**
+     * Getting index of a object
+     * @param a object that has to be searched
+     * @return index, if not found, return -1
+     */
     @Override
     public int indexOf(Object a)
     {
@@ -345,6 +452,11 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         }
     }
 
+    /**
+     * Getting last index of specified element
+     * @param o Object that will be searched
+     * @return last index of Object
+     */
     @Override
     public int lastIndexOf(Object o) {
         int lastIndex = 0;
@@ -360,6 +472,9 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         return lastIndex;
     }
 
+    /**
+     * Clearing all LinkedArrayList
+     */
     @Override
     public void clear() {
         Node t = new Node(capacity_of_all_arrays);
@@ -369,16 +484,26 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         head.before = null;
     }
 
+    /**
+     * Creating new LinkedArrayIterator
+     * @return Iterator<T>
+     */
     @Override
     public Iterator<T> iterator() {
         return new LinkedArrayIterator<>();
     }
-
+    /**
+     * Creating new LinkedArrayListIterator
+     * @return ListIterator<T>
+     */
     @Override
     public ListIterator<T> listIterator() {
         return new LinkedArrayListIterator();
     }
-
+    /**
+     * Creating new LinkedArrayListIterator to specified index
+     * @return ListIterator<T>
+     */
     @Override
     public ListIterator<T> listIterator(int index) {
 
@@ -396,6 +521,12 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         return linkedArrayListIterator;
     }
 
+    /**
+     * Creates sublist from given index to given index
+     * @param fromIndex starting index
+     * @param toIndex end index
+     * @return List<T>
+     */
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
         List<T> list = new ArrayList<>() ;
@@ -404,11 +535,21 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         return list;
     }
 
+    /**
+     * Check whether two objects are equal or not
+     * @param o Object that will be compared
+     * @return if equal, return true otherwise return false
+     */
     @Override
     public boolean equals(Object o) {
         return super.equals(o);
     }
 
+    /**
+     * Not implemented method
+     * @param fromIndex -
+     * @param toIndex -
+     */
     @Override
     protected void removeRange(int fromIndex, int toIndex) {
         try {
@@ -418,16 +559,29 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         }
     }
 
+    /**
+     * Check whether LinkedArrayList empty or not
+     * @return if LinkedArrayList empty, returns true otherwise returns false
+     */
     @Override
     public boolean isEmpty() {
         return head == null;
     }
 
+    /**
+     * Check LinkedArrayList contains o Object or not
+     * @param o Object that is compared
+     * @return if LinkedArrayList contains o Object returns true, otherwise returns false
+     */
     @Override
     public boolean contains(Object o) {
         return super.contains(o);
     }
 
+    /**
+     * Convert LinkedArrayList to Object array
+     * @return Object []
+     */
     @Override
     public Object[] toArray() {
         return super.toArray();
@@ -473,6 +627,10 @@ class LinkedArrayList<T> extends AbstractList<T> implements List<T>
         return false;
     }
 
+    /**
+     * Printing arrays
+     * @return String that includes arrays
+     */
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder("");
