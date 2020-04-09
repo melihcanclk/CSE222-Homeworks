@@ -2,7 +2,7 @@ import java.util.Collection;
 import java.util.Deque;
 import java.util.Iterator;
 
-class CustomDeque<T> implements Deque<T> {
+public class CustomDeque<T> implements Deque<T> {
 
     LinkedList<T> mainLinkedList;
     LinkedList<T> trashLinkedList;
@@ -101,12 +101,28 @@ class CustomDeque<T> implements Deque<T> {
 
     @Override
     public boolean removeFirstOccurrence(Object o) {
+        ListNode<T> listNode = mainLinkedList.head;
+        while (listNode != null){
+            if(listNode.data.equals(o)){
+                deleteObject(listNode);
+                return true;
+            }
+            listNode = listNode.next;
+        }
         return false;
     }
 
     @Override
     public boolean removeLastOccurrence(Object o) {
-        return false;
+        ListNode<T> listNode = mainLinkedList.tail;
+        while (listNode != null){
+            if(listNode.data.equals(o)){
+                deleteObject(listNode);
+                return true;
+            }
+            listNode = listNode.prev;
+        }
+        return true;
     }
 
     @Override
@@ -201,31 +217,7 @@ class CustomDeque<T> implements Deque<T> {
 
     @Override
     public boolean remove(Object o) {
-        ListNode<T> listNode = mainLinkedList.head;
-        while (listNode != null){
-            if(listNode.data.equals(o)){
-                if(listNode == mainLinkedList.head){
-                    ListNode<T> temp = mainLinkedList.head;
-                    listNode = listNode.next;
-                    mainLinkedList.head = listNode;
-                    temp.next = null;
-                    listNode.prev = null;
-                }else if(listNode == mainLinkedList.tail){
-                    ListNode<T> temp = mainLinkedList.tail;
-                    listNode = listNode.prev;
-                    mainLinkedList.tail = listNode;
-                    temp.prev = null;
-                    listNode.prev = null;
-                }else {
-                    listNode.prev.next = listNode.next;
-                    listNode.next.prev = listNode.prev;
-                    listNode.next = null;
-                    listNode.prev = null;
-                }
-            }
-            listNode = listNode.next;
-        }
-        return false;
+        return removeFirstOccurrence(o);
     }
 
     @Override
@@ -258,21 +250,26 @@ class CustomDeque<T> implements Deque<T> {
     public boolean isEmpty() {
         return mainLinkedList.head == null;
     }
-
+/**
+ * Creating new Iterator
+ */
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
             int current = 0;
-            ListNode<T> node;
+            ListNode<T> node = null;
+            ListNode<T> nextNode = mainLinkedList.head;
             @Override
             public boolean hasNext() {
-                return node.next != null;
+                return nextNode != null;
             }
 
             @Override
             public T next() {
                 current++;
-                return node.next.data;
+                node = nextNode;
+                nextNode = nextNode.next;
+                return node.data;
             }
         };
     }
@@ -295,19 +292,41 @@ class CustomDeque<T> implements Deque<T> {
     @Override
     public Iterator<T> descendingIterator() {
         return new Iterator<T>() {
-            int current = mainLinkedList.size() - 1;
-            ListNode<T> node;
+            int current = 0;
+            ListNode<T> node = null;
+            ListNode<T> prevNode = mainLinkedList.tail;
             @Override
             public boolean hasNext() {
-                return node.prev != null;
+                return prevNode != null;
             }
 
             @Override
             public T next() {
-                current--;
-                return node.prev.data;
+                current++;
+                node = prevNode;
+                prevNode = prevNode.prev;
+                return node.data;
             }
         };
+    }
+
+    private void deleteObject(ListNode<T> listNode){
+        if(listNode == mainLinkedList.head){
+            ListNode<T> temp = mainLinkedList.head;
+            listNode = listNode.next;
+            mainLinkedList.head = listNode;
+            temp.next = null;
+            listNode.prev = null;
+        }else if(listNode == mainLinkedList.tail){
+            ListNode<T> temp = mainLinkedList.tail.prev;
+            temp.next = null;
+            listNode.prev = null;
+        }else {
+            listNode.prev.next = listNode.next;
+            listNode.next.prev = listNode.prev;
+            listNode.next = null;
+            listNode.prev = null;
+        }
     }
 
     @Override
