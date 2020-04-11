@@ -2,9 +2,9 @@ import java.util.NoSuchElementException;
 
 public class LinkedList<T> {
     // Front / head node
-    public ListNode<T> head;
+    public CustomDeque.ListNode<T> head;
     // Tail Node
-    public  ListNode<T> tail;
+    public CustomDeque.ListNode<T> tail;
     // Helper, keeping track of size.
     private int size;
 
@@ -19,7 +19,7 @@ public class LinkedList<T> {
      * Adding a node to the front of the list.
      *
      */
-    public void addFront(ListNode<T> newNode) {
+    public void addFront(CustomDeque.ListNode<T> newNode) {
         if (isEmpty()){
             head = newNode;
             tail = head;
@@ -35,7 +35,7 @@ public class LinkedList<T> {
      * Inserting a node at the end of the list.
      *
      */
-    public void addEnd(ListNode<T> newNode) {
+    public void addEnd(CustomDeque.ListNode<T> newNode) {
         if (isEmpty()){
             head = newNode;
             tail = head;
@@ -58,14 +58,14 @@ public class LinkedList<T> {
         // List is empty, can't add
         if (isEmpty())
             throw new NoSuchElementException("Element " + x.toString() + " not found");
-        ListNode<T> current = head;
+        CustomDeque.ListNode<T> current = head;
         // Looping through until found
         while (current != null && !current.data.equals(x))
             current = current.next;
         // If null, not found
         if (current == null)
             throw new NoSuchElementException("Element " + x.toString() + " not found");
-        ListNode<T> newNode = new ListNode<T>(current.prev, y, current);
+        CustomDeque.ListNode<T> newNode = new CustomDeque.ListNode<T>(current.prev, y, current);
         if (current.prev != null)
             current.prev.next = newNode;
         else
@@ -82,7 +82,7 @@ public class LinkedList<T> {
     public void addAfter(T x, T y) {
         if (isEmpty())
             throw new NoSuchElementException("Element " + x.toString() + " not found");
-        ListNode<T> current = head;
+        CustomDeque.ListNode<T> current = head;
         // Looping through until found
         while (current != null && !current.data.equals(x))
             current = current.next;
@@ -90,14 +90,14 @@ public class LinkedList<T> {
         if (current == null)
             throw new NoSuchElementException("Element " + x.toString() + " not found");
         // Not null, value found
-        ListNode<T> newNode = new ListNode<T>(current, y, current.next);
+        CustomDeque.ListNode<T> newNode = new CustomDeque.ListNode<T>(current, y, current.next);
         if (current.next != null)
             current.next.prev = newNode;
         current.next = newNode;
         size++;
     }
-    public ListNode<T> removeLast(){
-        ListNode<T> listNode;
+    public CustomDeque.ListNode<T> removeLast(){
+        CustomDeque.ListNode<T> listNode;
         if(size() == 1){
             listNode = head;
             head = tail;
@@ -105,7 +105,7 @@ public class LinkedList<T> {
         }
         else if(tail.prev != null) {
             listNode = tail.prev;
-            ListNode<T> temp = tail;
+            CustomDeque.ListNode<T> temp = tail;
             listNode.next = null;
             temp.prev = null;
             tail = listNode;
@@ -115,8 +115,8 @@ public class LinkedList<T> {
             throw new NoSuchElementException();
         }
     }
-    public ListNode<T> removeFirst(){
-        ListNode<T> listNode = head;
+    public CustomDeque.ListNode<T> removeFirst(){
+        CustomDeque.ListNode<T> listNode = head;
         head = head.next;
         listNode.next = null;
         size--;
@@ -144,7 +144,7 @@ public class LinkedList<T> {
     }
     @Override
     public String toString() {
-        ListNode<T> temp = head;
+        CustomDeque.ListNode<T> temp = head;
         StringBuilder builder = new StringBuilder("[");
         if(temp != null){
             while (temp != null) {
