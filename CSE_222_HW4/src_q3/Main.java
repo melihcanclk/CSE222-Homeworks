@@ -6,7 +6,7 @@ public class Main{
     final static int BORDERY = 5;
     public static void main(String[] args) {
 
-        /*test1();
+        test1();
         test2();
         test3();
         test4();
@@ -19,7 +19,7 @@ public class Main{
         //Throw exception
         test11();
         test12();
-        test13();*/
+        test13();
         //Throw Exception
         test14();
 

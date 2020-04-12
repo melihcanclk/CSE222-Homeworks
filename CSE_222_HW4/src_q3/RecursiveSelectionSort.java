@@ -1,4 +1,11 @@
 public class RecursiveSelectionSort {
+    /**
+     * Finding minimum index
+     * @param input input int type array
+     * @param i i index
+     * @param j j index
+     * @return if i index of array is bigger thatn j index of array
+     */
     static int minIndex(int[] input, int i, int j)
     {
         if (i == j)
@@ -10,6 +17,13 @@ public class RecursiveSelectionSort {
         // Return minimum of current and remaining.
         return (input[i] < input[k])? i : k;
     }
+
+    /**
+     * Traveling over input
+     * @param input int input
+     * @param n shifted number
+     * @param index index fill be compared
+     */
     static void recurSelectionSort(int[] input, int n, int index)
     {
 

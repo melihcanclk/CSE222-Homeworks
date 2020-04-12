@@ -1,6 +1,10 @@
 import java.util.Arrays;
 
 public class ReverseString {
+    /**
+     * Reversing given string
+     * @param input String will be reverse printed
+     */
     public static void reverseString(String input){
         String [] array = input.split(" ");
         int length = array[array.length - 1].length();

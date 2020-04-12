@@ -2,10 +2,10 @@ import java.util.Stack;
 
 public class ExpressionRecursive {
     /**
-     *
-     * @param stack
-     * @param input
-     * @param starting_point
+     * Evaluation of postfix or prefix expression
+     * @param stack Stack for keeping evaluator
+     * @param input postfix or prefix expression
+     * @param starting_point starting point for string
      * @param evaluation_mode 1 for postfix evaluation and -1 for prefix evaluation
      */
     public static void evaluation(Stack<String> stack, String input, int starting_point,int evaluation_mode){

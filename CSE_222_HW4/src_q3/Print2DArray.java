@@ -1,7 +1,13 @@
 import java.util.Arrays;
 
 public class Print2DArray {
-
+    /**
+     * Initiliaze array
+     * @param array array will be initiliazed
+     * @param row number of rows
+     * @param col number of columns
+     * @param number number will be increased
+     */
     public static void initArray(int [][] array, int row, int col,int number) {
         if (row < array.length) {
             if (col < array[row].length) {
@@ -12,6 +18,16 @@ public class Print2DArray {
             }
         }
     }
+
+    /**
+     * Method For Printing Array
+     * @param array Array will be printed
+     * @param x row number
+     * @param y column number
+     * @param i number that will be increased after every loop
+     * @param BORDERX total number of rows
+     * @param BORDERY total number of columns
+     */
     public static void printArray(int [][] array,int x,int y,int i,final int BORDERX,final int BORDERY){
         initArray(array,0,0,1);
         System.out.print(" " + array[y][x]);
