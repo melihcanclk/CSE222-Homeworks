@@ -9,6 +9,9 @@ public class ExpressionRecursive {
      * @param evaluation_mode 1 for postfix evaluation and -1 for prefix evaluation
      */
     public static void evaluation(Stack<String> stack, String input, int starting_point,int evaluation_mode){
+        if(input.isEmpty()){
+            return;
+        }
         String string = String.valueOf(input.charAt(starting_point));
         double total = 0.0;
 
@@ -48,7 +51,7 @@ public class ExpressionRecursive {
         }
         if(evaluation_mode == 1){
             if(starting_point < input.length() - 1){
-                evaluation(stack,input,starting_point+ evaluation_mode,evaluation_mode);
+                evaluation(stack,input,starting_point + evaluation_mode,evaluation_mode);
             }
         }else {
             if (starting_point > 0) {

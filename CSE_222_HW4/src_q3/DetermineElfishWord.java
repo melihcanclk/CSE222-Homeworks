@@ -1,7 +1,6 @@
 public class DetermineElfishWord {
     public static boolean determineElfishWord(String input){
         return countNumbers(input, 'e') > 0 && countNumbers(input, 'l') > 0 && countNumbers(input, 'f') > 0;
-
     }
     private static int countNumbers(String input, char character){
         if (input.length() == 0)
