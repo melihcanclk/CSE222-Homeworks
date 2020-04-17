@@ -1,12 +1,15 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class FileSystemTree {
-    FileNode root;
+    private FileNode root;
 
     FileNode getRoot(){
         return root;
     }
+
     private static class FileNode{
         private ArrayList<String> nameList;
         private FileNode parent;
@@ -23,10 +26,16 @@ public class FileSystemTree {
             this.parent = parent;
             this.indexOfParent = indexOfParent;
         }
+
+        /**
+         * remove node as given parameter
+         * @param name name of node will be deleted
+         * @return name of node that is deleted
+         */
         String remove(String name) {
             String string = null;
             for(int i = 0; i< nameList.size(); ++i){
-                if(nameList.get(i).equals(name)){
+                if(getName(i).equals(name)){
                     string = nameList.remove(i);
                     directoryList.remove(i);
                 }
@@ -46,8 +55,12 @@ public class FileSystemTree {
         @Override
         public String toString() {
             StringBuilder stringBuilder = new StringBuilder();
-            for (String s : nameList) {
-                stringBuilder.append(s).append(" -> ");
+            for(int i = 0; i< size(); ++i){
+                if(i != size() - 1){
+                    stringBuilder.append(getName(i)).append(" -> ");
+                }else{
+                    stringBuilder.append(getName(i)).append("\n");
+                }
             }
             return stringBuilder.toString();
         }
@@ -80,8 +93,8 @@ public class FileSystemTree {
         String stringBefore = parsedArray[0];
         FileNode prevNode = root;
         int indexOfParent = 0;
-        if(!stringBefore.equals(root.nameList.get(0))){
-            System.out.println(stringBefore + " is not " + root.nameList.get(0));
+        if(!stringBefore.equals(root.getName(0))){
+            System.out.println(stringBefore + " is not " + root.getName(0));
             return;
         }
         while(parsedArray.length != 0){
@@ -118,7 +131,7 @@ public class FileSystemTree {
             String nameOfString = node.nameList.get(index);
             StringBuilder path = new StringBuilder();
             while(!node.equals(root)){
-                path.append(node.parent.nameList.get(node.indexOfParent)).append("/");
+                path.append(node.parent.getName(node.indexOfParent)).append("/");
                 node = node.parent;
             }
             String temp = path.toString();
@@ -148,18 +161,85 @@ public class FileSystemTree {
     private boolean isFile(String input){
         return input.indexOf('.') != -1;
     }
-    public void printFileSystem(FileNode node){
-        if(node.equals(root)){
-            System.out.println(node);
-            printFileSystem(node.getNode(0));
-        }else{
 
-            System.out.print(node);
-            for(int j = 0 ; j< node.size(); ++j){
-                printFileSystem(node.getNode(j));
-            }
-        }
-
+    public void remove(String path){
+        traverseFileSystem(root,path.split("/"));
     }
 
+    /**
+     * Recursive function for traverse FileSystemTree
+     * and find if path is true or not and remove file
+     * at the end of the string
+     * @param node FileNode that will be traversed
+     * @param parsedArray parsed array that will be find its path
+     * @return String filename or directory name that is deleted
+     */
+    private String traverseFileSystem(FileNode node,String [] parsedArray){
+        for(int j = 0 ; j< node.size(); ++j) {
+            if (node.getName(j).equals(parsedArray[0])) {
+                if (parsedArray.length == 1) {
+                    switch (node.getNode(j).nameList.size()) {
+                        case 0:
+                            break;
+                        default:
+                            System.out.println("Do you want to delete all directories and files connected to " + parsedArray[0] + "?");
+                            Scanner scanner = new Scanner(System.in);
+                            char val = scanner.next().toCharArray()[0];
+                            while (true) {
+                                if (val == 'N' || val == 'n') {
+                                    System.out.println(parsedArray[0] + " is not deleted");
+                                    return "";
+                                } else if (val == 'Y' || val == 'y') {
+                                    node.remove(parsedArray[0]);
+                                    System.out.println(parsedArray[0] + " is deleted");
+                                    return parsedArray[0];
+                                } else {
+                                    System.out.println("Wrong input");
+                                    val = scanner.next().toCharArray()[0];
+                                }
+                            }
+                    }
+                    node.remove(parsedArray[0]);
+                    System.out.println(parsedArray[0] + " is deleted");
+                    return parsedArray[0];
+                }
+                parsedArray = Arrays.copyOfRange(parsedArray, 1, parsedArray.length);
+                return traverseFileSystem(node.getNode(j), parsedArray);
+            }
+        }
+        if(isFile(parsedArray[0]))
+            System.out.println("No such file named " + parsedArray[0]);
+        else
+            System.out.println("No such directory named " + parsedArray[0]);
+        return parsedArray[0];
+    }
+
+    @Override
+    public String toString(){
+        printFileSystem(root);
+        return "";
+    }
+    private void printFileSystem(FileNode node){
+        if(node.equals(root)){
+            System.out.print(node);
+            if(node.size() != 0)
+                printFileSystem(node.getNode(0));
+        }else{
+            for(int j = 0 ; j< node.size(); ++j) {
+                FileNode temp= node;
+                int length = 0;
+                while(!node.equals(root)){
+                    length = node.parent.getName(node.indexOfParent).length();
+                    for(int a = 0; a < length;++a)
+                        System.out.print("-");
+                    node = node.parent;
+                }
+                node = temp;
+                System.out.println(node.getName(j));
+                if(node.getNode(j).size() > 0){
+                    printFileSystem(node.getNode(j));
+                }
+            }
+        }
+    }
 }
