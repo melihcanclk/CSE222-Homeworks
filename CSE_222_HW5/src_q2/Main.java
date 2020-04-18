@@ -9,7 +9,7 @@ public class Main {
         ExpressionTree expTree2 = new ExpressionTree("10 5 15 * + 20 +");
         System.out.println(expTree.postOrderTraverse());
         //System.out.println(expTree.preOrderTraverse());
-
+        System.out.println(expTree2.eval());
         //System.out.println(expTree2);
     }
 }

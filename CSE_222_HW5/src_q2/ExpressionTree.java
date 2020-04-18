@@ -83,6 +83,31 @@ public class ExpressionTree extends BinaryTree<String>{
 
     }
 
+    public double eval(){
+        return eval(root);
+    }
+    private double eval(Node<String> node){
+        if(node == null)
+            return 0;
+        if(node.isLeaf())
+            return Integer.parseInt(node.data);
+        else {
+            double firstOperant = eval(node.left);
+            double secondOperant = eval(node.right);
+
+            if(node.data.equals("+"))
+                return firstOperant + secondOperant;
+            else if(node.data.equals("-"))
+                return secondOperant - firstOperant;
+            else if(node.data.equals("*"))
+                return firstOperant * secondOperant;
+            else
+                return secondOperant / firstOperant;
+        }
+
+
+    }
+
     private static boolean isSymbol(String character){
         return "+-*/".contains(character);
     }
@@ -90,6 +115,10 @@ public class ExpressionTree extends BinaryTree<String>{
     @Override
     public String toString() {
         return super.toString();
+    }
+
+    public String toString2(){
+        return postOrderTraverse();
     }
 
     private static String reverseString(String string){

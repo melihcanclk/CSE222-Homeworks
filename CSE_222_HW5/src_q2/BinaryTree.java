@@ -28,6 +28,10 @@ public class BinaryTree<E> implements Serializable {
 			right = null;
 		}
 
+		public boolean isLeaf() {
+			return (this.left == null && this.right == null);
+		}
+
 		// Methods
 		/**
 		 * Return a string representation of the node.
@@ -108,10 +112,6 @@ public class BinaryTree<E> implements Serializable {
 			preOrderTraverse(node.left,depth+1,sb);
 			preOrderTraverse(node.right,depth+1,sb);
 		}
-	}
-
-	public boolean isLeaf() {
-		return (root.left == null && root.right == null);
 	}
 
 	public String toString() {
