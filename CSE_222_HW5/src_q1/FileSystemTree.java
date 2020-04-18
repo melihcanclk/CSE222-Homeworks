@@ -1,30 +1,48 @@
+import org.w3c.dom.Node;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class FileSystemTree {
-    private FileNode root;
+    private DirNode root;
 
-    FileNode getRoot(){
-        return root;
-    }
-
-    private static class FileNode{
-        private ArrayList<String> nameList;
-        private FileNode parent;
+    static abstract class Node implements NodeInterface{
+        private Node parent;
         private int indexOfParent;
-        private ArrayList<FileNode> directoryList;
 
-        FileNode(){
-            directoryList = new ArrayList<>();
-            nameList = new ArrayList<>();
+        Node getNode(int index){
+            return null;
         }
-        void add(String firstPath, FileNode parent, int indexOfParent){
-            directoryList.add(new FileNode());
-            nameList.add(firstPath);
+
+        void add(String firstPath, Node parent, int indexOfParent){
             this.parent = parent;
             this.indexOfParent = indexOfParent;
+        }
+    }
+
+    static class DirNode extends Node {
+        private ArrayList<String> nameList;
+        private ArrayList<Node> nodeList;
+
+        DirNode(){
+            nodeList = new ArrayList<>();
+            nameList = new ArrayList<>();
+        }
+        @Override
+        public void add(String firstPath, Node parent, int indexOfParent){
+            if(isFile(firstPath)){
+                nodeList.add(new FileNode(firstPath));
+            } else{
+                nodeList.add(new DirNode());
+            }
+            nameList.add(firstPath);
+            super.add(firstPath,parent,indexOfParent);
+        }
+        @Override
+        public int indexOf(String string){
+            return nameList.indexOf(string);
         }
 
         /**
@@ -37,19 +55,23 @@ public class FileSystemTree {
             for(int i = 0; i< nameList.size(); ++i){
                 if(getName(i).equals(name)){
                     string = nameList.remove(i);
-                    directoryList.remove(i);
+                    nodeList.remove(i);
                 }
             }
             return string;
         }
-        String getName(int index){
+
+        public String getName(int index){
             return nameList.get(index);
         }
-        FileNode getNode(int index){
-            return directoryList.get(index);
+
+        @Override
+        Node getNode(int index){
+            return nodeList.get(index);
         }
-        int size(){
-            return directoryList.size();
+
+        public int size(){
+            return nodeList.size();
         }
 
         @Override
@@ -64,9 +86,44 @@ public class FileSystemTree {
             }
             return stringBuilder.toString();
         }
+
+
+
     }
+
+    private static class FileNode extends Node{
+        private String name;
+
+        FileNode(String name){
+            this.name = name;
+        }
+
+        @Override
+        Node getNode(int index) {
+            return this;
+        }
+        @Override
+        public int size() {
+            return 1;
+        }
+
+        @Override
+        public String getName(int i) {
+            return name;
+        }
+
+        @Override
+        public int indexOf(String string){
+            if(string.equals(name))
+                return 0;
+            else
+                return -1;
+        }
+    }
+
+
     FileSystemTree(String root){
-        this.root = new FileNode();
+        this.root = new DirNode();
         this.root.add(root,null, 0);
     }
 
@@ -89,9 +146,9 @@ public class FileSystemTree {
     }
 
     private void add(String [] parsedArray){
-        FileNode tempFileNode = root;
+        Node tempNode = root;
         String stringBefore = parsedArray[0];
-        FileNode prevNode = root;
+        Node prevNode = root;
         int indexOfParent = 0;
         if(!stringBefore.equals(root.getName(0))){
             System.out.println(stringBefore + " is not " + root.getName(0));
@@ -103,14 +160,14 @@ public class FileSystemTree {
                 System.out.println(firstPath + " directory cannot be added after " + stringBefore);
                 return;
             }
-            int index = tempFileNode.nameList.indexOf(firstPath);
+            int index = tempNode.indexOf(firstPath);
             if(index != -1){
-                prevNode = tempFileNode;
+                prevNode = tempNode;
                 indexOfParent = index;
-                tempFileNode = tempFileNode.directoryList.get(index);
+                tempNode = tempNode.getNode(index);
             }else{
                 if(parsedArray.length == 1){
-                    tempFileNode.add(firstPath,prevNode,indexOfParent);
+                    tempNode.add(firstPath,prevNode,indexOfParent);
                 }
             }
             stringBefore = parsedArray[0];
@@ -120,15 +177,15 @@ public class FileSystemTree {
     }
 
     public void search(String stringWillBeSearched){
-        FileNode node = root;
+        Node node = root;
         searchRecursive(node,stringWillBeSearched);
     }
 
-    private void searchRecursive(FileNode node, String stringWillBeSearched) {
-        int index = find(node.nameList,stringWillBeSearched);
-        FileNode tempNode = node;
+    private void searchRecursive(Node node, String stringWillBeSearched) {
+        int index = find(node,stringWillBeSearched);
+        Node tempNode = node;
         if(index != -1){
-            String nameOfString = node.nameList.get(index);
+            String nameOfString = node.getName(index);
             StringBuilder path = new StringBuilder();
             while(!node.equals(root)){
                 path.append(node.parent.getName(node.indexOfParent)).append("/");
@@ -150,15 +207,15 @@ public class FileSystemTree {
         }
 
     }
-    private static int find(ArrayList<String> list, String searchString) {
-        for(int i=0 ; i < list.size() ; ++i){
-            if (list.get(i).contains(searchString)) {
+    private static int find(Node node, String searchString) {
+        for(int i=0 ; i < node.size() ; ++i){
+            if (node.getName(i).contains(searchString)) {
                 return i;
             }
         }
         return -1;
     }
-    private boolean isFile(String input){
+    private static boolean isFile(String input){
         return input.indexOf('.') != -1;
     }
 
@@ -170,19 +227,20 @@ public class FileSystemTree {
      * Recursive function for traverse FileSystemTree
      * and find if path is true or not and remove file
      * at the end of the string
-     * @param node FileNode that will be traversed
+     * @param node Node that will be traversed
      * @param parsedArray parsed array that will be find its path
      * @return String filename or directory name that is deleted
      */
-    private String traverseFileSystem(FileNode node,String [] parsedArray){
+    private String traverseFileSystem(Node node,String [] parsedArray){
         for(int j = 0 ; j< node.size(); ++j) {
             if (node.getName(j).equals(parsedArray[0])) {
                 if (parsedArray.length == 1) {
-                    switch (node.getNode(j).nameList.size()) {
+                    switch (node.getNode(j).size()) {
                         case 0:
                             break;
                         default:
                             System.out.println("Do you want to delete all directories and files connected to " + parsedArray[0] + "?");
+
                             Scanner scanner = new Scanner(System.in);
                             char val = scanner.next().toCharArray()[0];
                             while (true) {
@@ -190,7 +248,8 @@ public class FileSystemTree {
                                     System.out.println(parsedArray[0] + " is not deleted");
                                     return "";
                                 } else if (val == 'Y' || val == 'y') {
-                                    node.remove(parsedArray[0]);
+
+                                    //node.remove(parsedArray[0]);
                                     System.out.println(parsedArray[0] + " is deleted");
                                     return parsedArray[0];
                                 } else {
@@ -199,7 +258,7 @@ public class FileSystemTree {
                                 }
                             }
                     }
-                    node.remove(parsedArray[0]);
+                    //node.remove(parsedArray[0]);
                     System.out.println(parsedArray[0] + " is deleted");
                     return parsedArray[0];
                 }
@@ -219,14 +278,14 @@ public class FileSystemTree {
         printFileSystem(root);
         return "";
     }
-    private void printFileSystem(FileNode node){
+    private void printFileSystem(Node node){
         if(node.equals(root)){
             System.out.print(node);
             if(node.size() != 0)
                 printFileSystem(node.getNode(0));
         }else{
             for(int j = 0 ; j< node.size(); ++j) {
-                FileNode temp= node;
+                Node temp= node;
                 int length = 0;
                 while(!node.equals(root)){
                     length = node.parent.getName(node.indexOfParent).length();
@@ -236,7 +295,7 @@ public class FileSystemTree {
                 }
                 node = temp;
                 System.out.println(node.getName(j));
-                if(node.getNode(j).size() > 0){
+                if(temp.getNode(j).size() > 0 && node.getNode(j) instanceof DirNode){
                     printFileSystem(node.getNode(j));
                 }
             }
