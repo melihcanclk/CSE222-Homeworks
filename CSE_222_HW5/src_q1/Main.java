@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        FileSystemTree myFileSystem = new FileSystemTree("root");
+     /*   FileSystemTree myFileSystem = new FileSystemTree("root");
         myFileSystem.addDir("root/firstDir");
         myFileSystem.addDir("root/secondDir");
         myFileSystem.addFile("root/firstFile.txt");
@@ -10,14 +10,14 @@ public class Main {
         myFileSystem.addFile("root/firstDir/a.js");
         //myFileSystem.addFile("a/x.txt");
         //myFileSystem.printFileSystem(myFileSystem.getRoot());
-        //myFileSystem.search("Dir");
+        myFileSystem.search("Dir");
         System.out.println(myFileSystem);
         myFileSystem.remove("root/firstDir/a.js");
         System.out.println(myFileSystem);
         myFileSystem.remove("root/secondDir");
-        System.out.println(myFileSystem);
+        System.out.println(myFileSystem);*/
 
-/*
+
 //Create a file system with root directory
         FileSystemTree myFileSystem = new FileSystemTree("root");
 //Add directories and files using paths
@@ -35,7 +35,7 @@ public class Main {
 
         myFileSystem.remove("root/second_directory/new_directory");
         System.out.println(myFileSystem);
-*/
+
 
     }
 }

@@ -16,10 +16,16 @@ public class FileSystemTree {
             return null;
         }
 
-        void add(String firstPath, Node parent, int indexOfParent){
+        public void setParent(Node parent) {
             this.parent = parent;
+        }
+
+        public void setIndexOfParent(int indexOfParent) {
             this.indexOfParent = indexOfParent;
         }
+
+        void add(String firstPath, Node parent, int indexOfParent){ }
+
     }
 
     static class DirNode extends Node {
@@ -37,8 +43,9 @@ public class FileSystemTree {
             } else{
                 nodeList.add(new DirNode());
             }
+            setIndexOfParent(indexOfParent);
+            setParent(parent);
             nameList.add(firstPath);
-            super.add(firstPath,parent,indexOfParent);
         }
         @Override
         public int indexOf(String string){
@@ -50,7 +57,7 @@ public class FileSystemTree {
          * @param name name of node will be deleted
          * @return name of node that is deleted
          */
-        String remove(String name) {
+        public String remove(String name) {
             String string = null;
             for(int i = 0; i< nameList.size(); ++i){
                 if(getName(i).equals(name)){
@@ -86,9 +93,6 @@ public class FileSystemTree {
             }
             return stringBuilder.toString();
         }
-
-
-
     }
 
     private static class FileNode extends Node{
@@ -96,12 +100,19 @@ public class FileSystemTree {
 
         FileNode(String name){
             this.name = name;
+
         }
 
         @Override
         Node getNode(int index) {
             return this;
         }
+
+        @Override
+        public String remove(String s) {
+            return null;
+        }
+
         @Override
         public int size() {
             return 1;
@@ -202,6 +213,9 @@ public class FileSystemTree {
         }
         node = tempNode;
         if(node.size() > 0){
+            if(node.getNode(0) instanceof FileNode){
+                return;
+            }
             for(int j = 0 ; j< node.size(); ++j)
                 searchRecursive(node.getNode(j), stringWillBeSearched);
         }
@@ -235,30 +249,28 @@ public class FileSystemTree {
         for(int j = 0 ; j< node.size(); ++j) {
             if (node.getName(j).equals(parsedArray[0])) {
                 if (parsedArray.length == 1) {
-                    switch (node.getNode(j).size()) {
-                        case 0:
-                            break;
-                        default:
-                            System.out.println("Do you want to delete all directories and files connected to " + parsedArray[0] + "?");
+                    if (node.getNode(j).size() == 0 || (node.getNode(j).size() == 1 && node.getNode(0) instanceof FileNode)) {
+                    } else {
+                        System.out.println("Do you want to delete all directories and files connected to " + parsedArray[0] + "?");
 
-                            Scanner scanner = new Scanner(System.in);
-                            char val = scanner.next().toCharArray()[0];
-                            while (true) {
-                                if (val == 'N' || val == 'n') {
-                                    System.out.println(parsedArray[0] + " is not deleted");
-                                    return "";
-                                } else if (val == 'Y' || val == 'y') {
+                        Scanner scanner = new Scanner(System.in);
+                        char val = scanner.next().toCharArray()[0];
+                        while (true) {
+                            if (val == 'N' || val == 'n') {
+                                System.out.println(parsedArray[0] + " is not deleted");
+                                return "";
+                            } else if (val == 'Y' || val == 'y') {
 
-                                    //node.remove(parsedArray[0]);
-                                    System.out.println(parsedArray[0] + " is deleted");
-                                    return parsedArray[0];
-                                } else {
-                                    System.out.println("Wrong input");
-                                    val = scanner.next().toCharArray()[0];
-                                }
+                                node.remove(parsedArray[0]);
+                                System.out.println(parsedArray[0] + " is deleted");
+                                return parsedArray[0];
+                            } else {
+                                System.out.println("Wrong input");
+                                val = scanner.next().toCharArray()[0];
                             }
+                        }
                     }
-                    //node.remove(parsedArray[0]);
+                    node.remove(parsedArray[0]);
                     System.out.println(parsedArray[0] + " is deleted");
                     return parsedArray[0];
                 }
