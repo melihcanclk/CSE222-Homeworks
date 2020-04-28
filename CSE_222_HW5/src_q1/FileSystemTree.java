@@ -251,7 +251,7 @@ public class FileSystemTree {
                 if (parsedArray.length == 1) {
                     if (node.getNode(j).size() == 0 || (node.getNode(j).size() == 1 && node.getNode(0) instanceof FileNode)) {
                     } else {
-                        System.out.println("Do you want to delete all directories and files connected to " + parsedArray[0] + "?");
+                        System.out.println("Do you want to delete all subdirectories and subfiles connected to " + parsedArray[0] + "?");
 
                         Scanner scanner = new Scanner(System.in);
                         char val = scanner.next().toCharArray()[0];
@@ -307,7 +307,7 @@ public class FileSystemTree {
                 }
                 node = temp;
                 System.out.println(node.getName(j));
-                if(temp.getNode(j).size() > 0 && node.getNode(j) instanceof DirNode){
+                if(node.getNode(j).size() > 0 && node.getNode(j).getNode(0) instanceof DirNode){
                     printFileSystem(node.getNode(j));
                 }
             }
