@@ -1,6 +1,3 @@
-import org.w3c.dom.Node;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -168,7 +165,7 @@ public class FileSystemTree {
         while(parsedArray.length != 0){
             String firstPath = parsedArray[0];
             if(isFile(stringBefore) && isFile(firstPath)){
-                System.out.println(firstPath + " directory cannot be added after " + stringBefore);
+                System.out.println("It cannot be added after " + stringBefore);
                 return;
             }
             int index = tempNode.indexOf(firstPath);
@@ -193,41 +190,40 @@ public class FileSystemTree {
     }
 
     private void searchRecursive(Node node, String stringWillBeSearched) {
-        int index = find(node,stringWillBeSearched);
-        Node tempNode = node;
-        if(index != -1){
-            String nameOfString = node.getName(index);
-            StringBuilder path = new StringBuilder();
-            while(!node.equals(root)){
-                path.append(node.parent.getName(node.indexOfParent)).append("/");
-                node = node.parent;
+        ArrayList<Integer> indexes = find(node,stringWillBeSearched);
+        if (indexes.size() > 0){
+            Node tempNode = node;
+            for (Integer index : indexes) {
+                String nameOfString = node.getName(index);
+                StringBuilder path = new StringBuilder();
+                while(!node.equals(root)){
+                    path.append(node.parent.getName(node.indexOfParent)).append("/");
+                    node = node.parent;
+                }
+                String temp = path.toString();
+                path = new StringBuilder(ReverseString.reverseString(temp,new StringBuilder()));
+                path.append(nameOfString).append("\n");
+                if(isFile(nameOfString))
+                    path.insert(0,"file - ");
+                else
+                    path.insert(0, "dir - ");
+                System.out.print(path.toString());
+                node = tempNode;
             }
-            String temp = path.toString();
-            path = new StringBuilder(ReverseString.reverseString(temp,new StringBuilder()));
-            path.append(nameOfString).append("\n");
-            if(isFile(nameOfString))
-                path.insert(0,"file - ");
-            else
-                path.insert(0, "dir - ");
-            System.out.print(path.toString());
         }
-        node = tempNode;
-        if(node.size() > 0){
-            if(node.getNode(0) instanceof FileNode){
-                return;
-            }
-            for(int j = 0 ; j< node.size(); ++j)
+        for(int j = 0 ; j< node.size(); ++j)
+            if(node.getNode(j) instanceof DirNode)
                 searchRecursive(node.getNode(j), stringWillBeSearched);
-        }
 
     }
-    private static int find(Node node, String searchString) {
+    private static ArrayList<Integer> find(Node node, String searchString) {
+        ArrayList<Integer> indexes = new ArrayList<>();
         for(int i=0 ; i < node.size() ; ++i){
             if (node.getName(i).contains(searchString)) {
-                return i;
+                indexes.add(i);
             }
         }
-        return -1;
+        return indexes;
     }
     private static boolean isFile(String input){
         return input.indexOf('.') != -1;
@@ -307,7 +303,7 @@ public class FileSystemTree {
                 }
                 node = temp;
                 System.out.println(node.getName(j));
-                if(node.getNode(j).size() > 0 && node.getNode(j).getNode(0) instanceof DirNode){
+                if(node.getNode(j).size() > 0 && node.getNode(j) instanceof DirNode){
                     printFileSystem(node.getNode(j));
                 }
             }
