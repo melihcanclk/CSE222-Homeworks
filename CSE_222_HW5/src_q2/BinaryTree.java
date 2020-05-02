@@ -73,6 +73,10 @@ public class BinaryTree<E> implements Serializable {
 
 	}
 
+	/**
+	 * Getting Left Sub Tree
+	 * @return BinaryTree Node Root
+	 */
 	public BinaryTree<E> getLeftSubtree() {
 		if (root != null && root.left != null) {
 			return new BinaryTree<>(root.left);
@@ -80,7 +84,10 @@ public class BinaryTree<E> implements Serializable {
 			return null;
 		}
 	}
-
+	/**
+	 * Getting Right Sub Tree
+	 * @return BinaryTree Node Root
+	 */
 	public BinaryTree<E> getRightSubtree(){
 		if(root!= null&& root.right != null){
 			return new BinaryTree<>(root.right);
@@ -88,6 +95,10 @@ public class BinaryTree<E> implements Serializable {
 		return null;
 	}
 
+	/**
+	 * Getting Data
+	 * @return Data
+	 */
 	public E getData(){
 		if(root == null){
 			return null;
@@ -95,12 +106,22 @@ public class BinaryTree<E> implements Serializable {
 		return root.data;
 	}
 
+	/**
+	 * Traverse Pre Order
+	 * @return Pre Order Traverse
+	 */
 	public String preOrderTraverse(){
 		StringBuilder sb = new StringBuilder();
 		preOrderTraverse(root,1,sb);
 		return sb.toString();
 	}
 
+	/**
+	 * Traverse Pre Order
+	 * @param node Node
+	 * @param depth Depth
+	 * @param sb String will be builded
+	 */
 	private void preOrderTraverse(Node<E> node, int depth, StringBuilder sb) {
 		for(int i = 1; i< depth;++i)
 			sb.append("  ");
@@ -114,6 +135,10 @@ public class BinaryTree<E> implements Serializable {
 		}
 	}
 
+	/**
+	 * toString method
+	 * @return String that will be constructed
+	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		toString(root, 1, sb);
@@ -134,6 +159,10 @@ public class BinaryTree<E> implements Serializable {
 		}
 	}
 
+	/**
+	 * Writing object as output stream
+	 * @param nameofFile name of file
+	 */
 	public void writeObject(String nameofFile){
 		try{
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(nameofFile));
@@ -143,6 +172,12 @@ public class BinaryTree<E> implements Serializable {
 			System.exit(1);
 		}
 	}
+
+	/**
+	 * Reading input stream
+	 * @param nameofFile name of file
+	 * @return ObjectInputStream
+	 */
 	protected static ObjectInputStream readObject(String nameofFile) {
 		try {
 			return new ObjectInputStream(new FileInputStream(nameofFile));

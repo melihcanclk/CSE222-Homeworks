@@ -12,13 +12,13 @@ public class ExpressionTree extends BinaryTree<String>{
     public static BinaryTree<String> readBinaryTree(Scanner scan){
         //Determine whether input that is coming is postfix or prefix
         //according to that, input will be fixed.
-        scan = determineScanner(scan);
-
-        String data = scan.next().trim();
-        ExpressionTree expressionTree = new ExpressionTree(new Node<>(data));
+        String data = convertScannerToString(scan);
+        //determine whether we got end of the scanner or not
+        data = data + " .";
+        scan = new Scanner(data);
+        ExpressionTree expressionTree = new ExpressionTree(new Node<>( scan.next().trim()));
         Node<String> currentNode = expressionTree.root;
         data = scan.next().trim();
-        //eğer static yapmak zorunlu değil ise burayı kaldır
         while(scan.hasNext()){
             Node<String> tempNode = new Node<>(data);
             if(currentNode.left != null && currentNode.right != null){
@@ -64,7 +64,7 @@ public class ExpressionTree extends BinaryTree<String>{
         }
     }
 
-    private static Scanner determineScanner(Scanner scan){
+    private static String convertScannerToString(Scanner scan){
         String data = scan.next().trim();
         StringBuilder input = new StringBuilder(data + " ");
         while(scan.hasNext()){
@@ -78,8 +78,8 @@ public class ExpressionTree extends BinaryTree<String>{
             //to understand that loop is over
         }
         //to understand that loop is over
-        input.append(" .");
-        return new Scanner(input.toString());
+
+        return input.toString();
 
     }
 

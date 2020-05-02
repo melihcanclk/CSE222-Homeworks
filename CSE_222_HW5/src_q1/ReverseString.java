@@ -2,8 +2,10 @@ import java.util.Arrays;
 
 public class ReverseString {
     /**
-     * Reversing given string
+     *  Reversing given string
      * @param input String will be reverse printed
+     * @param stringBuilder Building string
+     * @return Reversed string
      */
     public static String reverseString(String input,StringBuilder stringBuilder){
         String [] array = input.split("/");

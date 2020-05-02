@@ -3,17 +3,33 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class MaxHeap<E extends Comparable<E>> {
-
+    /**
+     * Arraylist for hold Max-Heap
+     */
     private final ArrayList<E> arraylist;
 
+    /**
+     * Constructor of MaxHeap
+     */
     MaxHeap(){
         arraylist = new ArrayList<>();
     }
+
+    /**
+     * Constructor of Maxheap
+     * @param root root of MaxHeap
+     */
     MaxHeap(E root){
         arraylist = new ArrayList<>();
         //Root
         arraylist.add(root);
     }
+
+    /**
+     * Finding item
+     * @param item item that will be found
+     * @return If Arraylist includes item, returns 0, otherwise returns null
+     */
     public E find(E item){
         int result = 1;
         for (E e : arraylist) {
@@ -23,6 +39,11 @@ public class MaxHeap<E extends Comparable<E>> {
         }
         return null;
     }
+
+    /**
+     * Adding new item
+     * @param item item will be add
+     */
     public void add(E item){
         E resultOfFind = find(item);
         int indexOfNewElement;
@@ -35,6 +56,10 @@ public class MaxHeap<E extends Comparable<E>> {
         common(indexOfNewElement);
     }
 
+    /**
+     * Remove item
+     * @param item Item will be removed
+     */
     public void remove(E item){
         E resultOfFind = find(item);
         int indexOfNewElement;
@@ -48,9 +73,18 @@ public class MaxHeap<E extends Comparable<E>> {
                 boolean result = e.equals(item);
                 if(result){
                     for(int i = 0; i< arraylist.size(); i++){
-                        if(arraylist.get(i).compareTo(e) > 0){
-                            Collections.swap(arraylist,i,arraylist.indexOf(e));
-                            return;
+                        if(arraylist.get(i).compareTo(e) > 0) {
+                            int index = arraylist.indexOf(e);
+                            if(index < i){
+                                Collections.swap(arraylist, i, index);
+                                return;
+                            }
+                        }else if(arraylist.get(i).compareTo(e) < 0){
+                            int index = arraylist.indexOf(e);
+                            if(index > i){
+                                Collections.swap(arraylist, i, index);
+                                return;
+                            }
                         }
                     }
                 }
@@ -58,6 +92,10 @@ public class MaxHeap<E extends Comparable<E>> {
         }
     }
 
+    /**
+     * Common method that both add and remove methods
+     * @param indexOfNewElement Index of element
+     */
     private void common(int indexOfNewElement){
         int result = 1;
         CustomComperator<E> comparator = new CustomComperator<>();
@@ -69,6 +107,11 @@ public class MaxHeap<E extends Comparable<E>> {
         }
     }
 
+    /**
+     * Number of people that is younger than item that is given
+     * @param item Item that will be compared
+     * @return Number of people that is younger than item
+     */
     private int youngerThan(E item){
 
         int total = 0;
@@ -81,6 +124,11 @@ public class MaxHeap<E extends Comparable<E>> {
         return total;
     }
 
+    /**
+     * Number of people that is older than item that is given
+     * @param item Item that will be compared
+     * @return Number of people that is older than item
+     */
     private int olderThan(E item){
         int total = 0;
         for(E e: arraylist){
@@ -93,6 +141,10 @@ public class MaxHeap<E extends Comparable<E>> {
         return total;
     }
 
+    /**
+     * toString Method
+     * @return String that will be printed
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -102,11 +154,22 @@ public class MaxHeap<E extends Comparable<E>> {
         return sb.toString();
     }
 
+    /**
+     * Number of people that is younger than item that is given
+     * @param i Age
+     * @return Number of people that is older than item
+     */
     public int youngerThan(int i) {
         AgeData ageData = new AgeData(i);
         E object = (E)ageData;
         return youngerThan(object);
     }
+
+    /**
+     * Number of people that is older than item that is given
+     * @param i Age
+     * @return Number of people that is older than item
+     */
     public int olderThan(int i) {
         AgeData ageData = new AgeData(i);
         E object = (E)ageData;

@@ -41,9 +41,9 @@ public class BinarySearchTree<E extends Comparable<E>>
             if(compResult == 0){
                 return localRoot.data;
             }else if(compResult<0){
-                return find(root.left, target);
+                return find(localRoot.left, target);
             }else {
-                return find(root.right, target);
+                return find(localRoot.right, target);
             }
         }
     }
@@ -57,6 +57,7 @@ public class BinarySearchTree<E extends Comparable<E>>
     private Node<E> delete(Node<E> localRoot, E item) {
         if(localRoot == null){
             deleteReturn = null;
+            return null;
         }
         int compareResult = item.compareTo(localRoot.data);
         if(compareResult == -2){

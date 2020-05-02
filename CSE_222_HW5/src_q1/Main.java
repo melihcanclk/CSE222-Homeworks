@@ -1,18 +1,18 @@
 public class Main {
     private static FileSystemTree ftree;
     public static void main(String[] args) {
-        //test1();
-        //test2();
-        //test3();
-        //test4();
-        //test5();
-        //test6();
-        //test7();
-        //test8();
-        //test9();
-        //test10();
-        //test11();
-        //test12();
+//        test1();
+//        test2();
+//        test3();
+//        test4();
+//        test5();
+//        test6();
+//        test7();
+//        test8();
+//        test9();
+//        test10();
+//        test11();
+//        test12();
         test13();
     }
 
@@ -52,15 +52,18 @@ public class Main {
     public static void test1(){
         ftree.addDir("root/first_directory");
     }
+
     //Creating file as root
     public static void test2(){
         ftree = new FileSystemTree("root.txt");
     }
+
     //Creating file as root and adding directory after it as its child
     public static void test3(){
         ftree = new FileSystemTree("root.txt");
         ftree.addDir("root.txt/first_directory");
     }
+
     //Creating file as root and adding file after it as its child
     public static void test4(){
         ftree = new FileSystemTree("root.txt");
@@ -95,6 +98,7 @@ public class Main {
     public static void test10(){
         construct();
         ftree.remove("root/second_directory/Codeshop/FlutterShop/Larsca/lib/pages/home.dart");
+        System.out.println(ftree);
     }
     //Remove method for remove empty directory
     public static void test11(){
