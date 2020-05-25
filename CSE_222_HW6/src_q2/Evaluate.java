@@ -9,16 +9,16 @@ public class Evaluate <T> {
      * @param className Name of class that is sent. Reason of that parameter is that being able to print name of the
      *                  function that is called.
      */
-    public void evaluateArr(T[] arr, Consumer<? super T[]> action, Class className){
-
-        T[] arrcopy = arr.clone();
-        System.out.println("Size = " + arrcopy.length);
-        long start = System.nanoTime();
-        action.accept(arrcopy);
-        long finish = System.nanoTime();
-        double timeMillis = (double) finish - start;
-        System.out.println(className.getName()+ " = " + timeMillis/1000000000 + " seconds");
-
+    public double evaluateArr(T[] arr, Consumer<? super T[]> action, Class className, int numberOfArrays){
+        double timeMillis = 0.0;
+        for(int i = 0; i< numberOfArrays;i++){
+            T[] arrcopy = arr.clone();
+            long start = System.nanoTime();
+            action.accept(arrcopy);
+            long finish = System.nanoTime();
+            timeMillis =+ ((double) finish - start);
+        }
+        return timeMillis;
     }
 
     /**
@@ -28,15 +28,16 @@ public class Evaluate <T> {
      * @param className Name of class that is sent. Reason of that parameter is that being able to print name of the
      *                  function that is called.
      */
-    public void evaluateALl(LinkedList<T> ll, Consumer<LinkedList<T>> action, Class className){
-        LinkedList<T> clone = (LinkedList<T>) ll.clone();
-        System.out.println("Size = " + ll.size());
-        long start = System.nanoTime();
-        action.accept(clone);
-        long finish = System.nanoTime();
-        double timeMillis = (double) finish - start;
-        System.out.println(className.getName()+ " = " + timeMillis/1000000000 + " seconds");
-
+    public double evaluateALl(LinkedList<T> ll, Consumer<LinkedList<T>> action, Class className,int numberOfArrays){
+        double timeMillis = 0.0;
+        for(int i = 0; i< numberOfArrays;i++) {
+            LinkedList<T> clone = (LinkedList<T>) ll.clone();
+            long start = System.nanoTime();
+            action.accept(clone);
+            long finish = System.nanoTime();
+            timeMillis =+ ((double) finish - start);
+        }
+        return timeMillis;
     }
 
 }
