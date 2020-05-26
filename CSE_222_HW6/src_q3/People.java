@@ -17,14 +17,20 @@ public abstract class People {
 
 
     public void searchBookByAuthorName(NestedMap outermap){
+<<<<<<< HEAD
         outermap.printAuthors();
+=======
+>>>>>>> origin/master
         System.out.print("Please enter name of the author : ");
         Scanner scanner = new Scanner(System.in);
         String nameOfTheAuthor = scanner.nextLine();
         outermap.getBooks(nameOfTheAuthor);
     }
     public void searchBookByTitle(NestedMap outermap){
+<<<<<<< HEAD
         outermap.printBookTitles();
+=======
+>>>>>>> origin/master
         System.out.print("Please enter title of the book : ");
         Scanner scanner = new Scanner(System.in);
         String nameOfTitle = scanner.nextLine();
