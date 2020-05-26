@@ -33,7 +33,12 @@ public class NestedMap {
                         //It there is no book at the same location
                         if(!isContains){
                             outerMap.get(book.getNameOfAuthor()).get(book.getTitle()).add(book.getLocation());
+                            System.out.println(book.getTitle() + " added to the system at " + book.getLocation() + " position");
+                        }else {
+                            System.out.println(book.getTitle() + " can not be added to the system at " + book.getLocation() + " position " +
+                                    "because there is book at that position");
                         }
+
                         return;
                     }
                 }
@@ -41,6 +46,7 @@ public class NestedMap {
                 setOfLocation.add(book.getLocation());
 
                 outerMap.get(book.getNameOfAuthor()).put(book.getTitle(),setOfLocation);
+                System.out.println(book.getTitle() + " added to the system at " + book.getLocation() + " position");
                 return;
             }
             Set<Location> setOfLocation = new HashSet<>();
@@ -50,23 +56,34 @@ public class NestedMap {
             innermap.put(book.getTitle(),setOfLocation);
 
             outerMap.put(book.getNameOfAuthor(),innermap);
+            System.out.println(book.getTitle() + " added to the system at " + book.getLocation() + " position");
         }
 
     }
     public void removeBook(Location location){
+        boolean isbookremoved = false;
+        boolean isauthorremoved = false;
         Iterator author_iter = outerMap.keySet().iterator();
         for (Map<String, Set<Location>> value : outerMap.values()) {
-            author_iter.next();
-            Iterator bookTitle_iter = value.keySet().iterator();
-            for (Set<Location> locations : value.values()) {
-                bookTitle_iter.next();
-                locations.remove(location);
-                if(locations.size() == 0){
-                    bookTitle_iter.remove();
-                }
-            }
-            if(value.size() == 0){
-                author_iter.remove();
+               author_iter.next();
+               Iterator bookTitle_iter = value.keySet().iterator();
+               for (Set<Location> locations : value.values()) {
+                       bookTitle_iter.next();
+                       locations.remove(location);
+                       if(locations.size() == 0){
+                           bookTitle_iter.remove();
+                           isbookremoved = true;
+                       }
+                   if(isbookremoved){
+                      break;
+                   }
+               }
+               if(value.size() == 0){
+                   author_iter.remove();
+                   isauthorremoved = true;
+               }
+            if(isauthorremoved){
+                break;
             }
         }
     }
@@ -87,6 +104,8 @@ public class NestedMap {
                 Scanner scanner = new Scanner(System.in);
                 int numberOfTheBook = scanner.nextInt();
                 while(numberOfTheBook >= i || numberOfTheBook < 0){
+                    System.out.print("Wrong input. ");
+                    System.out.print("Select number that you want to see the location : ");
                     numberOfTheBook = scanner.nextInt();
                 }
                 i = 1;
@@ -98,27 +117,29 @@ public class NestedMap {
                     ++i;
                 }
             }
-            System.out.println("There is no author named " + authorName);
         }
+        System.out.println("There is no author named " + authorName);
     }
     public void updateLocations(Location oldLocation,Location newLocation){
         boolean isdeleted = false;
-        for (Map<String, Set<Location>> value : outerMap.values()) {
-            for (Set<Location> locations : value.values()) {
-                if(locations.remove(oldLocation)){
-                    locations.add(newLocation);
-                    isdeleted = true;
-                }
+        if(isLocated(newLocation) == null){
+            for (Map<String, Set<Location>> value : outerMap.values()) {
+                for (Set<Location> locations : value.values()) {
+                    if(locations.remove(oldLocation)){
+                        locations.add(newLocation);
+                        isdeleted = true;
+                    }
 
+                }
+            }
+            if(!isdeleted){
+                System.out.println("No book at " + oldLocation);
             }
         }
-        if(!isdeleted){
-            System.out.println("No book at " + oldLocation);
-        }
-
     }
 
     public void getTitle(String title){
+        boolean isFound = false;
         Set<String> setOfAuthors = outerMap.keySet();
         Iterator<String> iterator = setOfAuthors.iterator();
         for(Map<String,Set<Location>> temp: outerMap.values()){
@@ -126,9 +147,11 @@ public class NestedMap {
             for(String titles:temp.keySet()){
                 if(titles.equals(title)){
                     System.out.println(author + " " + temp.get(title));
+                    isFound = true;
                 }
             }
-            return;
+            if(isFound)
+                return;
         }
     }
     private Iterator isLocated(Location location){
@@ -146,12 +169,26 @@ public class NestedMap {
         }
         return null;
     }
+
+    public void printAuthors(){
+        for (String s : outerMap.keySet()) {
+            System.out.println(s);
+        }
+    }
+    public void printBookTitles(){
+        for (Map<String, Set<Location>> value : outerMap.values()) {
+            for (String s : value.keySet()) {
+                System.out.println(s);
+            }
+        }
+    }
     @Override
     public String toString() {
+        StringBuilder sb = new StringBuilder();
         for (Map.Entry entry : outerMap.entrySet())
         {
-            System.out.println("key: \n" + entry.getKey() + "\n\t value: \n\t\t" + entry.getValue());
+            sb.append("Author: \n\t").append(entry.getKey()).append("\n\t\t Titles: \n\t\t\t").append(entry.getValue()).append("\n");
         }
-        return null;
+        return sb.toString();
     }
 }

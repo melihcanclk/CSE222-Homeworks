@@ -7,6 +7,7 @@ public class LibrarySystem {
     private People user;
     LibrarySystem(){
         peoples = new CustomHashSet();
+        //for testing
         peoples.add(new Admin("admin", "1234"));
         peoples.add(new User("melihcan"));
     }
@@ -19,7 +20,8 @@ public class LibrarySystem {
             Scanner scanner = new Scanner(System.in);
             if(!isuserfound){
                 System.out.print("Enter username : ");
-                username = scanner.next();
+                username = scanner.nextLine();
+                username = username.trim();
                 for(People people:peoples){
                     if(people.getUsername().equals(username)){
                         if( people instanceof Admin){
@@ -38,42 +40,43 @@ public class LibrarySystem {
                     }
                 }
             }if(isuserfound){
-                if( user instanceof Admin){
-                    //admin part
+                if ((user instanceof Admin)) {
                     adminMenu();
-                }else {
-                    //user part
+                } else {
                     userMenu();
                 }
             }
             if(!isuserfound){
-                System.out.println("No such person, Do you want to create new user account(Y/N) : ");
+                System.out.println("No such person named " + username + ", Do you want to create new account with name "+ username +" (Y/N) : ");
                 String input = scanner.next();
                 if(isYes(input)){
                     //Create new user
-                    System.out.println("--User Creation--");
-                    System.out.print("Enter username : ");
-                    peoples.add(new User(scanner.next()));
+                    peoples.add(new User(username));
+                    isuserfound = true;
                 }
             }
             System.out.println("Do you want to exit from library system(Y/N) : ");
             if(isYes(scanner.next())){
                 exit = true;
+            }if(!exit){
+                System.out.println("Do you want to log out?(Y/N) : ");
+                if(isYes(scanner.next())){
+                    isuserfound = false;
+                }
             }
         }while(!exit);
 
     }
     private void adminMenu(){
-        //TODO : Admin menu
         Admin admin =(Admin) user;
         printadminMenu();
-        System.out.println("6-)Exit");
+        System.out.println("7-)Exit");
         Scanner scanner = new Scanner(System.in);
         int input = scanner.nextInt();
-        while(input < 0 || input >6){
+        while(input < 0 || input >7){
             System.out.print("Wrong input. Enter selection again : ");
             printadminMenu();
-            System.out.println("6-)Exit");
+            System.out.println("7-)Exit");
             input = scanner.nextInt();
         }
         if(input == 1){
@@ -81,38 +84,17 @@ public class LibrarySystem {
         } else if(input == 2) {
             user.searchBookByTitle(map);
         } else if(input == 3){
-            scanner = new Scanner(System.in);
-            System.out.print("Enter name of the author : ");
-            String nameOfAuthor = scanner.nextLine();
-            System.out.print("Enter title of the book : ");
-            String title = scanner.nextLine();
-            System.out.print("Enter shelf, corridor and queue of the book that you will put respectively : ");
-            int shelf = scanner.nextInt();
-            int corridor = scanner.nextInt();
-            int queue = scanner.nextInt();
-            admin.addBook(map,new Book(nameOfAuthor,title,new Location(shelf,corridor,queue)));
+            admin.addBook(map);
         } else if(input == 4){
-            System.out.print("Enter shelf, corridor and queue of the book that you will put respectively : ");
-            int shelf = scanner.nextInt();
-            int corridor = scanner.nextInt();
-            int queue = scanner.nextInt();
-            admin.removeBook(map,new Book(null,null,new Location(shelf,corridor,queue)));
+            admin.removeBook(map);
         } else if(input == 5){
-            System.out.println(map);
-            System.out.print("Enter shelf, corridor and queue of the book that you will change position respectively : ");
-            int shelf1 = scanner.nextInt();
-            int corridor1 = scanner.nextInt();
-            int queue1 = scanner.nextInt();
-            System.out.print("Enter shelf, corridor and queue of the book that you will put new position respectively : ");
-            int shelf2 = scanner.nextInt();
-            int corridor2 = scanner.nextInt();
-            int queue2 = scanner.nextInt();
-            admin.updateLocation(map,new Location(shelf1,corridor1,queue1), new Location(shelf2,corridor2,queue2));
+            admin.updateLocation(map);
+        } else if(input == 6){
+            admin.printAllBooks(map);
         }
     }
 
     private void userMenu(){
-        //TODO : User Menu
         printuserMenu();
         System.out.println("3-)Exit");
         Scanner scanner = new Scanner(System.in);
@@ -134,6 +116,7 @@ public class LibrarySystem {
         System.out.println("3-)Add Book");
         System.out.println("4-)Delete Book");
         System.out.println("5-)Update Location Of Book");
+        System.out.println("6-)Print All Books");
     }
     private static void printuserMenu(){
         System.out.println("1-)Search By Author");

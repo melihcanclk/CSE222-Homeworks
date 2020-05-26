@@ -10,7 +10,7 @@ public class Main {
         Book book2 = new Book("Halit Ziya", "Çalıkuşu", new Location(5, 4, 2));
         Book book3 = new Book("Halit Ziya", "Mai ve Siyah", new Location(5, 4, 3));
         Book book4 = new Book("Halit Ziya", "Kapıcılar Kralı", new Location(5, 4, 4));
-        Book book5 = new Book("Hasan Ali Kaldırım","Nasıl kaldırdım",new Location(5,8,9));
+        Book book5 = new Book("Hasan Ali Kaldırım","Nasıl Kaldırdım?",new Location(5,8,9));
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.map.put(book1);
         librarySystem.map.put(book2);
