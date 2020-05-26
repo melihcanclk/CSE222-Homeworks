@@ -1,15 +1,11 @@
-<<<<<<< HEAD
 import java.util.Scanner;
 
-=======
->>>>>>> origin/master
 public class Admin extends People{
     private final String password;
     Admin(String username, String password){
         super(username);
         this.password = password;
     }
-<<<<<<< HEAD
     public void addBook(NestedMap map){
         System.out.println(map);
         Scanner scanner = new Scanner(System.in);
@@ -53,16 +49,6 @@ public class Admin extends People{
     }
     public void printAllBooks(NestedMap map){
         System.out.println(map);
-=======
-    public void addBook(NestedMap map,Book book){
-        map.put(book);
-    }
-    public void removeBook(NestedMap map, Book book){
-        map.removeBook(book.getLocation());
-    }
-    public void updateLocation(NestedMap map, Location oldLocation, Location newLocation){
-        map.updateLocations(oldLocation,newLocation);
->>>>>>> origin/master
     }
     public String getPassword() {
         return password;
