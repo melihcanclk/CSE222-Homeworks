@@ -1,4 +1,4 @@
-public class BTHashTableChain<K extends Comparable<K>,V> implements KWHashMap<K,V>{
+public class BTHashTableChain<K extends Comparable<K>,V extends Comparable<V>> implements KWHashMap<K,V>{
 
     private BinaryTree<Entry<K,V>> [] table;
     private int numKeys;
@@ -92,11 +92,20 @@ public class BTHashTableChain<K extends Comparable<K>,V> implements KWHashMap<K,
     private V replaceValue(K key, V value, BinaryTree<Entry<K,V>> tree) {
         BinaryTree.Node<Entry<K,V>> node = tree.root;
         while(node != null){
-            if(node.data.key.equals(key)){
-                node.data.value = value;
+            if(node.data.value.compareTo(value) == 0){
                 return node.data.value;
+            }if(node.left == null && node.data.value.compareTo(value) > 0){
+                node.left = new BinaryTree.Node<>(new Entry<>(key,value));
+                return node.left.data.value;
+            }else if(node.data.value.compareTo(value) > 0){
+                node = node.left;
+            }if(node.right == null && node.data.value.compareTo(value) <0){
+                node.right = new BinaryTree.Node<>(new Entry<>(key,value));
+                return node.right.data.value;
+            }else if(node.data.value.compareTo(value) < 0){
+                node = node.right;
             }
-            node = (node.left.data.compareTo(node.right.data) < 0) ? node.left : node.right;
+
         }
         return null;
     }

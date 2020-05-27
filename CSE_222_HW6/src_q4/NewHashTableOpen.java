@@ -1,13 +1,15 @@
+import java.util.Random;
+
 public class NewHashTableOpen <K,V> implements KWHashMap<K, V> {
 
     private Entry<K, V>[] table;
-    private static final int START_CAPACITY = 101;
+    private static final int START_CAPACITY = 4;
     private double LOAD_THRESHOLD = 0.75;
     private int numKeys;
     private int numDeletes;
     private final Entry<K,V> DELETED = new Entry <K,V>(null, null);
 
-    public HashTableOpen() {
+    public NewHashTableOpen() {
         table = new Entry[START_CAPACITY];
     }
 
@@ -37,16 +39,27 @@ public class NewHashTableOpen <K,V> implements KWHashMap<K, V> {
 
     }
 
+    /**
+     * second hash
+     * @param key hash will be taken
+     * @return new hash code
+     */
+    private int second_hash(Object key){
+        Random random = new Random();
+        int val = random.nextInt(START_CAPACITY);
+        return (val + key.hashCode());
+    }
+
     private int find(Object key) {
-        int index = key.hashCode() % table.length;
+        int index = (key.hashCode() % table.length);
         if(index < 0) {
             index += table.length;
         }
 
         while(table[index] != null && !key.equals(table[index].key)) {
-            index++;
+            index = (key.hashCode() + (second_hash(key)));
             if(index >= table.length)
-                index = 0;
+                index = index % table.length;
         }
         return index;
     }

@@ -32,7 +32,7 @@ public class NestedMap {
                     boolean isContains = locations.contains(book.getLocation());{
                         //It there is no book at the same location
                         if(!isContains){
-                            outerMap.get(book.getNameOfAuthor()).get(book.getTitle()).add(book.getLocation());
+                            outerMap.get(book.getNameOfAuthor()).get(book.getTitle().trim()).add(book.getLocation());
                             System.out.println(book.getTitle() + " added to the system at " + book.getLocation() + " position");
                         }else {
                             System.out.println(book.getTitle() + " can not be added to the system at " + book.getLocation() + " position " +

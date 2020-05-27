@@ -4,10 +4,9 @@ public class Book {
     private Location location;
 
     Book(String nameOfAuthor, String title, Location location){
-        this.nameOfAuthor = nameOfAuthor;
-        this.title = title;
+        this.nameOfAuthor = nameOfAuthor.trim();
+        this.title = title.trim();
         this.location = location;
-
     }
 
     public String getNameOfAuthor() {
