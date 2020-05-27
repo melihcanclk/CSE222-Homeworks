@@ -1,0 +1,13 @@
+Type of Hash Table,Name of function,NanoSeconds
+Hash Table Open,put,49855812
+My Hash Table Open,put,40628028
+Hash Table Chain,put,62863676
+Binary Tree Hash Table Chain,put,1364567374
+Hash Table Open,get,113307
+My Hash Table Open,get,91818
+Hash Table Chain,get,96546
+Binary Tree Hash Table Chain,get,162012
+Hash Table Open,remove,118808
+My Hash Table Open,remove,126050
+Hash Table Chain,remove,95452
+Binary Tree Hash Table Chain,remove,152795
