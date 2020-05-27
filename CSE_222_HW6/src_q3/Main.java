@@ -8,12 +8,12 @@ public class Main {
 
         Book book1 = new Book("Halit Ziya", "Çalıkuşu", new Location(5, 4, 1));
         Book book2 = new Book("İlber Ortaylı", "Bir Ömür Nasıl Yaşanır? ", new Location(5, 4, 2));
-        Book book3 = new Book("Jose Mauro De Vasconcelos", "Şeker Portakalı", new Location(5, 4, 3));
+        Book book3 = new Book("Jose Mauro De Vasconcelos", "Seker Portakali", new Location(5, 4, 3));
         Book book4 = new Book("Michael Ende", "Momo ", new Location(5, 4, 4));
         Book book6 = new Book("Ray Bradbury","Fahrenheit 451",new Location(5,8,5));
         Book book7 = new Book("George Orwell","Hayvan Çiftliği ",new Location(5,8,6));
         Book book8 = new Book("Victor Hugo","Bir İdam Mahkumunun Son Günü",new Location(5,8,7));
-        Book book9 = new Book("Sabahattin Ali","İçimizdeki Şeytan",new Location(5,8,8));
+        Book book9 = new Book("Sabahattin Ali","İcimizdeki Seytan",new Location(5,8,8));
         Book book10 = new Book("George Orwell","1984",new Location(5,8,9));
         Book book11 = new Book("Stefan Zweig","Olağanüstü Bir Gece",new Location(4,8,9));
         Book book12 = new Book("Stefan Zweig","Bilinmeyen Bir Kadının Mektubu",new Location(2,6,9));

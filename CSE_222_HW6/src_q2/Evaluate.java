@@ -6,6 +6,7 @@ public class Evaluate <T> {
      * Evaluating Array to given function and printing the running time of the given function as seconds
      * @param arr Array that will be evaluated
      * @param action Consumer class function that will be accepted
+     * @return Running time of given action
      */
     public long evaluateArr(T[] arr, Consumer<? super T[]> action){
         long timeMillis = 0;
@@ -22,6 +23,7 @@ public class Evaluate <T> {
      * Evaluating LinkedList to given function and printing the running time of the given function as seconds
      * @param ll LinkedList that will be evaluated
      * @param action Consumer class function that will be accepted
+     * @return Running time of given action
      */
     public long evaluateALl(LinkedList<T> ll, Consumer<LinkedList<T>> action){
         long timeMillis = 0;

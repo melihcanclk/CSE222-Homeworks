@@ -1,13 +1,34 @@
 public class QuickSort {
+    /**
+     * Swaps values at position i and j
+     * @param table Table that will elements be swapped
+     * @param i First element
+     * @param j Second element
+     * @param <T> Generic Class Type that has Comperable interface
+     */
     private static <T extends Comparable<T>> void swap(T[] table, int i, int j) {
         T temp = table[i];
         table[i] = table[j];
         table[j] = temp;
     }
+
+    /**
+     * Sort method  that takes table and sorts according to Quick Sort Algorithm
+     * @param table Generic table
+     * @param <T> Generic type Class that implements Comperable interface
+     */
     public static <T extends Comparable<T>> void sort(T[] table) {
         // Sort the whole table.
         quickSort(table, 0, table.length - 1);
     }
+
+    /**
+     * Recursive quicksort method
+     * @param table table that will be sorted
+     * @param first first element
+     * @param last last element
+     * @param <T> Comperable type Class that implements Comperable interface
+     */
     private static <T extends Comparable<T>> void quickSort(T[] table,
                                                             int first, int last) {
         if (first < last) { // There is data to be sorted.
@@ -19,6 +40,15 @@ public class QuickSort {
             quickSort(table, pivIndex + 1, last);
         }
     }
+
+    /**
+     * Method that do partition part
+     * @param table table that will be sorted
+     * @param first first index of given table
+     * @param last last index of given table
+     * @param <T> Comperable type Class that implements Comperable interface
+     * @return index that is placed
+     */
     private static <T extends Comparable<T>> int partition(T[] table, int first, int last) {
         bubbleSort3(table,first,last);
         int middle = (first + last) / 2;
@@ -47,6 +77,14 @@ public class QuickSort {
         // Return the index of the pivot value.
         return down;
     }
+
+    /**
+     * Make bubble sort with 3 elements only
+     * @param table Table that will be sorted
+     * @param first first element
+     * @param last last element
+     * @param <T> Comperable type Class that implements Comperable interface
+     */
     private static <T extends Comparable<T>> void bubbleSort3(T[]table, int first, int last){
         int middle = (first + last ) / 2;
         if(table[middle].compareTo(table[first])< 0){

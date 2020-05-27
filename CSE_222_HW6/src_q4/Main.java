@@ -7,7 +7,7 @@ public class Main {
         KWHashMap<Integer,Integer> mymap = null;
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Type of Hash Table;").append("Name of function;").append("NanoSeconds\n");
+        sb.append("Type of Hash Table;").append("NanoSeconds\n");
         for (int j = 0; j < 3; j++) {
            for (int i = 0; i< 4;i++) {
                long put = 0;
@@ -15,16 +15,16 @@ public class Main {
                long remove = 0;
                if (i == 0) {
                    mymap = new HashTableOpen<>();
-                   sb.append("Hash Table Open;");
+                   sb.append("Hash Table Open / ");
                } else if (i == 1) {
                    mymap = new NewHashTableOpen<>();
-                   sb.append("My Hash Table Open;");
+                   sb.append("My Hash Table Open / ");
                } else if (i == 2) {
                    mymap = new HashTableChain<>();
-                   sb.append("Hash Table Chain;");
+                   sb.append("Hash Table Chain / ");
                } else {
                    mymap = new BTHashTableChain<>();
-                   sb.append("Binary Tree Hash Table Chain;");
+                   sb.append("Binary Tree Hash Table Chain / ");
                }
                if (j == 0) {
                    put = putMethod(mymap, 1000);
@@ -48,6 +48,13 @@ public class Main {
         System.out.println(sb.toString());
 
     }
+
+    /**
+     * Method that test put method of KWHashMap and get running time of that method.
+     * @param map map that will be added at
+     * @param number Number of value that will be add
+     * @return Running time of put method
+     */
     public static long putMethod(KWHashMap<Integer, Integer> map, int number){
 
         long timeMillis = 0;
@@ -61,6 +68,12 @@ public class Main {
         }
         return timeMillis;
     }
+    /**
+     * Method that test get method of KWHashMap and get running time of that method.
+     * @param map map that will be added at
+     * @param number Number of value that will be add
+     * @return Running time of get method
+     */
     public static long getMethod(KWHashMap<Integer, Integer> map, int number){
         long timeMillis = 0;
         for (int i = 0; i< number;i++){
@@ -71,6 +84,12 @@ public class Main {
         }
         return timeMillis;
     }
+    /**
+     * Method that test remove method of KWHashMap and get running time of that method.
+     * @param map map that will be added at
+     * @param number Number of value that will be add
+     * @return Running time of remove method
+     */
     public static long removeMethod(KWHashMap<Integer, Integer> map, int number){
         long timeMillis = 0;
         for (int i = 0; i< number;i++){

@@ -1,4 +1,9 @@
 public class BubbleSort {
+    /**
+     * Sort method  that takes table and sorts according to Bubble Sort Algorithm
+     * @param table Generic table
+     * @param <T> Generic type Class that implements Comperable interface
+     */
     public static <T extends Comparable<T>> void sort(T[] table){
         int pass = 1;
         boolean exchanges = false;

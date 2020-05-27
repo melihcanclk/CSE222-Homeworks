@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"<Unnamed>","l":"Admin"},{"l":"All Classes","url":"allclasses-index.html"},{"p":"<Unnamed>","l":"Book"},{"p":"<Unnamed>","l":"CustomHashSet"},{"p":"<Unnamed>","l":"LibrarySystem"},{"p":"<Unnamed>","l":"Location"},{"p":"<Unnamed>","l":"Main"},{"p":"<Unnamed>","l":"NestedMap"},{"p":"<Unnamed>","l":"People"},{"p":"<Unnamed>","l":"User"}]

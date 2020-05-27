@@ -1,0 +1,181 @@
+Size ;Random or Ordered;Name of Sort Type      ;Miliseconds
+10000;Random           ;Heap Sort              ;10774800
+10000;Ordered          ;Heap Sort              ;4569700
+Average time of Random(Milliseconds);;;10774800
+Time of Ordered(Milliseconds);;;4569700
+10000;Random           ;Bubble Sort            ;372036700
+10000;Ordered          ;Bubble Sort            ;71500
+Average time of Random(Milliseconds);;;372036700
+Time of Ordered(Milliseconds);;;71500
+10000;Random           ;Insertion Sort         ;103297200
+10000;Ordered          ;Insertion Sort         ;235500
+Average time of Random(Milliseconds);;;103297200
+Time of Ordered(Milliseconds);;;235500
+10000;Random           ;Selection              ;173205000
+10000;Ordered          ;Selection              ;147528700
+Average time of Random(Milliseconds);;;173205000
+Time of Ordered(Milliseconds);;;147528700
+10000;Random           ;Shell Sort             ;4002800
+10000;Ordered          ;Shell Sort             ;4125800
+Average time of Random(Milliseconds);;;4002800
+Time of Ordered(Milliseconds);;;4125800
+10000;Random           ;Merge Sort(Book)       ;3374000
+10000;Ordered          ;Merge Sort(Book)       ;2084300
+Average time of Random(Milliseconds);;;3374000
+Time of Ordered(Milliseconds);;;2084300
+10000;Random           ;Merge Sort(Linked List);14930000
+10000;Ordered          ;Merge Sort(Linked List);14594900
+Average time of Random(Milliseconds);;;14930000
+Time of Ordered(Milliseconds);;;14594900
+10000;Random           ;Quick Sort(Book)       ;3054900
+10000;Ordered          ;Quick Sort(Book)       ;970000
+Average time of Random(Milliseconds);;;3054900
+Time of Ordered(Milliseconds);;;970000
+10000;Random           ;Quick Sort(Linked List);116185600
+10000;Ordered          ;Quick Sort(Linked List);85312700
+Average time of Random(Milliseconds);;;116185600
+Time of Ordered(Milliseconds);;;85312700
+40000;Random           ;Heap Sort              ;8223000
+40000;Ordered          ;Heap Sort              ;7078900
+Average time of Random(Milliseconds);;;8223000
+Time of Ordered(Milliseconds);;;7078900
+40000;Random           ;Bubble Sort            ;5369426100
+40000;Ordered          ;Bubble Sort            ;97400
+Average time of Random(Milliseconds);;;5369426100
+Time of Ordered(Milliseconds);;;97400
+40000;Random           ;Insertion Sort         ;1223216000
+40000;Ordered          ;Insertion Sort         ;526700
+Average time of Random(Milliseconds);;;1223216000
+Time of Ordered(Milliseconds);;;526700
+40000;Random           ;Selection              ;2629141900
+40000;Ordered          ;Selection              ;2700042800
+Average time of Random(Milliseconds);;;2629141900
+Time of Ordered(Milliseconds);;;2700042800
+40000;Random           ;Shell Sort             ;25899000
+40000;Ordered          ;Shell Sort             ;2145000
+Average time of Random(Milliseconds);;;25899000
+Time of Ordered(Milliseconds);;;2145000
+40000;Random           ;Merge Sort(Book)       ;9461900
+40000;Ordered          ;Merge Sort(Book)       ;5541200
+Average time of Random(Milliseconds);;;9461900
+Time of Ordered(Milliseconds);;;5541200
+40000;Random           ;Merge Sort(Linked List);20395000
+40000;Ordered          ;Merge Sort(Linked List);29776500
+Average time of Random(Milliseconds);;;20395000
+Time of Ordered(Milliseconds);;;29776500
+40000;Random           ;Quick Sort(Book)       ;28477200
+40000;Ordered          ;Quick Sort(Book)       ;12113100
+Average time of Random(Milliseconds);;;28477200
+Time of Ordered(Milliseconds);;;12113100
+40000;Random           ;Quick Sort(Linked List);1614565800
+40000;Ordered          ;Quick Sort(Linked List);1480249700
+Average time of Random(Milliseconds);;;1614565800
+Time of Ordered(Milliseconds);;;1480249700
+100000;Random           ;Heap Sort              ;23940100
+100000;Ordered          ;Heap Sort              ;20305200
+Average time of Random(Milliseconds);;;23940100
+Time of Ordered(Milliseconds);;;20305200
+100000;Random           ;Bubble Sort            ;36396123200
+100000;Ordered          ;Bubble Sort            ;201800
+Average time of Random(Milliseconds);;;36396123200
+Time of Ordered(Milliseconds);;;201800
+100000;Random           ;Insertion Sort         ;8371668500
+100000;Ordered          ;Insertion Sort         ;516100
+Average time of Random(Milliseconds);;;8371668500
+Time of Ordered(Milliseconds);;;516100
+100000;Random           ;Selection              ;16546780200
+100000;Ordered          ;Selection              ;16317413000
+Average time of Random(Milliseconds);;;16546780200
+Time of Ordered(Milliseconds);;;16317413000
+100000;Random           ;Shell Sort             ;25100000
+100000;Ordered          ;Shell Sort             ;4672900
+Average time of Random(Milliseconds);;;25100000
+Time of Ordered(Milliseconds);;;4672900
+100000;Random           ;Merge Sort(Book)       ;23411100
+100000;Ordered          ;Merge Sort(Book)       ;12728600
+Average time of Random(Milliseconds);;;23411100
+Time of Ordered(Milliseconds);;;12728600
+100000;Random           ;Merge Sort(Linked List);56353600
+100000;Ordered          ;Merge Sort(Linked List);52593500
+Average time of Random(Milliseconds);;;56353600
+Time of Ordered(Milliseconds);;;52593500
+100000;Random           ;Quick Sort(Book)       ;14223300
+100000;Ordered          ;Quick Sort(Book)       ;4000500
+Average time of Random(Milliseconds);;;14223300
+Time of Ordered(Milliseconds);;;4000500
+100000;Random           ;Quick Sort(Linked List);9084193200
+100000;Ordered          ;Quick Sort(Linked List);10449462600
+Average time of Random(Milliseconds);;;9084193200
+Time of Ordered(Milliseconds);;;10449462600
+150000;Random           ;Heap Sort              ;51010500
+150000;Ordered          ;Heap Sort              ;72587000
+Average time of Random(Milliseconds);;;51010500
+Time of Ordered(Milliseconds);;;72587000
+150000;Random           ;Bubble Sort            ;125090578300
+150000;Ordered          ;Bubble Sort            ;345200
+Average time of Random(Milliseconds);;;125090578300
+Time of Ordered(Milliseconds);;;345200
+150000;Random           ;Insertion Sort         ;46971041400
+150000;Ordered          ;Insertion Sort         ;1919900
+Average time of Random(Milliseconds);;;46971041400
+Time of Ordered(Milliseconds);;;1919900
+150000;Random           ;Selection              ;38115978200
+150000;Ordered          ;Selection              ;36868911400
+Average time of Random(Milliseconds);;;38115978200
+Time of Ordered(Milliseconds);;;36868911400
+150000;Random           ;Shell Sort             ;51433800
+150000;Ordered          ;Shell Sort             ;19431000
+Average time of Random(Milliseconds);;;51433800
+Time of Ordered(Milliseconds);;;19431000
+150000;Random           ;Merge Sort(Book)       ;89863900
+150000;Ordered          ;Merge Sort(Book)       ;36875500
+Average time of Random(Milliseconds);;;89863900
+Time of Ordered(Milliseconds);;;36875500
+150000;Random           ;Merge Sort(Linked List);189268300
+150000;Ordered          ;Merge Sort(Linked List);185644600
+Average time of Random(Milliseconds);;;189268300
+Time of Ordered(Milliseconds);;;185644600
+150000;Random           ;Quick Sort(Book)       ;25941300
+150000;Ordered          ;Quick Sort(Book)       ;6887300
+Average time of Random(Milliseconds);;;25941300
+Time of Ordered(Milliseconds);;;6887300
+150000;Random           ;Quick Sort(Linked List);20472735100
+150000;Ordered          ;Quick Sort(Linked List);20243033800
+Average time of Random(Milliseconds);;;20472735100
+Time of Ordered(Milliseconds);;;20243033800
+180000;Random           ;Heap Sort              ;60990400
+180000;Ordered          ;Heap Sort              ;88068200
+Average time of Random(Milliseconds);;;60990400
+Time of Ordered(Milliseconds);;;88068200
+180000;Random           ;Bubble Sort            ;178283397300
+180000;Ordered          ;Bubble Sort            ;491600
+Average time of Random(Milliseconds);;;178283397300
+Time of Ordered(Milliseconds);;;491600
+180000;Random           ;Insertion Sort         ;66565156600
+180000;Ordered          ;Insertion Sort         ;1953800
+Average time of Random(Milliseconds);;;66565156600
+Time of Ordered(Milliseconds);;;1953800
+180000;Random           ;Selection              ;55092999600
+180000;Ordered          ;Selection              ;55517548500
+Average time of Random(Milliseconds);;;55092999600
+Time of Ordered(Milliseconds);;;55517548500
+180000;Random           ;Shell Sort             ;64446700
+180000;Ordered          ;Shell Sort             ;23818500
+Average time of Random(Milliseconds);;;64446700
+Time of Ordered(Milliseconds);;;23818500
+180000;Random           ;Merge Sort(Book)       ;74183900
+180000;Ordered          ;Merge Sort(Book)       ;66776500
+Average time of Random(Milliseconds);;;74183900
+Time of Ordered(Milliseconds);;;66776500
+180000;Random           ;Merge Sort(Linked List);241527700
+180000;Ordered          ;Merge Sort(Linked List);115363300
+Average time of Random(Milliseconds);;;241527700
+Time of Ordered(Milliseconds);;;115363300
+180000;Random           ;Quick Sort(Book)       ;32895100
+180000;Ordered          ;Quick Sort(Book)       ;8868500
+Average time of Random(Milliseconds);;;32895100
+Time of Ordered(Milliseconds);;;8868500
+180000;Random           ;Quick Sort(Linked List);31530645000
+180000;Ordered          ;Quick Sort(Linked List);36526639800
+Average time of Random(Milliseconds);;;31530645000
+Time of Ordered(Milliseconds);;;36526639800

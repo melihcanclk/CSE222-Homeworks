@@ -1,0 +1,13 @@
+Type of Hash Table;NanoSeconds
+Hash Table Open / put;54200971
+My Hash Table Open / put;54601754
+Hash Table Chain / put;51576044
+Binary Tree Hash Table Chain / put;1396295922
+Hash Table Open / get;103200
+My Hash Table Open / get;83301
+Hash Table Chain / get;94684
+Binary Tree Hash Table Chain / get;115380
+Hash Table Open / remove;106090
+My Hash Table Open / remove;96608
+Hash Table Chain / remove;89383
+Binary Tree Hash Table Chain / remove;118412

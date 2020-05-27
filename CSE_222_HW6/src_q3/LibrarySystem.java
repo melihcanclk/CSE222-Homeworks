@@ -2,9 +2,22 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class LibrarySystem {
+    /**
+     * Set that keeps peoples
+     */
     private Set<People> peoples;
+    /**
+     * Map
+     */
     NestedMap map = new NestedMap();
+    /**
+     * User that login to system
+     */
     private People user;
+
+    /**
+     * Constructor of library Management System
+     */
     LibrarySystem(){
         peoples = new CustomHashSet();
         //for testing
@@ -12,6 +25,9 @@ public class LibrarySystem {
         peoples.add(new User("melihcan"));
     }
 
+    /**
+     * Login method
+     */
     public void login(){
         boolean exit = false;
         boolean isuserfound = false;
@@ -67,6 +83,10 @@ public class LibrarySystem {
         }while(!exit);
 
     }
+
+    /**
+     * Menu of Admin
+     */
     private void adminMenu(){
         Admin admin =(Admin) user;
         printadminMenu();
@@ -94,6 +114,9 @@ public class LibrarySystem {
         }
     }
 
+    /**
+     * Menu of User
+     */
     private void userMenu(){
         printuserMenu();
         System.out.println("3-)Exit");
@@ -111,6 +134,10 @@ public class LibrarySystem {
             user.searchBookByTitle(map);
         }
     }
+
+    /**
+     * Printing Admin Menu
+     */
     private static void printadminMenu(){
         printuserMenu();
         System.out.println("3-)Add Book");
@@ -118,10 +145,20 @@ public class LibrarySystem {
         System.out.println("5-)Update Location Of Book");
         System.out.println("6-)Print All Books");
     }
+
+    /**
+     * Printing User Menu
+     */
     private static void printuserMenu(){
         System.out.println("1-)Search By Author");
         System.out.println("2-)Search By Title of the Book");
     }
+
+    /**
+     * Detect if input is y or n
+     * @param input input that will be detected
+     * @return if y or n, returns true, otherwise returns false
+     */
     private boolean isYes(String input){
         Scanner scanner = new Scanner(System.in);
         while (!(input.equals("y") || input.equals("Y") || input.equals("n") || input.equals("N"))){

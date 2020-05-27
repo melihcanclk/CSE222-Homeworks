@@ -2,10 +2,21 @@ import java.util.Scanner;
 
 public class Admin extends People{
     private final String password;
+
+    /**
+     * Constructor of Admin Class
+     * @param username Username of Admin
+     * @param password Password of Admin
+     */
     Admin(String username, String password){
         super(username);
         this.password = password;
     }
+
+    /**
+     * Adding book to Map
+     * @param map Map that keeps all information about books
+     */
     public void addBook(NestedMap map){
         System.out.println(map);
         Scanner scanner = new Scanner(System.in);
@@ -19,6 +30,11 @@ public class Admin extends People{
         int queue = scanner.nextInt();
         map.put(new Book(nameOfAuthor,title,new Location(shelf,corridor,queue)));
     }
+
+    /**
+     *  Remove book from Map
+     * @param map Map that keeps all information about books
+     */
     public void removeBook(NestedMap map){
         System.out.println(map);
         System.out.print("Enter shelf, corridor and queue of the book that you will put respectively : ");
@@ -28,6 +44,11 @@ public class Admin extends People{
         int queue = scanner.nextInt();
         map.removeBook(new Location(shelf,corridor,queue));
     }
+
+    /**
+     * Update locations of the books
+     * @param map Map that keeps all information about books
+     */
     public void updateLocation(NestedMap map){
         System.out.println(map);
         System.out.print("Enter shelf, corridor and queue of the book that you will change position respectively : ");
@@ -47,9 +68,19 @@ public class Admin extends People{
             System.out.println("Entered Same Location!");
         }
     }
+
+    /**
+     * Printing All books
+     * @param map Map that keeps all information about books
+     */
     public void printAllBooks(NestedMap map){
         System.out.println(map);
     }
+
+    /**
+     * Getting password of the Admin
+     * @return password
+     */
     public String getPassword() {
         return password;
     }

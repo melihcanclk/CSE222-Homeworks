@@ -2,6 +2,11 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 public class MergeSortLL {
+    /**
+     * Sort method  that takes table and sorts according to Merge Sort Algorithm
+     * @param table Linkedlist table
+     * @param <T> Generic type Class that implements Comperable interface
+     */
     public static <T extends Comparable<T>> void sort(LinkedList<T> table){
         if(table.size() > 1){
             int halfSize = table.size() / 2;
@@ -19,6 +24,14 @@ public class MergeSortLL {
             merge(table,first,second);
         }
     }
+
+    /**
+     * Merge two array
+     * @param outputSequence Output linkedlist that is merged
+     * @param leftSequence Left linkedlist that will be compared by Right linkedlist
+     * @param rightSequence Right linkedlist that will be compared by Left linkedlist
+     * @param <T> Generic Class Type that implements Comperable interface
+     */
     private static <T extends Comparable<T>> void merge(LinkedList<T> outputSequence,
                                                         LinkedList<T> leftSequence,
                                                         LinkedList<T> rightSequence){

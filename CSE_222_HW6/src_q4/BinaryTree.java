@@ -60,6 +60,12 @@ public class BinaryTree<E extends Comparable<E>> implements Serializable {
 		this.size = 1;
 	}
 
+	/**
+	 * Constructor of Binary Tree class
+	 * @param data Data of Binary Tree root
+	 * @param leftTree Left subtree
+	 * @param rightTree Right subtree
+	 */
 	public BinaryTree(E data, BinaryTree<E> leftTree, BinaryTree<E> rightTree) {
 		root = new Node<>(data);
 		size = 1;
@@ -192,30 +198,21 @@ public class BinaryTree<E extends Comparable<E>> implements Serializable {
 		}
 		return null;
 	}
-	public int getSize(){
-		return getSize(root);
-	}
-	private int getSize(Node<E> node){
-		if (node == null)
-			return 0;
-		else
-		{
-			/* compute the depth of each subtree */
-			int lDepth = getSize(node.left);
-			int rDepth = getSize(node.right);
 
-			/* use the larger one */
-			if (lDepth > rDepth)
-				return (lDepth + 1);
-			else
-				return (rDepth + 1);
-		}
-	}
-
+	/**
+	 * Add Function that adds value to BT
+	 * @param value Value that will be add
+	 */
 	public void add(E value) {
 		root = addRecursive(root, value);
 	}
 
+	/**
+	 * Recursive add function
+	 * @param current Current node
+	 * @param value Value of node that will be add
+	 * @return Node that add
+	 */
 	private Node<E> addRecursive(Node<E> current, E value) {
 		if (current == null) {
 			return new Node<E>(value);
@@ -233,12 +230,17 @@ public class BinaryTree<E extends Comparable<E>> implements Serializable {
 		return current;
 	}
 
+	/**
+	 * Delete Node
+	 * @param key Value of Node that will be deleted
+	 * @return Node that is deleted
+	 */
 	Node<E> deleteKey(E key)
 	{
 		return deleteRec(root, key);
 	}
 
-	/* A recursive function to insert a new key in BST */
+
 	private Node<E> deleteRec(Node<E> root, E key)
 	{
 		if (root == null)  return root;
@@ -263,6 +265,12 @@ public class BinaryTree<E extends Comparable<E>> implements Serializable {
 
 		return root;
 	}
+
+	/**
+	 * Find minimum value at a BT
+	 * @param root root of the BT
+	 * @return Minimum value
+	 */
 	private E minValue(Node<E> root)
 	{
 		E minv = root.data;

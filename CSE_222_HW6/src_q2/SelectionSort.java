@@ -1,4 +1,8 @@
 public class SelectionSort {
+    /**
+     * Selection sort algoritm method
+     * @param table table that will be sorted
+     */
     public static void sort(Comparable[] table){
         int n = table.length;
         for(int fill = 0; fill < n-1;fill++){

@@ -1,4 +1,9 @@
 public class MergeSort {
+    /**
+     * Sort method  that takes table and sorts according to Merge Sort Algorithm
+     * @param table Generic table
+     * @param <T> Generic type Class that implements Comperable interface
+     */
     public static <T extends Comparable<T>> void sort(T[] table){
         if(table.length > 1){
             int halfSize = table.length / 2;
@@ -11,6 +16,14 @@ public class MergeSort {
             merge(table,leftTable,rightTable);
         }
     }
+
+    /**
+     * Merge two array
+     * @param outputSequence Output array that is merged
+     * @param leftSequence Left Array that will be compared by Right array
+     * @param rightSequence Right array that will be compared by Left array
+     * @param <T> Generic Class Type that implements Comperable interface
+     */
     private static <T extends Comparable<T>> void merge(T[] outputSequence,
                                                         T[] leftSequence,
                                                         T[] rightSequence){

@@ -9,7 +9,12 @@ public class NestedMap {
         this();
         outerMap.put(book.getNameOfAuthor(),constructMapFromBook(book));
     }
-    //Constructs inner class
+
+    /**
+     * Constructs inner class
+     * @param book Book that will be constructed first
+     * @return Inner map
+     */
     private Map<String,Set<Location>> constructMapFromBook(Book book){
 
         Set<Location> setOfLocation = new HashSet<>();
@@ -20,6 +25,11 @@ public class NestedMap {
 
         return innerMap;
     }
+
+    /**
+     * Put function that puts book to location
+     * @param book Book that will be put
+     */
     public void put(Book book){
 
         if(isLocated(book.getLocation()) == null){
@@ -60,6 +70,11 @@ public class NestedMap {
         }
 
     }
+
+    /**
+     * Remove book
+     * @param location Location of the book
+     */
     public void removeBook(Location location){
         boolean isbookremoved = false;
         boolean isauthorremoved = false;
@@ -88,6 +103,10 @@ public class NestedMap {
         }
     }
 
+    /**
+     * Printing books with given Author name
+     * @param authorName Author name that will books' searched
+     */
     public void getBooks(String authorName){
         StringBuilder sb = new StringBuilder();
         for (String s1 : outerMap.keySet()) {
@@ -120,6 +139,12 @@ public class NestedMap {
         }
         System.out.println("There is no author named " + authorName);
     }
+
+    /**
+     * Update location of a book
+     * @param oldLocation Old location of the book
+     * @param newLocation New location of the book
+     */
     public void updateLocations(Location oldLocation,Location newLocation){
         boolean isdeleted = false;
         if(isLocated(newLocation) == null){
@@ -138,6 +163,10 @@ public class NestedMap {
         }
     }
 
+    /**
+     * Printing Author and Position of the given Book title
+     * @param title Book title
+     */
     public void getTitle(String title){
         boolean isFound = false;
         Set<String> setOfAuthors = outerMap.keySet();
@@ -154,10 +183,16 @@ public class NestedMap {
                 return;
         }
     }
-    private Iterator isLocated(Location location){
+
+    /**
+     * Method that detects if there is a book at given position or not
+     * @param location Location of the Book that will be looking for
+     * @return Iterator that points to location
+     */
+    private Iterator<Location> isLocated(Location location){
         for (Map<String, Set<Location>> value : outerMap.values()) {
             for (Set<Location> locationsSet : value.values()) {
-                Iterator locations = locationsSet.iterator();
+                Iterator<Location> locations = locationsSet.iterator();
                 while(locations.hasNext()){
                     if(locations.next().equals(location)){
                         System.out.println("There is book at " + location);
@@ -170,11 +205,18 @@ public class NestedMap {
         return null;
     }
 
+    /**
+     * Print Authors
+     */
     public void printAuthors(){
         for (String s : outerMap.keySet()) {
             System.out.println(s);
         }
     }
+
+    /**
+     * Print Book Titles
+     */
     public void printBookTitles(){
         for (Map<String, Set<Location>> value : outerMap.values()) {
             for (String s : value.keySet()) {
@@ -182,6 +224,11 @@ public class NestedMap {
             }
         }
     }
+
+    /**
+     * Overriden toString Method that prints Map
+     * @return String that includes Authors, Titles of the book and Locations
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

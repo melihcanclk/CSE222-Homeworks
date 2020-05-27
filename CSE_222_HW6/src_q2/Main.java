@@ -39,8 +39,8 @@ public class Main {
 
                 //Reason I didn't convert milliseconds to seconds is that .csv file deletes and doesn't show double values so
                 //I left total time values as milliseconds
-		sb.append("Total time of Random(Milliseconds);" + ";" + ";").append(totalTime).append("\n");               
-		sb.append("Average time of Random(Milliseconds);" + ";" + ";").append(totalTime / NUMBER_OF_RANDOM_ARRAYS).append("\n");
+		        sb.append("Total time of Random(Milliseconds);" + ";" + ";").append(totalTime).append("\n");
+		        sb.append("Average time of Random(Milliseconds);" + ";" + ";").append(totalTime / NUMBER_OF_RANDOM_ARRAYS).append("\n");
                 sb.append("Time of Ordered(Milliseconds);" + ";" + ";").append(ordered_time).append("\n");
                 System.out.println(totalTime);
                 System.out.println(totalTime / NUMBER_OF_RANDOM_ARRAYS);
@@ -57,6 +57,20 @@ public class Main {
         System.out.println(sb.toString());
     }
 
+    /**
+     * Execution method
+     * @param arr array that will be given for being sorted
+     * @param ll Linkedlist tat will be given for being sorted
+     * @param evaluater Evaluater class for evaluate given function
+     * @param sb String Builder for extract output as .csv file
+     * @param order Order of given array
+     * @param array_capacity Capacity of the array or linkedlist
+     * @param setting SOrting algorithm is changing according to given setting. If 1, heap sort executed,
+     *                If 2, bubble sort executed,If 3, insertion sort executed,If 4, selection sort executed,If 5, shell sort executed,
+     *                If 6, merge(book) sort executed,If 7, merge(linkedlist) sort executed,If 8, quick sort(book) executed,
+     *                If 9, quick sort(linkedlist) executed,
+     * @return running time of the execution
+     */
     private static long execution(Integer[] arr,
                                   LinkedList<Integer> ll,
                                   Evaluate<Integer> evaluater,
@@ -105,6 +119,11 @@ public class Main {
         return result;
     }
 
+    /**
+     * Generate Random array
+     * @param arrayCapacity capacity of that array
+     * @return array
+     */
     public static Integer[] generateRandomArray(int arrayCapacity){
         Random rd = new Random();
         rd.setSeed(0);
@@ -114,6 +133,12 @@ public class Main {
         }
         return arr;
     }
+
+    /**
+     * returns array ascending order
+     * @param arrayCapacity capacity of array
+     * @return array
+     */
     public static Integer [] generateOrderedArray(int arrayCapacity){
         Integer[] arr = new Integer[arrayCapacity];
         for (int i = 0; i < arr.length; i++) {
