@@ -19,7 +19,7 @@ public class Main {
                 .append("Miliseconds")
                 .append('\n');
 
-        for(int i = 0 ; i< 5; i++) {
+        for(int i = 0 ; i< ARRAY_CAPACITY.length; i++) {
             for (int k = 0; k < 9; k++) {
                 long totalTime = 0;
                 long ordered_time = 0;
@@ -39,13 +39,15 @@ public class Main {
 
                 //Reason I didn't convert milliseconds to seconds is that .csv file deletes and doesn't show double values so
                 //I left total time values as milliseconds
-                sb.append("Total time Random(Milliseconds);" + ";" + ";").append(totalTime).append("\n");
-                sb.append("Total time Ordered(Milliseconds);" + ";" + ";").append(ordered_time).append("\n");
+		sb.append("Total time of Random(Milliseconds);" + ";" + ";").append(totalTime).append("\n");               
+		sb.append("Average time of Random(Milliseconds);" + ";" + ";").append(totalTime / NUMBER_OF_RANDOM_ARRAYS).append("\n");
+                sb.append("Time of Ordered(Milliseconds);" + ";" + ";").append(ordered_time).append("\n");
                 System.out.println(totalTime);
-                System.out.println(ordered_time);
+                System.out.println(totalTime / NUMBER_OF_RANDOM_ARRAYS);
+		System.out.println(ordered_time);
             }
         }
-        try (PrintWriter printWriter = new PrintWriter(new File("src_q2/1801042092_output.csv"))){
+        try (PrintWriter printWriter = new PrintWriter(new File("1801042092_output.csv"))){
 
             printWriter.write(sb.toString());
 
@@ -119,4 +121,5 @@ public class Main {
         }
         return arr;
     }
+
 }

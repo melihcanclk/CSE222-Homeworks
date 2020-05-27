@@ -38,7 +38,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/CSE_222_HW6" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -52,6 +52,7 @@
       <updated>1590306540166</updated>
       <workItem from="1590306541459" duration="35000" />
       <workItem from="1590355356043" duration="163000" />
+      <workItem from="1590584015459" duration="11000" />
     </task>
     <task id="LOCAL-00001" summary="new(CSE_222_HW6) : initial commit + Q2-Q3 started implementation&#10;-Q2 classes that are on book are implemented&#10;-Q3 Book and map and sets are implemented, adding and removing implementations done">
       <created>1590355504542</created>
@@ -76,6 +77,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="new(CSE_222_HW6) : initial commit + Q2-Q3 started implementation&#10;-Q2 classes that are on book are implemented&#10;-Q3 Book and map and sets are implemented, adding and removing implementations done" />
