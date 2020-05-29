@@ -1,10 +1,11 @@
 public class AVLTree<E extends Comparable<E>> extends BinarySearchTreeWithRotate<E> {
-
+//TODO : Remove method will be add to AVLTree
     /**
      *
      */
     private static final long serialVersionUID = 1L;
     private boolean increase;
+    private boolean decrease;
 
     private static class AVLNode<E> extends Node<E> {
         /**

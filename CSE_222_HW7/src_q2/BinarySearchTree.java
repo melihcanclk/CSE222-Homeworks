@@ -35,15 +35,15 @@ public class BinarySearchTree<E extends Comparable<E>>
 
     @Override
     public E find(E target) {
-        return find(root,target);
+        return find(root,target).data;
     }
-    private E find(Node<E> localRoot, E target){
+    private Node<E> find(Node<E> localRoot, E target){
         if(localRoot == null){
             return null;
         }else{
             int compResult = target.compareTo(localRoot.data);
             if(compResult == 0){
-                return localRoot.data;
+                return localRoot;
             }else if(compResult<0){
                 return find(localRoot.left, target);
             }else {
@@ -58,7 +58,7 @@ public class BinarySearchTree<E extends Comparable<E>>
         return deleteReturn;
     }
 
-    private Node<E> delete(Node<E> localRoot, E item) {
+    protected Node<E> delete(Node<E> localRoot, E item) {
         if(localRoot == null){
             deleteReturn = null;
             return null;
@@ -93,7 +93,7 @@ public class BinarySearchTree<E extends Comparable<E>>
         }
     }
 
-    private E findLargestChild(Node<E> parent) {
+    protected E findLargestChild(Node<E> parent) {
         if(parent.right.right == null){
             E returnValue = parent.right.data;
             parent.right = parent.right. left;

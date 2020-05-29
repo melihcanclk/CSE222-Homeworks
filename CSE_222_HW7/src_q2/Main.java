@@ -5,6 +5,9 @@ public class Main{
         for (int i = 0; i < array.length; i++) {
             x.add(array[i]);
             System.out.println(x);
-        }    
+        }
+        x.remove(20);
+        System.out.println(x);
+
     }
 }
