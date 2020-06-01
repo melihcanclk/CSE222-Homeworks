@@ -8,38 +8,10 @@ import java.util.Random;
  *@param <E> The type of data stored. Must be a Comparable
  */
 public class SkipList<E extends Comparable<E>> {
-	static class Array<E> {
-		private final Object[] obj_array;   //object array
-		public final int length;
-		// class constructor
-		public Array(int length)    {
-			// instantiate a new Object array of specified length
-			obj_array = new Object [length];
-			this.length = length;
-		}
-		// get obj_array[i]
-		E get(int i) {
-			@SuppressWarnings("unchecked")
-			final E e = (E)obj_array[i];
-			return e;
-		}
-		// set e at obj_array[i]
-		void set(int i, E e) {
-			obj_array[i] = e;
-		}
-		@Override
-		public String toString() {
-			return Arrays.toString(obj_array);
-		}
-	}
 	/**
 	 * Head of the skip-list
 	 */
-	public SLNode<E> head;
-	/**
-	 * Size of each array
-	 */
-	private static final int sizeOfArrays = 3;
+	public GeneralNode<E> head;
 	/**
 	 * Size of the skip list
 	 */
@@ -64,18 +36,17 @@ public class SkipList<E extends Comparable<E>> {
 	 * Random number generator
 	 */
 	private Random rand = new Random();
-	
+
 	//Constructor
-	
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public SkipList(){
 		size = 0;
 		maxLevel = 0;
 		maxCap = computeMaxCap(maxLevel);
-		E [] arr = (E[]) new Comparable[sizeOfArrays];
-		head = new SLNode(maxLevel,arr);
+		head = new GeneralNode<>(new SLNode(maxLevel, MIN, 0),null);
 	}
-	
+
 	/**
 	 * Search for an item in the list
 	 * @param target The item being sought
@@ -84,7 +55,7 @@ public class SkipList<E extends Comparable<E>> {
 	@SuppressWarnings("unchecked")
 	private SLNode<E>[] search(E target){
 		SLNode<E>[] pred = (SLNode<E>[]) new SLNode[maxLevel];
-		SLNode<E> current = head;
+		SLNode<E> current = head.node;
 		for(int i = current.links.length - 1; i >= 0; i--){
 			while(current.links[i] != null
 					&& current.links[i].data[0].compareTo(target) < 0){
@@ -94,12 +65,12 @@ public class SkipList<E extends Comparable<E>> {
 		}
 		return pred;
 	}
-	
+
 	/**
 	 * Find an object in the skip-list
 	 * @param target The item being sought
 	 * @return A reference to the object in the skip-list that matches
-	 * 		   the target. If not found, null is returned 
+	 * 		   the target. If not found, null is returned
 	 */
 	public E find(E target){
 		SLNode<E>[] pred = search(target);
@@ -110,7 +81,7 @@ public class SkipList<E extends Comparable<E>> {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Inserts the given item
 	 * @param item The item to add
@@ -122,21 +93,29 @@ public class SkipList<E extends Comparable<E>> {
 		if(size > maxCap){
 			maxLevel++;
 			maxCap = computeMaxCap(maxLevel);
-			head.links = Arrays.copyOf(head.links, maxLevel);
+			head.node.links = Arrays.copyOf(head.node.links, maxLevel);
 			pred = Arrays.copyOf(pred, maxLevel);
-			pred[maxLevel - 1] = head;
+			pred[maxLevel - 1] = head.node;
 		}
-		int random = logRandom();
-		E [] arr = (E[]) new Comparable[sizeOfArrays];
-		arr[0] = item; 
-		SLNode<E> newNode = new SLNode<E>(random, arr);
-		for(int i = 0; i < newNode.links.length; i++){
-			newNode.links[i] = pred[i].links[i];
-			pred[i].links[i] = newNode;
+		if(pred[0].cursor == SLNode.SIZE_OF_ARRAYS){
+			SLNode<E> newNode = new SLNode<E>(logRandom(), item,0);
+			for(int i = 0; i < newNode.links.length; i++){
+				newNode.links[i] = pred[i].links[i];
+				pred[i].links[i] = newNode;
+			}
+			GeneralNode<E> current = head;
+			while(current.node != pred[0] && current.nextNode != null){
+				current = current.nextNode;
+			}
+			current.nextNode = new GeneralNode<>(newNode, null);
+
+		}else{
+			pred[0].data[pred[0].cursor] = item;
+			pred[0].cursor++;
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Removes an instance of the given item
 	 * @param item The item to remove
@@ -147,7 +126,7 @@ public class SkipList<E extends Comparable<E>> {
 		if(pred[0].links != null &&
 				pred[0].links[0].data[0].compareTo(item) != 0){
 			return false; //item is not in the list
-		} else { 
+		} else {
 			size--; //don't re-adjust maxCap and level, as we may have nodes at these levels
 			SLNode<E> deleteNode = pred[0];
 			for(int i = 0; i < deleteNode.links.length; i++){
@@ -158,7 +137,7 @@ public class SkipList<E extends Comparable<E>> {
 		}
 	}
 
-	
+
 	/**
 	 * Method to generate a logarithmic distributed integer between 1 and maxLevel.
 	 *  I.E. 1/2 of the values are 1, 1/4 are 2, etc.
@@ -171,7 +150,7 @@ public class SkipList<E extends Comparable<E>> {
 			k = maxLevel - 1;
 		return maxLevel - k;
 	}
-	
+
 	/**
 	 * Recompute the max cap
 	 * @param level
@@ -180,27 +159,27 @@ public class SkipList<E extends Comparable<E>> {
 	private int computeMaxCap(int level){
 		return (int) Math.pow(2, level) - 1;
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	public String toString(){
 		if(size == 0)
 			return "Empty";
 		StringBuilder sc = new StringBuilder();
-		SLNode itr = head;
+		GeneralNode itr = head;
 		sc.append("Head: " + maxLevel);
 		int lineMaker = 0;
-		while(itr.links[0] != null){
-			itr = itr.links[0];
-			sc.append(" --> " + itr.toString());
+		while(itr != null){
+			sc.append(" --> " + itr.node.toString());
 			lineMaker++;
 			if(lineMaker == 10){
 				sc.append("\n");
 				lineMaker = 0;
 			}
+			itr = itr.nextNode;
 		}
 		return sc.toString();
 	}
-	
+
 	/**
 	 * Static class to contain data and links
 	 * @author Jacob / Koffman & Wolfgang
@@ -208,22 +187,35 @@ public class SkipList<E extends Comparable<E>> {
 	 * @param <E> The type of data stored. Must be a Comparable
 	 */
 	static class SLNode<E>{
+		private static final int SIZE_OF_ARRAYS = 5;
 		SLNode<E>[] links;
-		E [] data;
-		
+		E []data;
+		int cursor;
 		/**
 		 * Create a node of level m
 		 * @param m The level of the node
 		 * @param data The data to be stored
 		 */
 		@SuppressWarnings("unchecked")
-		public SLNode(int m, E [] data){
+		public SLNode(int m, E data,int index){
 			links = (SLNode<E>[]) new SLNode[m];
-			this.data = data;
+			this.data = (E[])new Comparable[SIZE_OF_ARRAYS];
+			this.data[index] = data;
+			cursor = 1;
 		}
-		
+
+
 		public String toString(){
-			return (Arrays.toString(data) + " |" + links.length + "|"); 
+			return (Arrays.toString(data) + " |" + links.length + "|");
+		}
+	}
+	static class GeneralNode<E>{
+		SLNode<E> node;
+		GeneralNode<E> nextNode;
+
+		public GeneralNode(SLNode<E> node, GeneralNode<E> nextNode) {
+			this.node = node;
+			this.nextNode = nextNode;
 		}
 	}
 }
