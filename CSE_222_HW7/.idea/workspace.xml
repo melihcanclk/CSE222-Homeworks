@@ -19,7 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb647b43-82f3-441b-a2da-5c190fb20c13" name="Default Changelist" comment="" />
+    <list default="true" id="bb647b43-82f3-441b-a2da-5c190fb20c13" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_q2/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q2/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_q2/SkipList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q2/SkipList.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,7 +75,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1591021485489</updated>
-      <workItem from="1591021492762" duration="5293000" />
+      <workItem from="1591021492762" duration="5967000" />
+      <workItem from="1591031633966" duration="17513000" />
     </task>
     <servers />
   </component>
@@ -88,55 +93,55 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="765" y="231" key="#com.intellij.ide.util.MemberChooser" timestamp="1591025367369">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="765" y="231" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1591025367369" />
-    <state width="1877" height="327" key="GridCell.Tab.0.bottom" timestamp="1591026807818">
+    <state width="437" height="466" key="DebuggerActiveHint" timestamp="1591032383510">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="327" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1591026807818" />
-    <state width="1877" height="327" key="GridCell.Tab.0.center" timestamp="1591026807818">
+    <state width="437" height="466" key="DebuggerActiveHint/0.0.1920.1050@0.0.1920.1050" timestamp="1591032383510" />
+    <state width="916" height="327" key="GridCell.Tab.0.bottom" timestamp="1591052282237">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="327" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1591026807818" />
-    <state width="1877" height="327" key="GridCell.Tab.0.left" timestamp="1591026807818">
+    <state width="916" height="327" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1591052282237" />
+    <state width="916" height="327" key="GridCell.Tab.0.center" timestamp="1591052282237">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="327" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1591026807818" />
-    <state width="1877" height="327" key="GridCell.Tab.0.right" timestamp="1591026807818">
+    <state width="916" height="327" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1591052282237" />
+    <state width="916" height="327" key="GridCell.Tab.0.left" timestamp="1591052282237">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="327" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1591026807818" />
-    <state width="1877" height="327" key="GridCell.Tab.1.bottom" timestamp="1591026807909">
+    <state width="916" height="327" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1591052282237" />
+    <state width="916" height="327" key="GridCell.Tab.0.right" timestamp="1591052282237">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="327" key="GridCell.Tab.1.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1591026807909" />
-    <state width="1877" height="327" key="GridCell.Tab.1.center" timestamp="1591026807909">
+    <state width="916" height="327" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1591052282237" />
+    <state width="916" height="327" key="GridCell.Tab.1.bottom" timestamp="1591052282237">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="327" key="GridCell.Tab.1.center/0.0.1920.1050@0.0.1920.1050" timestamp="1591026807909" />
-    <state width="1877" height="327" key="GridCell.Tab.1.left" timestamp="1591026807909">
+    <state width="916" height="327" key="GridCell.Tab.1.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1591052282237" />
+    <state width="916" height="327" key="GridCell.Tab.1.center" timestamp="1591052282237">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="327" key="GridCell.Tab.1.left/0.0.1920.1050@0.0.1920.1050" timestamp="1591026807909" />
-    <state width="1877" height="327" key="GridCell.Tab.1.right" timestamp="1591026807909">
+    <state width="916" height="327" key="GridCell.Tab.1.center/0.0.1920.1050@0.0.1920.1050" timestamp="1591052282237" />
+    <state width="916" height="327" key="GridCell.Tab.1.left" timestamp="1591052282237">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="327" key="GridCell.Tab.1.right/0.0.1920.1050@0.0.1920.1050" timestamp="1591026807909" />
+    <state width="916" height="327" key="GridCell.Tab.1.left/0.0.1920.1050@0.0.1920.1050" timestamp="1591052282237" />
+    <state width="916" height="327" key="GridCell.Tab.1.right" timestamp="1591052282237">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="916" height="327" key="GridCell.Tab.1.right/0.0.1920.1050@0.0.1920.1050" timestamp="1591052282237" />
+    <state x="666" y="272" key="refactoring.ChangeSignatureDialog" timestamp="1591046197585">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="666" y="272" key="refactoring.ChangeSignatureDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1591046197585" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src_q2/SkipList.java</url>
-          <line>171</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="item" />
