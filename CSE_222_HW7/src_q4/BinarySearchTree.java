@@ -9,7 +9,6 @@
 public class BinarySearchTree<E extends Comparable<E>>
 								extends BinaryTree<E>
 								implements SearchTree<E>{
-	//Data Fields
 	/**
 	 * Return value from the public add method
 	 */
@@ -127,7 +126,6 @@ public class BinarySearchTree<E extends Comparable<E>>
 	 * post: The object is not in the tree
 	 * @param target The object to be deleted
 	 * @return The object deleted from the tree or null if the object was not in the tree
-	 * @throws ClassCast Exception if target does not implement Comparable
 	 */
 	public E delete(E target){
 		root = delete(root, target);
@@ -213,7 +211,6 @@ public class BinarySearchTree<E extends Comparable<E>>
 	 * post: The object is not in the tree
 	 * @param target The object to be deleted
 	 * @return The object deleted from the tree or null if the object was not in the tree
-	 * @throws ClassCast Exception if target does not implement Comparable
 	 */
 	public E deleteS(E target){
 		root = deleteS(root, target);

@@ -6,7 +6,8 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class LibrarySystem {
-    
+    static Scanner scanner = new Scanner(System.in);
+    static Scanner scannerOther = new Scanner(System.in);
     /**
      * Set that keeps peoples
      */
@@ -14,7 +15,7 @@ public class LibrarySystem {
     /**
      * Tree sorted by name
      */
-    private Map<String,SearchTree<Specs>> nameSortedTree;
+    private CustomTree tree;
     /**
      * User that login to system
      */
@@ -25,11 +26,7 @@ public class LibrarySystem {
      */
     LibrarySystem(){
         peoples = new HashSet<>();
-        nameSortedTree = new HashMap<String, SearchTree<RevisedNode<String>>>();
-        versionSortedTree = new BinarySearchTree<>();
-        quantitySortedTree = new BinarySearchTree<>();
-        priceSortedTree = new BinarySearchTree<>();
-
+        tree = new CustomTree();
         //for testing
         final Admin admin = new Admin("admin", "1234");
         peoples.add(new Admin("admin", "1234"));
@@ -41,8 +38,9 @@ public class LibrarySystem {
         arr.add(new Software("Norton", 5.5, 235, 65.4));
         arr.add(new Software("Adobe Flash", 3.3, 635, 45.0));
         arr.add(new Software("Adobe Flash", 4.0, 235, 65.0));
-        for (int i = 0; i < arr.size(); i++) {
-            admin.addSoftware(nameSortedTree,versionSortedTree ,quantitySortedTree, priceSortedTree, arr.get(i));
+        for (Software software : arr) {
+            software.setName(software.getName().toLowerCase());
+            tree.add(software);
         }
     }
 
@@ -54,7 +52,6 @@ public class LibrarySystem {
         boolean isuserfound = false;
         String username = null;
         do{
-            final Scanner scanner = new Scanner(System.in);
             if(!isuserfound){
                 System.out.print("Enter username : ");
                 username = scanner.nextLine();
@@ -63,7 +60,7 @@ public class LibrarySystem {
                     if(people.getUsername().equals(username)){
                         if( people instanceof Admin){
                             System.out.print("Enter password : ");
-                            final String password = scanner.next();
+                            String password = scannerOther.next();
                             if(((Admin) people).getPassword().equals(password)){
                                 this.user = new Admin(username,((Admin) people).getPassword());
                                 isuserfound = true;
@@ -85,23 +82,30 @@ public class LibrarySystem {
             }
             if(!isuserfound){
                 System.out.println("No such person named " + username + ", Do you want to create new account with name "+ username +" (Y/N) : ");
-                final String input = scanner.next();
+                String input = scannerOther.next();
                 if(isYes(input)){
                     //Create new user
-                    peoples.add(new User(username));
+                    user = new User(username);
+                    peoples.add(user);
                     isuserfound = true;
                 }
             }
-            System.out.println("Do you want to exit from library system(Y/N) : ");
-            if(isYes(scanner.next())){
+            //Logout olmak dediğinde y yazınca no such person diyor (DONE)
+            System.out.print("Do you want to exit from library system(Y/N) : ");
+            String word = "";
+            word = scannerOther.next();
+            boolean isyes = false;
+            if (word != null) {
+                isyes = isYes(word);
+            }
+            if(isyes){
                 exit = true;
-            }if(!exit){
-                System.out.println("Do you want to log out?(Y/N) : ");
-                if(isYes(scanner.next())){
+            }if(!exit && isuserfound){
+                System.out.print("Do you want to log out?(Y/N) : ");
+                if(isYes(scannerOther.next())){
                     isuserfound = false;
                 }
             }
-            scanner.close();
         }while(!exit);
         
     }
@@ -113,30 +117,28 @@ public class LibrarySystem {
         final Admin admin =(Admin) user;
         printadminMenu();
         System.out.println("8-)Exit");
-        final Scanner scanner = new Scanner(System.in);
-        int input = scanner.nextInt();
+        int input = scannerOther.nextInt();
         while(input < 0 || input >8){
             System.out.print("Wrong input. Enter selection again : ");
             printadminMenu();
             System.out.println("8-)Exit");
-            input = scanner.nextInt();
-        }/*
+            input = scannerOther.nextInt();
+        }
         if(input == 1){
-            user.searchSoftwareByName(nameSortedTree);
+            user.searchSoftwareByName(tree);
         } else if(input == 2) {
-            user.searchSoftwareByQuantity(quantitySortedTree);
+            user.searchSoftwareByQuantity(tree);
         } else if(input == 3) {
-            user.searchSoftwareByPrice(priceSortedTree);
+            user.searchSoftwareByPrice(tree);
         } else if(input == 4){
-            admin.addSoftware(nameSortedTree, quantitySortedTree, priceSortedTree);
+            admin.addSoftware(tree);
         } else if(input == 5){
-            admin.removeSoftware(nameSortedTree, quantitySortedTree, priceSortedTree);
+            admin.removeSoftware(tree);
         } else if(input == 6){
-            admin.updateSoftware(nameSortedTree, quantitySortedTree, priceSortedTree);
+            admin.updateSoftware(tree);
         } else if(input == 7){
-            admin.printAllSoftwares(nameSortedTree);
-        }*/
-        scanner.close();
+            admin.printAllSoftwares(tree);
+        }
     }
 
     /**
@@ -145,22 +147,20 @@ public class LibrarySystem {
     private void userMenu(){
         printuserMenu();
         System.out.println("4-)Exit");
-        final Scanner scanner = new Scanner(System.in);
-        int input = scanner.nextInt();
+        int input = scannerOther.nextInt();
         while(input < 0 || input >4){
             System.out.print("Wrong input. Enter selection again : ");
             printuserMenu();
             System.out.println("4-)Exit");
-            input = scanner.nextInt();
-        }/*
+            input = scannerOther.nextInt();
+        }
         if(input == 1){
-            user.searchSoftwareByName(nameSortedTree);
+            user.searchSoftwareByName(tree);
         }else if(input == 2){
-            user.searchSoftwareByQuantity(quantitySortedTree);
+            user.searchSoftwareByQuantity(tree);
         }else if(input == 3){
-            user.searchSoftwareByPrice(priceSortedTree);
-        }*/
-        scanner.close();
+            user.searchSoftwareByPrice(tree);
+        }
     }
 
     /**
@@ -168,18 +168,19 @@ public class LibrarySystem {
      */
     private static void printadminMenu(){
         printuserMenu();
-        System.out.println("3-)Add Book");
-        System.out.println("4-)Delete Book");
-        System.out.println("5-)Update Location Of Book");
-        System.out.println("6-)Print All Books");
+        System.out.println("4-)Add Software");
+        System.out.println("5-)Delete Software");
+        System.out.println("6-)Update Software");
+        System.out.println("7-)Print All Softwares");
     }
 
     /**
      * Printing User Menu
      */
     private static void printuserMenu(){
-        System.out.println("1-)Search By Author");
-        System.out.println("2-)Search By Title of the Book");
+        System.out.println("1-)Search By Software Name");
+        System.out.println("2-)Search By Software Quantity");
+        System.out.println("3-)Search By Software Price");
     }
 
     /**
@@ -187,26 +188,18 @@ public class LibrarySystem {
      * @param input input that will be detected
      * @return if y or n, returns true, otherwise returns false
      */
-    private boolean isYes(String input){
-        final Scanner scanner = new Scanner(System.in);
+    public static boolean isYes(String input){
         while (!(input.equals("y") || input.equals("Y") || input.equals("n") || input.equals("N"))){
-            System.out.println("Wrong input. Do you want to create new user account(Y/N) : ");
-            input = scanner.next();
+            System.out.println("Wrong input : ");
+            input = scannerOther.next();
         }
-        scanner.close();
         return input.equals("y") || input.equals("Y");
-
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#toString()
-     */
 
     @Override
     public String toString() {
-        return "[tree=\n" + nameSortedTree + "\n";
+        return "[tree=\n" + tree + "\n";
     }
 
     

@@ -24,37 +24,43 @@ public abstract class People {
 
     /**
      * Search Book By Author Name
-     * @param outermap Outer Map
      */
-    public void searchSoftwareByName(SearchTree<Software> tree){
-        
-        System.out.print("Please enter name of the author : ");
+    public void searchSoftwareByName(CustomTree tree){
+        System.out.print("Please enter name of software : ");
         Scanner scanner = new Scanner(System.in);
         String nameOfSoftware = scanner.nextLine();
-        //Print all books named nameofsoftware
+        nameOfSoftware = nameOfSoftware.toLowerCase();
+        System.out.print("Do you want to enter version? : ");
+        String input = scanner.next();
+        if(LibrarySystem.isYes(input)){
+            System.out.print("Please enter version of software : ");
+            scanner.nextLine();
+            String versionOfSoftware = scanner.nextLine();
+            tree.findName(tree.root,nameOfSoftware,Double.valueOf(versionOfSoftware));
+        }else{
+            tree.findName(tree.root,nameOfSoftware);
+        }
     }
 
     /**
-     * Search Author and Location(s) of a book
-     * @param outermap Outer Map
+     * Search Quantities of software
      */
-    public void searchSoftwareByQuantity(SearchTree<Software> tree){
+    public void searchSoftwareByQuantity(CustomTree tree){
         
-        System.out.print("Please enter title of the book : ");
+        System.out.print("Please enter number of quantity of software : ");
         Scanner scanner = new Scanner(System.in);
-        String nameOfTitle = scanner.nextLine();
-        //Print all softwares with same quantity
+        Integer quantity = scanner.nextInt();
+        tree.findQuantity(tree.root,quantity);
     }
 
     /**
-     * Search Author and Location(s) of a book
-     * @param outermap Outer Map
+     * Search Prices of softwares
      */
-    public void searchSoftwareByPrice(SearchTree<Software> tree){
-        System.out.print("Please enter title of the book : ");
+    public void searchSoftwareByPrice(CustomTree tree){
+        System.out.print("Please enter price of software : ");
         Scanner scanner = new Scanner(System.in);
-        String nameOfTitle = scanner.nextLine();
-        //print all softwares with same price
+        String price = scanner.nextLine();
+        tree.findPrice(tree.root,Double.valueOf(price));
     }
 
     /**

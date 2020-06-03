@@ -1,89 +1,63 @@
-public class Software {
-    /**
-     * Name of the author
-     */
-    private String nameOfSoftware;
-    /**
-     * Title of the book
-     */
-    private Double versionOfSoftware;
-    /**
-     * Location of the book that is located
-     */
-    private Integer quantityOfSoftware;
-    /**
-     * Location of the book that is located
-     */
-    private Double priceOfSoftware;
+public class Software implements Comparable<Software> {
+    private String name;
+    private Double version;
+    private Integer quantity;
+    private Double price;
 
-    /**
-     * @return the nameOfSoftware
-     */
-    public String getNameOfSoftware() {
-        return nameOfSoftware;
+    public Software(String name, Double version, Integer quantity, Double price) {
+        this.name = name;
+        this.version = version;
+        this.quantity = quantity;
+        this.price = price;
     }
 
-    /**
-     * @param nameOfSoftware the nameOfSoftware to set
-     */
-    public void setNameOfSoftware(String nameOfSoftware) {
-        this.nameOfSoftware = nameOfSoftware;
+    public String getName() {
+        return name;
     }
 
-    /**
-     * @return the versionOfSoftware
-     */
-    public Double getVersionOfSoftware() {
-        return versionOfSoftware;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    /**
-     * @param versionOfSoftware the versionOfSoftware to set
-     */
-    public void setVersionOfSoftware(Double versionOfSoftware) {
-        this.versionOfSoftware = versionOfSoftware;
+    public Double getVersion() {
+        return version;
     }
 
-    /**
-     * @return the quantityOfSoftware
-     */
-    public Integer getQuantityOfSoftware() {
-        return quantityOfSoftware;
+    public void setVersion(Double version) {
+        this.version = version;
     }
 
-    /**
-     * @param quantityOfSoftware the quantityOfSoftware to set
-     */
-    public void setQuantityOfSoftware(Integer quantityOfSoftware) {
-        this.quantityOfSoftware = quantityOfSoftware;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    /**
-     * @return the priceOfSoftware
-     */
-    public Double getPriceOfSoftware() {
-        return priceOfSoftware;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
-    /**
-     * @param priceOfSoftware the priceOfSoftware to set
-     */
-    public void setPriceOfSoftware(Double priceOfSoftware) {
-        this.priceOfSoftware = priceOfSoftware;
+    public Double getPrice() {
+        return price;
     }
 
-	/**
-	 * @param nameOfSoftware
-	 * @param versionOfSoftware
-	 * @param quantityOfSoftware
-	 * @param priceOfSoftware
-	 */
-	public Software(String nameOfSoftware, Double versionOfSoftware, Integer quantityOfSoftware,
-			Double priceOfSoftware) {
-		this.nameOfSoftware = nameOfSoftware;
-		this.versionOfSoftware = versionOfSoftware;
-		this.quantityOfSoftware = quantityOfSoftware;
-		this.priceOfSoftware = priceOfSoftware;
-	}
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 
+    @Override
+    public int compareTo(Software o) {
+        int returnval = this.name.compareTo(o.name);
+        if(returnval == 0){
+            returnval = this.version.compareTo(o.version);
+        }
+        return returnval;
+    }
+
+    @Override
+    public String toString() {
+        return "Software{" +
+                "name='" + name +" " + version +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                '}';
+    }
 }
