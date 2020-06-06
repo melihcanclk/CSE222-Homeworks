@@ -22,7 +22,7 @@ public class BinarySearchTree<E extends Comparable<E>>
 	//Methods
 	
 	public String toString(){
-		return super.toString();
+		return inorder();
 	}
 	
 	public String inorder(){
@@ -127,7 +127,6 @@ public class BinarySearchTree<E extends Comparable<E>>
 	 * post: The object is not in the tree
 	 * @param target The object to be deleted
 	 * @return The object deleted from the tree or null if the object was not in the tree
-	 * @throws ClassCast Exception if target does not implement Comparable
 	 */
 	public E delete(E target){
 		root = delete(root, target);
@@ -213,7 +212,6 @@ public class BinarySearchTree<E extends Comparable<E>>
 	 * post: The object is not in the tree
 	 * @param target The object to be deleted
 	 * @return The object deleted from the tree or null if the object was not in the tree
-	 * @throws ClassCast Exception if target does not implement Comparable
 	 */
 	public E deleteS(E target){
 		root = deleteS(root, target);

@@ -1,30 +1,31 @@
 public class Software implements Comparable<Software> {
-    private String name;
-    private Double version;
+    private NameOfSoftware nameOfSoftware;
     private Integer quantity;
     private Double price;
+    //control compareTo method
+    private Controller controller;
 
-    public Software(String name, Double version, Integer quantity, Double price) {
-        this.name = name;
-        this.version = version;
+    public Software(NameOfSoftware nameOfSoftware, Integer quantity, Double price, Controller controller) {
+        this.nameOfSoftware = nameOfSoftware;
         this.quantity = quantity;
         this.price = price;
+        this.controller = controller;
     }
 
-    public String getName() {
-        return name;
+    public Controller getController() {
+        return controller;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setController(Controller controller) {
+        this.controller = controller;
     }
 
-    public Double getVersion() {
-        return version;
+    public NameOfSoftware getNameOfSoftware() {
+        return nameOfSoftware;
     }
 
-    public void setVersion(Double version) {
-        this.version = version;
+    public void setNameOfSoftware(NameOfSoftware nameOfSoftware) {
+        this.nameOfSoftware = nameOfSoftware;
     }
 
     public Integer getQuantity() {
@@ -45,17 +46,37 @@ public class Software implements Comparable<Software> {
 
     @Override
     public int compareTo(Software o) {
-        int returnval = this.name.compareTo(o.name);
-        if(returnval == 0){
-            returnval = this.version.compareTo(o.version);
+        int compare = 0;
+        if(controller.equals(Controller.NAME)){
+            compare = this.nameOfSoftware.getName().compareTo(o.nameOfSoftware.getName());
+            if(compare == 0){
+                compare = this.nameOfSoftware.getVersion().compareTo(o.nameOfSoftware.getVersion());
+            }
+            //eşit olduğunda sağa vermemin sebebi aynı olduğunda da bütün ağaçlarda tutmak
+        }else if(controller.equals(Controller.QUANTITY_ADD)){
+            if(this.quantity.compareTo(o.quantity) >= 0){
+                compare = 1;
+            }else{
+                compare = -1;
+            }
+        }else if(controller.equals(Controller.QUANTITY_FIND)){
+            compare = this.quantity.compareTo(o.quantity);
+        }else if(controller.equals(Controller.PRICE_ADD)){
+            if(this.price.compareTo(o.price) >= 0){
+                compare = 1;
+            }else{
+                compare = -1;
+            }
+        }else if(controller.equals(Controller.PRICE_FIND)){
+            compare = this.price.compareTo(o.price);
         }
-        return returnval;
+        return compare;
     }
 
     @Override
     public String toString() {
         return "Software{" +
-                "name='" + name +" " + version +
+                "name='" + nameOfSoftware +
                 ", quantity=" + quantity +
                 ", price=" + price +
                 '}';

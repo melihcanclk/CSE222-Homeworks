@@ -1,5 +1,3 @@
-/*<listing chapter="9" section="5">*/
-
 /**
  * An implementation of the B-tree. A B-tree is a
  * search tree in which each node contains n data items where
@@ -160,7 +158,7 @@ public class BTree<E extends Comparable<E>>  implements SearchTree<E> {
      *         if the item is already in the tree
      */
     private boolean insert(Node<E> root, E item) {
-        int index = search(item, root.data, 0, root.size);
+        int index = binarySearch(item, root.data, 0, root.size);
         if (index != root.size && item.compareTo(root.data[index]) == 0) {
             return false;
         }
@@ -206,8 +204,31 @@ public class BTree<E extends Comparable<E>>  implements SearchTree<E> {
         node.child[index + 1] = child;
         node.size++;
     }
+    private int binarySearch(E target, E[] data, int first, int last){
+        if (first == last)
+            return first;
+        if (last- first == 1){
+            if ( target.compareTo(data[first]) <=0) {
+                return first;
+            }
+            else{
+                return last;
+            }
+        }
 
-    /*<listing chapter="9" number="6">*/
+        int middle = first + (last -first) /2;
+        int compResult = target.compareTo(data[middle]);
+        if(compResult==0){
+            return middle;
+        }
+        if (compResult<0){
+            return binarySearch(target,data,first,middle);
+        }
+        else{
+            return binarySearch(target,data,middle+1,last);
+        }
+    }
+
     /**
      * Method to split a node
      * @param node - The node to be split
@@ -267,8 +288,7 @@ public class BTree<E extends Comparable<E>>  implements SearchTree<E> {
      */
     @Override
     public boolean remove(E o) {
-        throw new UnsupportedOperationException("Remove from B-trees "
-                + "not implemented");
+        return (delete(o) == null) ? false : true;
     }
 
     /**
@@ -279,7 +299,6 @@ public class BTree<E extends Comparable<E>>  implements SearchTree<E> {
      * tree
      * @throws UnsupportedOperationException if called.
      */
-    @Override
     public E delete(E o) {
         throw new UnsupportedOperationException("Delete from B-trees not"
                 + " implemented");

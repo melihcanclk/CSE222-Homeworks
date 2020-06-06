@@ -10,7 +10,7 @@ import java.util.Random;
  *
  *@param <E> The type of data stored. Must be a Comparable
  */
-public class SkipList<E extends Comparable<E>> {
+public class SkipListArray<E extends Comparable<E>> {
 	/**
 	 * Head of the skip-list
 	 */
@@ -41,7 +41,7 @@ public class SkipList<E extends Comparable<E>> {
 
 	//Constructor
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public SkipList(){
+	public SkipListArray(){
 		size = 1;
 		maxLevel = 0;
 		maxCap = computeMaxCap(maxLevel);

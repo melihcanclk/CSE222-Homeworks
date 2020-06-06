@@ -19,13 +19,12 @@ public class Main {
         skipList.add(23);
         System.out.println(skipList);
         System.out.println(skipList.find(44));
-        skipList.remove(8);
         skipList.remove(23);
-        skipList.remove(43);
         skipList.remove(21);
-        skipList.remove(23);
-        skipList.remove(47);
-        skipList.remove(56);
+        skipList.remove(26);
+        skipList.remove(43);
+        System.out.println(skipList);
+        skipList.add(23);
         System.out.println(skipList);
     }
 }

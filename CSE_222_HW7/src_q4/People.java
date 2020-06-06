@@ -25,43 +25,16 @@ public abstract class People {
     /**
      * Search Book By Author Name
      */
-    public void searchSoftwareByName(CustomTree tree){
-        System.out.print("Please enter name of software : ");
+    public void searchSoftwareByName(SearchTree<Software> searchTreeByName){
         Scanner scanner = new Scanner(System.in);
-        String nameOfSoftware = scanner.nextLine();
-        nameOfSoftware = nameOfSoftware.toLowerCase();
-        System.out.print("Do you want to enter version? : ");
-        String input = scanner.next();
-        if(LibrarySystem.isYes(input)){
-            System.out.print("Please enter version of software : ");
-            scanner.nextLine();
-            String versionOfSoftware = scanner.nextLine();
-            tree.findName(tree.root,nameOfSoftware,Double.valueOf(versionOfSoftware));
-        }else{
-            tree.findName(tree.root,nameOfSoftware);
-        }
+        System.out.println("Name of Software : ");
+        String input = scanner.nextLine();
+        System.out.println("Version of Software : ");
+        String vers = scanner.next();
+        Software software = searchTreeByName.find(new Software(new NameOfSoftware(input,Double.valueOf(vers)),null,null, Controller.NAME));
+        System.out.println(Admin.capitalizeWord(software.toString()));
     }
 
-    /**
-     * Search Quantities of software
-     */
-    public void searchSoftwareByQuantity(CustomTree tree){
-        
-        System.out.print("Please enter number of quantity of software : ");
-        Scanner scanner = new Scanner(System.in);
-        Integer quantity = scanner.nextInt();
-        tree.findQuantity(tree.root,quantity);
-    }
-
-    /**
-     * Search Prices of softwares
-     */
-    public void searchSoftwareByPrice(CustomTree tree){
-        System.out.print("Please enter price of software : ");
-        Scanner scanner = new Scanner(System.in);
-        String price = scanner.nextLine();
-        tree.findPrice(tree.root,Double.valueOf(price));
-    }
 
     /**
      * Equals method that controls if two people has same name or not
@@ -83,5 +56,20 @@ public abstract class People {
     public String toString() {
         return "People [username=" + username + "]";
     }
-    
+
+    public void searchSoftwareByQuantity(SearchTree<Software> searchTreeByQuantity) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Quantity of Software : ");
+        Integer input = scanner.nextInt();
+        Software software = new Software(null,input,null, Controller.QUANTITY_FIND);
+        System.out.println(searchTreeByQuantity.find(software));
+    }
+
+    public void searchSoftwareByPrice(SearchTree<Software> searchTreeByPrice) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Price of Software : ");
+        String input = scanner.next();
+        Software software = new Software(null,null,Double.valueOf(input), Controller.PRICE_FIND);
+        System.out.println(searchTreeByPrice.find(software));
+    }
 }

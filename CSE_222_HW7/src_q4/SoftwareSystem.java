@@ -1,3 +1,4 @@
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -5,7 +6,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-public class LibrarySystem {
+public class SoftwareSystem {
     static Scanner scanner = new Scanner(System.in);
     static Scanner scannerOther = new Scanner(System.in);
     /**
@@ -15,7 +16,7 @@ public class LibrarySystem {
     /**
      * Tree sorted by name
      */
-    private CustomTree tree;
+    private CustomSearchTree tree;
     /**
      * User that login to system
      */
@@ -24,23 +25,29 @@ public class LibrarySystem {
     /**
      * Constructor of library Management System
      */
-    LibrarySystem(){
+    SoftwareSystem() throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
         peoples = new HashSet<>();
-        tree = new CustomTree();
+        //User should give tree that implements SearchTree interface
+        tree = new CustomSearchTree(new BinarySearchTree<>());
         //for testing
         final Admin admin = new Admin("admin", "1234");
         peoples.add(new Admin("admin", "1234"));
         peoples.add(new User("melihcan"));
         final ArrayList<Software> arr = new ArrayList<>();
-        arr.add(new Software("Adobe PhotoShop", 6.0, 568, 175.84));
-        arr.add(new Software("Adobe PhotoShop", 6.2, 489, 198.0));
-        arr.add(new Software("Norton", 4.5, 125, 32.3));
-        arr.add(new Software("Norton", 5.5, 235, 65.4));
-        arr.add(new Software("Adobe Flash", 3.3, 635, 45.0));
-        arr.add(new Software("Adobe Flash", 4.0, 235, 65.0));
+        arr.add(new Software(new NameOfSoftware("Adobe PhotoShop", 6.0), 568, 175.84, Controller.NAME));
+        arr.add(new Software(new NameOfSoftware("Adobe PhotoShop", 6.2), 489, 198.0, Controller.NAME));
+        arr.add(new Software(new NameOfSoftware("Norton", 4.5), 125, 32.3, Controller.NAME));
+        arr.add(new Software(new NameOfSoftware("Norton", 5.5), 235, 65.4, Controller.NAME));
+        arr.add(new Software(new NameOfSoftware("Adobe Flash", 3.3), 635, 45.0, Controller.NAME));
+        arr.add(new Software(new NameOfSoftware("Adobe Flash", 4.0), 235, 45.0, Controller.NAME));
         for (Software software : arr) {
-            software.setName(software.getName().toLowerCase());
-            tree.add(software);
+            NameOfSoftware nameOfSoftware = new NameOfSoftware(software.getNameOfSoftware().getName().toLowerCase(),software.getNameOfSoftware().getVersion());
+            software.setNameOfSoftware(nameOfSoftware);
+            tree.searchNameTree.add(software);
+            software.setController(Controller.PRICE_ADD);
+            tree.searchPriceTree.add(software);
+            software.setController(Controller.QUANTITY_ADD);
+            tree.searchQuantityTree.add(software);
         }
     }
 
@@ -125,12 +132,12 @@ public class LibrarySystem {
             input = scannerOther.nextInt();
         }
         if(input == 1){
-            user.searchSoftwareByName(tree);
-        } else if(input == 2) {
-            user.searchSoftwareByQuantity(tree);
-        } else if(input == 3) {
-            user.searchSoftwareByPrice(tree);
-        } else if(input == 4){
+            user.searchSoftwareByName(tree.searchNameTree);
+        } else if(input == 2){
+            user.searchSoftwareByPrice(tree.searchPriceTree);
+        } else if(input == 3){
+            user.searchSoftwareByQuantity(tree.searchQuantityTree);
+        }else if(input == 4){
             admin.addSoftware(tree);
         } else if(input == 5){
             admin.removeSoftware(tree);
@@ -155,11 +162,11 @@ public class LibrarySystem {
             input = scannerOther.nextInt();
         }
         if(input == 1){
-            user.searchSoftwareByName(tree);
-        }else if(input == 2){
-            user.searchSoftwareByQuantity(tree);
-        }else if(input == 3){
-            user.searchSoftwareByPrice(tree);
+            user.searchSoftwareByName(tree.searchNameTree);
+        } else if(input == 2){
+            user.searchSoftwareByPrice(tree.searchPriceTree);
+        } else if(input == 3){
+            user.searchSoftwareByQuantity(tree.searchQuantityTree);
         }
     }
 
@@ -179,8 +186,8 @@ public class LibrarySystem {
      */
     private static void printuserMenu(){
         System.out.println("1-)Search By Software Name");
-        System.out.println("2-)Search By Software Quantity");
-        System.out.println("3-)Search By Software Price");
+        System.out.println("2-)Search By Software Price");
+        System.out.println("3-)Search By Software Quantity");
     }
 
     /**
@@ -190,7 +197,7 @@ public class LibrarySystem {
      */
     public static boolean isYes(String input){
         while (!(input.equals("y") || input.equals("Y") || input.equals("n") || input.equals("N"))){
-            System.out.println("Wrong input : ");
+            System.out.print("Wrong input : ");
             input = scannerOther.next();
         }
         return input.equals("y") || input.equals("Y");
