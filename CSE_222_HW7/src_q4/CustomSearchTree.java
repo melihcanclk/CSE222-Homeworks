@@ -10,6 +10,6 @@ public class CustomSearchTree {
     }
     @Override
     public String toString() {
-        return searchNameTree + "\n" + searchQuantityTree + "\n" + searchPriceTree;
+        return searchNameTree.toString();
     }
 }

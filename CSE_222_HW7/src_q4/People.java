@@ -32,7 +32,12 @@ public abstract class People {
         System.out.println("Version of Software : ");
         String vers = scanner.next();
         Software software = searchTreeByName.find(new Software(new NameOfSoftware(input,Double.valueOf(vers)),null,null, Controller.NAME));
-        System.out.println(Admin.capitalizeWord(software.toString()));
+        if(software != null){
+            System.out.println(Admin.capitalizeWord(software.toString()));
+        }else{
+            System.out.println("No Software Named " + input + " " + vers);
+        }
+
     }
 
 
@@ -62,7 +67,13 @@ public abstract class People {
         System.out.println("Quantity of Software : ");
         Integer input = scanner.nextInt();
         Software software = new Software(null,input,null, Controller.QUANTITY_FIND);
-        System.out.println(searchTreeByQuantity.find(software));
+        software = searchTreeByQuantity.find(software);
+        if(software != null){
+            System.out.println(software);
+        }else{
+            System.out.println("There is no software with quantity " + input);
+        }
+
     }
 
     public void searchSoftwareByPrice(SearchTree<Software> searchTreeByPrice) {
@@ -70,6 +81,11 @@ public abstract class People {
         System.out.println("Price of Software : ");
         String input = scanner.next();
         Software software = new Software(null,null,Double.valueOf(input), Controller.PRICE_FIND);
-        System.out.println(searchTreeByPrice.find(software));
+        software = searchTreeByPrice.find(software);
+        if(software != null){
+            System.out.println(software);
+        }else{
+            System.out.println("There is no software with price " + input);
+        }
     }
 }

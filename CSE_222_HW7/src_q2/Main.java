@@ -1,30 +1,124 @@
 public class Main {
+    static SkipList<Integer> skipList = new SkipList<>();
     public static void main(String[] args) {
-        SkipList<Integer> skipList = new SkipList<>();
+
+        //test1();
+        //test2();
+        //test3();
+        //test4();
+        //test5();
+        //test6();
+        //test7();
+        //test8();
+        //test9();
+        //test10();
+        //test11();
+    }
+    public static void test1(){
+        skipList.add(5);
+        System.out.println(skipList);
+    }
+    public static void test2(){
         skipList.add(5);
         skipList.add(8);
-        skipList.add(54);
-        skipList.add(43);
-        skipList.add(12);
-        skipList.add(64);
-        skipList.add(23);
-        skipList.add(44);
-        skipList.add(21);
-        skipList.add(56);
-        skipList.add(489);
-        skipList.add(18);
-        skipList.add(61);
-        skipList.add(26);
-        skipList.add(47);
-        skipList.add(23);
+        skipList.add(13);
+        skipList.add(2);
+
         System.out.println(skipList);
-        System.out.println(skipList.find(44));
-        skipList.remove(23);
-        skipList.remove(21);
-        skipList.remove(26);
-        skipList.remove(43);
+    }
+    public static void test3(){
+        skipList.add(5);
+        skipList.add(8);
+        skipList.add(13);
+        skipList.add(2);
+        skipList.add(3);
+
+
         System.out.println(skipList);
-        skipList.add(23);
+    }
+    public static void test4(){
+        skipList.add(5);
+        skipList.add(8);
+        skipList.add(13);
+        skipList.add(2);
+        skipList.add(3);
+        skipList.add(24);
+
         System.out.println(skipList);
+    }
+    public static void test5(){
+        skipList.add(5);
+        skipList.add(8);
+        skipList.add(13);
+        skipList.add(2);
+        skipList.add(3);
+        skipList.add(24);
+        skipList.add(74);
+        skipList.add(1);
+        skipList.add(36);
+        System.out.println(skipList);
+    }
+    public static void test6(){
+        skipList.add(5);
+        skipList.add(8);
+        skipList.add(13);
+        skipList.add(2);
+        skipList.add(3);
+        skipList.add(24);
+        skipList.add(74);
+        System.out.println(skipList);
+        skipList.remove(3);
+        System.out.println(skipList);
+    }
+    public static void test7(){
+        skipList.add(5);
+        skipList.add(8);
+        skipList.add(13);
+        skipList.add(2);
+        skipList.add(3);
+
+        System.out.println(skipList);
+        skipList.remove(13);
+        System.out.println(skipList);
+    }
+    public static void test8(){
+        skipList.add(5);
+        skipList.add(8);
+        skipList.add(13);
+        skipList.add(2);
+        skipList.add(3);
+        skipList.add(3);
+        System.out.println(skipList);
+
+    }
+    public static void test9(){
+        skipList.add(5);
+        skipList.add(8);
+        skipList.add(13);
+        skipList.add(2);
+        skipList.add(3);
+        skipList.remove(31);
+        System.out.println(skipList);
+
+    }
+    public static void test10(){
+        skipList.add(5);
+        skipList.add(8);
+        skipList.add(13);
+        skipList.add(2);
+        skipList.add(3);
+        System.out.println(skipList.find(2));
+        System.out.println(skipList);
+
+    }
+    public static void test11(){
+        skipList.add(5);
+        skipList.add(8);
+        skipList.add(13);
+        skipList.add(2);
+        skipList.add(3);
+        System.out.println(skipList.find(31));
+        System.out.println(skipList);
+
     }
 }

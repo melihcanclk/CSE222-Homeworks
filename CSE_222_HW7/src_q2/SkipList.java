@@ -169,7 +169,12 @@ public class SkipList<E extends Comparable<E>> {
 				break;
 			}
 		}
-		if(!isInclude && pred[0].links[0].data.get(0).equals(item)){
+		if(!isInclude && pred[0].links[0] == null){
+			System.out.println(item + " is not in this list");
+			return false;
+		}
+
+		else if(!isInclude && pred[0].links[0].data.get(0).equals(item)){
 			pred[0].links[0].data.remove(0);
 			if(pred[0].links[0].data.size() == 0){
 				size--; //don't re-adjust maxCap and level, as we may have nodes at these levels

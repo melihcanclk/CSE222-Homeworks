@@ -64,7 +64,7 @@ public class Admin extends People{
         Scanner scanner = new Scanner(System.in);
         Software software = removeSoftware(tree);
         if(software == null){
-            System.out.println("No Software named " + software);
+            System.out.println("No Software");
             return;
         }
         System.out.println(software);
