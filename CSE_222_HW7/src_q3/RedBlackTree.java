@@ -1,9 +1,4 @@
-/**
- * Implementation of a Red-Black Tree Data Structure
- * @author Jacob / Koffman & Wolfgang
- *
- * @param <E> The data type of items stored in the tree. Must be Comparable
- */
+
 @SuppressWarnings("serial")
 public class RedBlackTree<E extends Comparable<E>>
 	extends BinarySearchTreeWithRotate<E> {
@@ -125,12 +120,7 @@ public class RedBlackTree<E extends Comparable<E>>
 		}
 	}
 	
-	/**
-	 * Class to represent a Red-Black node
-	 * @author Jacob / Koffman & Wolfgang
-	 *
-	 * @param <E> The data type of items stored in the node. Must be Comparable
-	 */
+
 	private static class RedBlackNode<E> extends Node<E> {
 
 		//Additional Data Fields

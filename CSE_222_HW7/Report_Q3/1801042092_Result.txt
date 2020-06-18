@@ -1,0 +1,71 @@
+Addition Results
+Binary Search Tree 10000 17190
+RedBlackTree 10000 16260
+TreeSet 10000 9150
+B-Tree 10000 11690
+SkipList(Book) 10000 5020
+SkipList(Java) 10000 8800
+SkipList(Q2) 10000 440870
+
+Deletion Results
+Binary Search Tree 10000 17770
+RedBlackTree 10000 0
+TreeSet 10000 52570
+B-Tree 10000 0
+SkipList(Book) 10000 14580
+SkipList(Java) 10000 40590
+SkipList(Q2) 10000 664750
+
+Addition Results
+Binary Search Tree 20000 9820
+RedBlackTree 20000 4540
+TreeSet 20000 3520
+B-Tree 20000 3910
+SkipList(Book) 20000 5040
+SkipList(Java) 20000 3100
+SkipList(Q2) 20000 638910
+
+Deletion Results
+Binary Search Tree 20000 7580
+RedBlackTree 20000 0
+TreeSet 20000 20410
+B-Tree 20000 0
+SkipList(Book) 20000 6370
+SkipList(Java) 20000 23020
+SkipList(Q2) 20000 661490
+
+Addition Results
+Binary Search Tree 40000 9160
+RedBlackTree 40000 3640
+TreeSet 40000 3120
+B-Tree 40000 3200
+SkipList(Book) 40000 4870
+SkipList(Java) 40000 3300
+SkipList(Q2) 40000 1287940
+
+Deletion Results
+Binary Search Tree 40000 8460
+RedBlackTree 40000 0
+TreeSet 40000 14540
+B-Tree 40000 0
+SkipList(Book) 40000 7650
+SkipList(Java) 40000 25720
+SkipList(Q2) 40000 1228980
+
+Addition Results
+Binary Search Tree 80000 4550
+RedBlackTree 80000 3820
+TreeSet 80000 10260
+B-Tree 80000 4170
+SkipList(Book) 80000 5890
+SkipList(Java) 80000 5610
+SkipList(Q2) 80000 3253350
+
+Deletion Results
+Binary Search Tree 80000 7770
+RedBlackTree 80000 0
+TreeSet 80000 20840
+B-Tree 80000 0
+SkipList(Book) 80000 9360
+SkipList(Java) 80000 25080
+SkipList(Q2) 80000 3098350

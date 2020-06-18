@@ -12,7 +12,11 @@ public class Admin extends People{
         super(username);
         this.password = password;
     }
-//bütün tree'ler verilecek
+
+    /**
+     * Adding Software to tree
+     * @param tree Tree that software will be added
+     */
     public void addSoftware(CustomSearchTree tree){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Name of Software : ");
@@ -34,9 +38,9 @@ public class Admin extends People{
     }
 
     /**
-     *  Remove book from Maps
-     * @return
-     * @param tree
+     *  Remove software from tree
+     * @return Removed software
+     * @param tree Tree that will be deleted from
      */
     public Software removeSoftware(CustomSearchTree tree){
         Scanner scanner = new Scanner(System.in);
@@ -55,10 +59,10 @@ public class Admin extends People{
         }
         return software;
     }
-//Bütün tree'lerdeki bilgiler değiştirilecek
+
     /**
-     * Update locations of the books
-     * @param tree
+     * Update Quantity or price of a software
+     * @param tree Tree that will be updated from
      */
     public void updateSoftware(CustomSearchTree tree){
         Scanner scanner = new Scanner(System.in);
@@ -93,7 +97,7 @@ public class Admin extends People{
 
     /**
      * Printing All books
-     * @param tree
+     * @param tree Tree that will be printed
      */
     public void printAllSoftwares(CustomSearchTree tree){
         System.out.println(tree);
@@ -105,16 +109,5 @@ public class Admin extends People{
      */
     public String getPassword() {
         return password;
-    }
-
-    public static String capitalizeWord(String str){
-        String[] words =str.split("\\s");
-        String capitalizeWord="";
-        for(String w:words){
-            String first=w.substring(0,1);
-            String afterfirst=w.substring(1);
-            capitalizeWord+=first.toUpperCase()+afterfirst+" ";
-        }
-        return capitalizeWord.trim();
     }
 }

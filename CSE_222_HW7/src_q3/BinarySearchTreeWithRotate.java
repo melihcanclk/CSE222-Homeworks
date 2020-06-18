@@ -1,11 +1,4 @@
-/**
- * Extends the BinarySearchTree by adding the rotate operations.
- * Rotation will change the balance of a search tree while preserving the search tree property.
- * Used as a common base for self-balancing trees.
- * @author Jacob/ Koffman & Wolfgang
- *
- * @param <E> The type of data stored. Must be a Comparable type
- */
+
 @SuppressWarnings("serial")
 public class BinarySearchTreeWithRotate<E extends Comparable<E>>
 	extends BinarySearchTree<E> {

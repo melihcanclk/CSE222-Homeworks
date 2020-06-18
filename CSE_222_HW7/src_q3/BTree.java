@@ -20,8 +20,8 @@ public class BTree<E extends Comparable<E>>  implements SearchTree<E> {
         /** The information */
         private E[] data;
         /** The links to the children. child[i] refers to
-         *  the subtree of children < data[i] for i < size
-         *  and to the subtree of children > data[size-1]
+         *  the subtree of children less than data[i] for i less than size
+         *  and to the subtree of children less than data[size-1]
          *  for i == size  */
         private Node<E>[] child;
 
@@ -64,7 +64,7 @@ public class BTree<E extends Comparable<E>>  implements SearchTree<E> {
     /**
      * Construct a B-tree with a specified order
      * @param order - the size of a node
-     * @throws IllegalArgumentException if order < 3
+     * @throws IllegalArgumentException if order less than 3
      */
     public BTree(int order) {
         if (order < 3) {
@@ -187,9 +187,6 @@ public class BTree<E extends Comparable<E>>  implements SearchTree<E> {
 
     /**
      * Method to insert a new value into a node
-     * @pre node.data[index-1] &lt; item %lt; node.data[index];
-     * @post node.data[index] == item and old values are moved
-     *       right one
      * @param node The node to insert the value into
      * @param index The index where the inserted item is to be placed
      * @param item The value to be inserted

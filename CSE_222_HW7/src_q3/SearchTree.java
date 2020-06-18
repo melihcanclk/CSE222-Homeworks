@@ -1,8 +1,5 @@
 /**
  * Searchable tree interface
- * @author Jacob / Koffman & Wolfgang
- *
- * @param <E> The item type of the tree
  */
 public interface SearchTree<E> {
 	/***

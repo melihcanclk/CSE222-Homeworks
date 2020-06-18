@@ -1,10 +1,31 @@
+/**
+ * Software class that keeps Software utilities
+ */
 public class Software implements Comparable<Software> {
+    /**
+     * Name of software (name + version)
+     */
     private NameOfSoftware nameOfSoftware;
+    /**
+     * Quantity of a software
+     */
     private Integer quantity;
+    /**
+     * Price of a software
+     */
     private Double price;
-    //control compareTo method
+    /**
+     * Control compareTo method
+     */
     private Controller controller;
 
+    /**
+     * Software Class constructor
+     * @param nameOfSoftware Name of Store class instance name of class
+     * @param quantity Quantity of software
+     * @param price Price of software
+     * @param controller Controller of software that set compareTo method
+     */
     public Software(NameOfSoftware nameOfSoftware, Integer quantity, Double price, Controller controller) {
         this.nameOfSoftware = nameOfSoftware;
         this.quantity = quantity;
@@ -12,38 +33,55 @@ public class Software implements Comparable<Software> {
         this.controller = controller;
     }
 
-    public Controller getController() {
-        return controller;
-    }
-
+    /**
+     * Setting controller of software
+     * @param controller Controller enum class
+     */
     public void setController(Controller controller) {
         this.controller = controller;
     }
 
+    /**
+     * Getter for name of software
+     * @return NameOfSoftware Type Name of Software
+     */
     public NameOfSoftware getNameOfSoftware() {
         return nameOfSoftware;
     }
 
+    /**
+     * Setter for Name of Software
+     * @param nameOfSoftware NameOfSoftware type name of software
+     */
     public void setNameOfSoftware(NameOfSoftware nameOfSoftware) {
         this.nameOfSoftware = nameOfSoftware;
     }
 
+    /**
+     * Getter for Quantity
+     * @return Integer type Quantity
+     */
     public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
+    /**
+     * Getter for Price
+     * @return Double type Price
+     */
     public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
+    /**
+     * compareTo method for software class. This class's behaviour changes according to software variable's controller.
+     * If controller is NAME, it uses String compareTo method. If controller is QUANTITY_ADD, it returns 1 if other software
+     * object is greater or equal to this software variable. Reason of that greater or equal to is that if two different
+     * software has same quantity, it adds to tree anyway. This reason is same for PRICE_ADD controller. For QUANTITY_FIND
+     * and PRICE_FIND, It uses Integer and Double compareTo method respectively
+     * @param o other software variable
+     * @return compareTo method returns
+     */
     @Override
     public int compareTo(Software o) {
         int compare = 0;
@@ -73,6 +111,10 @@ public class Software implements Comparable<Software> {
         return compare;
     }
 
+    /**
+     * toString method for Software Class
+     * @return String name + quantity + price
+     */
     @Override
     public String toString() {
         return "Software{" +

@@ -1,9 +1,4 @@
-/**
- * Searchable tree interface
- * @author Jacob / Koffman & Wolfgang
- *
- * @param <E> The item type of the tree
- */
+
 public interface SearchTree<E> {
 	/***
 	 * Inserts item where it belongs in the tree. Returns true if item is inserted; false if it isn't (already in tree)

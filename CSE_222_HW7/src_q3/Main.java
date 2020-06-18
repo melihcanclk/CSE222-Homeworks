@@ -35,7 +35,7 @@ public class Main {
                     skipListSet.add(integer);
                     skipListArray.add(integer);
                 }
-                System.out.println("ADDING");
+
                 times_add[j][0] += evaluate.evaluateArr(values,binarySearchTree::add);
                 times_add[j][1] += evaluate.evaluateArr(values,redBlackTree::add);
                 times_add[j][2] += evaluate.evaluateArr(values,treeSet::add);
@@ -43,7 +43,7 @@ public class Main {
                 times_add[j][4] += evaluate.evaluateArr(values,skipList::add);
                 times_add[j][5] += evaluate.evaluateArr(values,skipListSet::add);
                 times_add[j][6] += evaluate.evaluateArr(values,skipListArray::add);
-                System.out.println("DELETING");
+
                 for (int k = 0; k< 10;k++){
                     values[k] =arrOfCapacities[j] - k * 2;
                 }

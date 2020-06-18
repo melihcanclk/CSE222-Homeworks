@@ -20,17 +20,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bb647b43-82f3-441b-a2da-5c190fb20c13" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CSE_222_HW7.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CSE_222_HW7.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report_Q2/1801042092_Q2.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report_Q2/1801042092_Q2.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report_Q2/1801042092_Q2.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report_Q3/1801042092_Q2.pdf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src_q2/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q2/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src_q2/SkipList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q2/SkipList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_q3/BTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q3/BTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_q3/BinarySearchTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q3/BinarySearchTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_q3/BinarySearchTreeWithRotate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q3/BinarySearchTreeWithRotate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_q3/BinaryTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q3/BinaryTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_q3/Evaluate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q3/Evaluate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src_q3/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q3/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_q3/RedBlackTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q3/RedBlackTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_q3/SearchTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q3/SearchTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_q3/SkipList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q3/SkipList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src_q3/SkipListArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q3/SkipListArray.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src_q4/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q4/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_q4/BinarySearchTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q4/BinarySearchTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_q4/BinaryTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q4/BinaryTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_q4/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q4/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src_q4/CustomSearchTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q4/CustomSearchTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_q4/NameOfSoftware.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q4/NameOfSoftware.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src_q4/People.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q4/People.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_q4/SearchTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q4/SearchTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_q4/Software.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q4/Software.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_q4/SoftwareSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q4/SoftwareSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src_q4/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src_q4/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +78,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src_q3" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../CSE_222_HW8" />
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
@@ -119,6 +136,11 @@
       <workItem from="1591435248521" duration="3787000" />
       <workItem from="1591440042399" duration="11744000" />
       <workItem from="1591452619986" duration="868000" />
+      <workItem from="1591453550266" duration="58000" />
+      <workItem from="1591453800855" duration="43000" />
+      <workItem from="1591454100299" duration="515000" />
+      <workItem from="1591454684846" duration="2898000" />
+      <workItem from="1591961951189" duration="14000" />
     </task>
     <servers />
   </component>
@@ -154,6 +176,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="690" y="272" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1591395775898" />
+    <state x="707" y="244" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1591457596870">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="707" y="244" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1050@0.0.1920.1050" timestamp="1591457596870" />
     <state width="437" height="466" key="DebuggerActiveHint" timestamp="1591385782042">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -162,26 +188,26 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="704" y="108" key="Diagram.Print.Preview.Dialog/0.0.1920.1050@0.0.1920.1050" timestamp="1591437290128" />
-    <state x="740" y="251" key="FileChooserDialogImpl" timestamp="1591439464671">
+    <state x="740" y="251" key="FileChooserDialogImpl" timestamp="1591961965417">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="740" y="251" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1591439464671" />
-    <state width="1877" height="349" key="GridCell.Tab.0.bottom" timestamp="1591453495380">
+    <state x="740" y="251" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1591961965417" />
+    <state width="1877" height="408" key="GridCell.Tab.0.bottom" timestamp="1591457609915">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="349" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1591453495380" />
-    <state width="1877" height="349" key="GridCell.Tab.0.center" timestamp="1591453495380">
+    <state width="1877" height="408" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1591457609915" />
+    <state width="1877" height="408" key="GridCell.Tab.0.center" timestamp="1591457609915">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="349" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1591453495380" />
-    <state width="1877" height="349" key="GridCell.Tab.0.left" timestamp="1591453495380">
+    <state width="1877" height="408" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1591457609915" />
+    <state width="1877" height="408" key="GridCell.Tab.0.left" timestamp="1591457609915">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="349" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1591453495380" />
-    <state width="1877" height="349" key="GridCell.Tab.0.right" timestamp="1591453495380">
+    <state width="1877" height="408" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1591457609915" />
+    <state width="1877" height="408" key="GridCell.Tab.0.right" timestamp="1591457609915">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="349" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1591453495380" />
+    <state width="1877" height="408" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1591457609915" />
     <state width="1877" height="323" key="GridCell.Tab.1.bottom" timestamp="1591451943233">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -227,18 +253,8 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src_q4/BinarySearchTree.java</url>
-          <line>111</line>
-          <option name="timeStamp" value="68" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src_q4/Admin.java</url>
-          <line>18</line>
-          <option name="timeStamp" value="75" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src_q4/SoftwareSystem.java</url>
-          <line>134</line>
+          <line>137</line>
           <option name="timeStamp" value="77" />
         </line-breakpoint>
       </breakpoints>

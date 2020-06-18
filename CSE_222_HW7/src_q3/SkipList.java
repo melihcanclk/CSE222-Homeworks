@@ -1,12 +1,7 @@
 import java.util.Arrays;
 import java.util.Random;
 
-/**
- * Implementation of a Skip-List data structure
- * @author Jacob / Koffman & Wolfgang
- *
- *@param <E> The type of data stored. Must be a Comparable
- */
+
 public class SkipList<E extends Comparable<E>> {
 	/**
 	 * Head of the skip-list
@@ -142,8 +137,8 @@ public class SkipList<E extends Comparable<E>> {
 	
 	/**
 	 * Recompute the max cap
-	 * @param level
-	 * @return
+	 * @param level Max Level of Skip List
+	 * @return new Computed Max Cap
 	 */
 	private int computeMaxCap(int level){
 		return (int) Math.pow(2, level) - 1;
@@ -171,9 +166,6 @@ public class SkipList<E extends Comparable<E>> {
 	
 	/**
 	 * Static class to contain data and links
-	 * @author Jacob / Koffman & Wolfgang
-	 *
-	 * @param <E> The type of data stored. Must be a Comparable
 	 */
 	static class SLNode<E>{
 		SLNode<E>[] links;

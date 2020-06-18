@@ -21,11 +21,14 @@ public class SoftwareSystem {
      * User that login to system
      */
     private People user;
-  
+
     /**
-     * Constructor of library Management System
+     *
+     *  Constructor of library Management System
+     * @throws IllegalAccessException Exception for Illegal Access
+     * @throws InstantiationException Exception for Instantiation
      */
-    SoftwareSystem() throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
+    SoftwareSystem() throws IllegalAccessException, InstantiationException {
         peoples = new HashSet<>();
         //User should give tree that implements SearchTree interface
         tree = new CustomSearchTree(new BinarySearchTree<>());

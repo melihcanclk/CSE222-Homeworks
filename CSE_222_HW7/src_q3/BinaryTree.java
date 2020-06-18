@@ -2,12 +2,6 @@
 import java.io.*;
 import java.util.Scanner;
 
-/**
- * Class for a binary tree that stores type E objects
- * @author Jacob / Koffman & Wolfgang
- *
- * @param <E> The type of data to be stored
- */
 @SuppressWarnings("serial")
 public class BinaryTree<E> implements Serializable {
 	
@@ -195,9 +189,6 @@ public class BinaryTree<E> implements Serializable {
 	
 	/**
 	 * Class to encapsulate a tree node
-	 * @author Jacob / Koffman & Wolfgang
-	 *
-	 * @param <E> The type of data stored
 	 */
 	protected static class Node<E> implements Serializable {
 		

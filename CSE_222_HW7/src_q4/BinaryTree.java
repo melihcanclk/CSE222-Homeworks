@@ -21,7 +21,6 @@ public class BinaryTree<E> implements Serializable {
 		 * @param data The data to store in this node
 		 * 
 		 */
-
 		public Node(E data) {
 			this.data = data;
 			left = null;

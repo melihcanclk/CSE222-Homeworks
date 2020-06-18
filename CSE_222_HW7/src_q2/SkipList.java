@@ -1,4 +1,3 @@
-import javax.sound.sampled.Line;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -6,15 +5,15 @@ import java.util.Random;
 
 /**
  * Implementation of a Skip-List data structure
- * @author Jacob / Koffman & Wolfgang
- *
- *@param <E> The type of data stored. Must be a Comparable
  */
 public class SkipList<E extends Comparable<E>> {
 	/**
 	 * Head of the skip-list
 	 */
 	public SLNode<E> head;
+	/**
+	 * Total size of Nodes
+	 */
 	public static int size;
 	/**
 	 * The maximum level of the skip-list
@@ -28,7 +27,13 @@ public class SkipList<E extends Comparable<E>> {
 	 * Natural log of 2
 	 */
 	static final double LOG2 = Math.log(2.0);
+	/**
+	 * Minimum capacity of arrays
+	 */
 	static final int maxCapOfArray = 4;
+	/**
+	 * Maximum capacity of arrays
+	 */
 	static final int minCapOfArray = 1;
 	/**
 	 * Minimum possible integer value for the head
@@ -39,7 +44,9 @@ public class SkipList<E extends Comparable<E>> {
 	 */
 	private Random rand = new Random();
 
-	//Constructor
+	/**
+	 * Constructor of Skip List
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public SkipList(){
 		size = 1;
@@ -126,6 +133,14 @@ public class SkipList<E extends Comparable<E>> {
 		}
 		return true;
 	}
+
+	/**
+	 * Recursive add method
+	 * @param item E item that will be added to Skip List
+	 * @param node Predecessor node
+	 * @param i if i is smaller than 1, it adds last item at the node to next node
+	 * @return returns -1 if there are still nodes, returns 1 if there are no nodes left
+	 */
 	int add(E item, SLNode<E> node, int i){
 		//---- -> --
 		if(node.links[0] != null && node.links[0].data.size() < maxCapOfArray){
@@ -208,8 +223,8 @@ public class SkipList<E extends Comparable<E>> {
 
 	/**
 	 * Recompute the max cap
-	 * @param level
-	 * @return
+	 * @param level maxlevel of head node
+	 * @return recomputed max capacity
 	 */
 	private int computeMaxCap(int level){
 		return (int) Math.pow(2, level) - 1;

@@ -1,10 +1,4 @@
 
-/**
- * Implementation of a Binary Search Tree
- * @author Jacob / Koffman & Wolfgang
- *
- * @param <E> The type of data in the tree. Must be a Comparable object.
- */
 @SuppressWarnings("serial")
 public class BinarySearchTree<E extends Comparable<E>>
 								extends BinaryTree<E>

@@ -14,6 +14,7 @@ public class Main {
         //test10();
         //test11();
     }
+
     public static void test1(){
         skipList.add(5);
         System.out.println(skipList);

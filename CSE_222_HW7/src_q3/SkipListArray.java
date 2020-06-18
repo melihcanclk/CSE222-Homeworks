@@ -1,12 +1,6 @@
 
 import java.util.*;
 
-/**
- * Implementation of a Skip-List data structure
- * @author Jacob / Koffman & Wolfgang
- *
- *@param <E> The type of data stored. Must be a Comparable
- */
 public class SkipListArray<E extends Comparable<E>> {
 	/**
 	 * Head of the skip-list
@@ -148,10 +142,8 @@ public class SkipListArray<E extends Comparable<E>> {
 	}
 
 	/**
-	 * Static class to contain data and links
-	 * @author Jacob / Koffman & Wolfgang
-	 *
-	 * @param <E> The type of data stored. Must be a Comparable
+	 * Skip List Node Class
+	 * @param <E> E generic type
 	 */
 	static class SLNode<E>{
 		private static final int SIZE_OF_ARRAYS = 5;
@@ -168,6 +160,10 @@ public class SkipListArray<E extends Comparable<E>> {
 			this.data.add(data);
 			cursor = 0;
 		}
+
+		/**
+		 * Create a node with empty length data
+		 */
 		public SLNode(){
 			this.data = new ArrayList<>();
 			cursor = 0;
@@ -178,6 +174,11 @@ public class SkipListArray<E extends Comparable<E>> {
 			return (data + " |" +  "|");
 		}
 	}
+
+	/**
+	 * General Node that keeps next and before nodes
+	 * @param <E> Generic Type
+	 */
 	static class GeneralNode<E>{
 		SLNode<E> node;
 		GeneralNode<E> nextNode;

@@ -23,7 +23,8 @@ public abstract class People {
     }
 
     /**
-     * Search Book By Author Name
+     * Search Software by Name
+     * @param searchTreeByName Name Tree
      */
     public void searchSoftwareByName(SearchTree<Software> searchTreeByName){
         Scanner scanner = new Scanner(System.in);
@@ -33,14 +34,12 @@ public abstract class People {
         String vers = scanner.next();
         Software software = searchTreeByName.find(new Software(new NameOfSoftware(input,Double.valueOf(vers)),null,null, Controller.NAME));
         if(software != null){
-            System.out.println(Admin.capitalizeWord(software.toString()));
+            System.out.println(software.toString());
         }else{
             System.out.println("No Software Named " + input + " " + vers);
         }
 
     }
-
-
     /**
      * Equals method that controls if two people has same name or not
      * @param obj Other People object
@@ -51,17 +50,19 @@ public abstract class People {
         return this.getUsername().equals(((People)obj).getUsername());
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#toString()
+    /**
+     * toString Method for people
+     * @return String People + username
      */
-
     @Override
     public String toString() {
         return "People [username=" + username + "]";
     }
 
+    /**
+     * Search Software by Quantity
+     * @param searchTreeByQuantity Quantity Tree
+     */
     public void searchSoftwareByQuantity(SearchTree<Software> searchTreeByQuantity) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Quantity of Software : ");
@@ -76,6 +77,10 @@ public abstract class People {
 
     }
 
+    /**
+     * Search Software by Price
+     * @param searchTreeByPrice Price Tree
+     */
     public void searchSoftwareByPrice(SearchTree<Software> searchTreeByPrice) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Price of Software : ");
