@@ -6,7 +6,6 @@ import java.util.*;
  *    Edges are ordered pairs of vertices.
  * Each implementation of the Graph interface should provide a constructor that specifies the number of vertices
  * and whether or not the graph is directed.
- * @author Jacob / Koffman & Wolfgang
  *
  */
 public interface Graph {
@@ -50,7 +49,7 @@ public interface Graph {
 	/**
 	 * Return an iterator to the edges connected to a given vertex
 	 * @param source The source vertex
-	 * @return An Iterator<Edge> to the vertices connected to source
+	 * @return An Iterator Edge to the vertices connected to source
 	 */
 	Iterator<Edge> edgeIterator(int source);
 }

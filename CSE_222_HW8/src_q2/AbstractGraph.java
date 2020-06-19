@@ -1,9 +1,8 @@
 import java.util.*;
-import java.io.*;
 
 /**
  * Abstract base class for graphs. A graph is a set of vertices and a set of
- * edges. Vertices are represented by integers from 0 to n ‐ 1. Edges are
+ * edges. Vertices are represented by integers from 0 to n minus 1. Edges are
  * ordered pairs of vertices.
  */
 public abstract class AbstractGraph implements Graph {
@@ -25,16 +24,15 @@ public abstract class AbstractGraph implements Graph {
         this.numV = numV;
         this.directed = directed;
     }
+
     /**
      * Return the number of vertices.
-     *
-     * @return The number of vertices
+     * @param numV Number of Vertices
      */
-    public int setNumV(int numV) {
-        return this.numV = numV;
+    public void setNumV(int numV) {
+        this.numV = numV;
     }
 
-    // Accessor Methods
     /**
      * Return the number of vertices.
      * 
@@ -78,6 +76,7 @@ public abstract class AbstractGraph implements Graph {
      *                   created, and the string "List" if an adjacency list is to
      *                   be created
      * @throws IllegalArgumentException if type is neither "Matrix" nor "List"
+     * @return Returns created Graph
      */
     public static Graph createGraph(Scanner scan, boolean isDirected, String type) {
         int numV = scan.nextInt();

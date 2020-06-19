@@ -2,7 +2,6 @@ import java.util.*;
 
 /**
  * An implementation of a graph that uses an array of lists to represent the edges
- * @author Jacob / Koffman & Wolfgang
  *
  */
 public class ListGraph extends AbstractGraph {
@@ -25,11 +24,21 @@ public class ListGraph extends AbstractGraph {
 			edges[i] = new LinkedList<Edge>();
 		}
 	}
-	
+
+	/**
+	 * Is given source and destination represents an edge
+	 * @param source source index
+	 * @param dest destination index
+	 * @return if given source and destination represents edge or not
+	 */
 	public boolean isEdge(int source, int dest){
 		return edges[source].contains(new Edge(source, dest));
 	}
-	
+
+	/**
+	 * Inserts an edge into List Graph
+	 * @param edge Edge data field that will be inserted
+	 */
 	public void insert(Edge edge){
 		edges[edge.getSource()].add(edge);
 		if(!isDirected()){
@@ -38,21 +47,35 @@ public class ListGraph extends AbstractGraph {
 											   edge.getWeight()));
 		}
 	}
-	
+
+	/**
+	 * Iterator of edge that traverse edges with given source
+	 * @param source source of edge that will be traversed
+	 * @return Iterator of a given source
+	 */
 	public Iterator<Edge> edgeIterator(int source){
 		return edges[source].iterator();
 	}
-	
+
+	/**
+	 * Getting Edge Class Type with given source and destination
+	 * @param source source of an edge
+	 * @param dest destination of an edge
+	 * @return edge with given source and destination
+	 */
 	public Edge getEdge(int source, int dest){
 		Edge target = new Edge(source, dest, Double.POSITIVE_INFINITY);
 		for(Edge edge : edges[source]){
 			if(edge.equals(target))
 				return edge; //Desired edge found; return it
 		}
-		//Assert: All edges for source checked.
 		return target; //Desired edge not found.
 	}
-	
+
+	/**
+	 * toString method of Edges
+	 * @return  Edges
+	 */
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		int end = edges.length;
@@ -64,7 +87,12 @@ public class ListGraph extends AbstractGraph {
 		}
 		return sb.toString();
 	}
-	
+
+	/**
+	 * Loades edges From file as given below
+	 *    source,dest,weight
+	 * @param scan The Scanner connected to the data file
+	 */
 	@Override
 	public void loadEdgesFromFile(Scanner scan){
 		//System.out.println(edges.length);
@@ -75,7 +103,12 @@ public class ListGraph extends AbstractGraph {
 		}
 		scan.close();
 	}
-	
+
+	/**
+	 * Returns edge with given file
+	 * @param input One line
+	 * @return Edge
+	 */
 	private Edge parseFileString(String input)
 	{
 		Edge toReturn = null;//initialize an Edge to return

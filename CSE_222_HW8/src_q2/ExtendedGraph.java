@@ -1,15 +1,46 @@
 import java.util.*;
 
 public class ExtendedGraph extends AbstractGraph{
+    /**
+     * Head node that keeps head of 2-D linkedlist
+     */
     private static Node head;
 
+    /**
+     * Node class that represents Nodes of Linkedlist
+     */
     private static class Node{
+        /**
+         * Edge of node
+         */
         private Edge edge;
+        /**
+         * Row Previous of Node
+         */
         private Node r_prev;
+        /**
+         * Row Next of Node
+         */
         private Node r_next;
+        /**
+         * Column Previous of Node
+         */
         private Node c_prev;
+        /**
+         * Column Next of Node
+         */
         private Node c_next;
 
+        /**
+         * Node class constructor
+         * @param source Source
+         * @param dest Destination
+         * @param weight Weight
+         * @param r_prev Row Previous
+         * @param r_next Row Next
+         * @param c_prev Column Previous
+         * @param c_next Column Next
+         */
         public Node(int source, int dest, double weight, Node r_prev, Node r_next, Node c_prev, Node c_next) {
             this(source,dest,weight);
             this.r_prev = r_prev;
@@ -17,6 +48,13 @@ public class ExtendedGraph extends AbstractGraph{
             this.c_prev = c_prev;
             this.c_next = c_next;
         }
+
+        /**
+         * Node class Constructor with no next or prev Node classes
+         * @param source Source
+         * @param dest Destination
+         * @param weight Weight
+         */
         public Node(int source, int dest, double weight) {
             this.edge = new Edge(source, dest, weight);
         }
@@ -49,6 +87,13 @@ public class ExtendedGraph extends AbstractGraph{
         }
     }
 
+    /**
+     * Find Row and Column nodes next to head node
+     * @param source Source
+     * @param dest Destination
+     * @return Node[0] gives top Node of head with given source
+     *          Node[1] gives left Node of head with given destination
+     */
     private Node[] findRowAndColumn(int source, int dest){
         Node temp_col;
         Node temp_row = temp_col =  head;
@@ -74,6 +119,12 @@ public class ExtendedGraph extends AbstractGraph{
         return nodes;
     }
 
+    /**
+     * Find Node with given source and destination
+     * @param source Source
+     * @param dest Destination
+     * @return Node type node with given source and destination. If not found, returns null
+     */
     private Node findNode(int source, int dest){
         Node [] nodes = findRowAndColumn(source, dest);
         Node temp = nodes[0];
@@ -88,6 +139,10 @@ public class ExtendedGraph extends AbstractGraph{
         return null;
     }
 
+    /**
+     * Inserts new Edge to Graph
+     * @param edge The new edge
+     */
     @Override
     public void insert(Edge edge) {
         int source = edge.getSource();
@@ -99,6 +154,12 @@ public class ExtendedGraph extends AbstractGraph{
         }
     }
 
+    /**
+     * Inserts new Edge to Graph
+     * @param source Source
+     * @param dest Destination
+     * @param weight Weight
+     */
     private void insert(int source,int dest, double weight){
 
         Node [] nodes = findRowAndColumn(source,dest);
@@ -107,15 +168,30 @@ public class ExtendedGraph extends AbstractGraph{
         if(temp_col != null && temp_row != null){
             Node tempPredRow = temp_row;
             while (temp_row != null && temp_row.edge.getSource() < source){
+
                 tempPredRow = temp_row;
                 temp_row = temp_row.c_next;
             }
             Node tempPredCol = temp_col;
-            while (temp_col != null && temp_col.edge.getDest() < dest){
+            while (temp_col != null && temp_col.edge.getDest() < dest ){
+
                 tempPredCol = temp_col;
                 temp_col = temp_col.r_next;
             }
+            if(temp_col!= null && temp_row != null )
+                if(weight == 1.0){
+                    if(temp_col.edge.getDest() == dest && temp_row.edge.getSource() == source){
+                        System.out.println(new Node(source,dest,weight) + " Already Exists");
+                        return;
+                    }
+                } else{
+                    if(temp_col.edge.getDest() == dest && temp_row.edge.getSource() == source && temp_col.edge.getWeight() == weight && temp_row.edge.getWeight() == weight){
+                        System.out.println(new Node(source,dest,weight) + " Already Exists");
+                        return;
+                    }
+                }
             Node node = new Node(source,dest,weight,tempPredCol, temp_col,tempPredRow,temp_row);
+
             tempPredCol.r_next = node;
             if(temp_col != null){
                 temp_col.r_prev = node;
@@ -130,17 +206,34 @@ public class ExtendedGraph extends AbstractGraph{
 
     }
 
+    /**
+     * Returns if given source and destination vertexes represents an edge or not
+     * @param source The source vertex
+     * @param dest   The destination vertex
+     * @return if  given source and destination vertexes represents an edge or not
+     */
     @Override
     public boolean isEdge(int source, int dest) {
         return getEdge(source,dest) != null;
     }
 
+    /**
+     * Getting Edge with given Source and destination vertexes
+     * @param source The source vertex
+     * @param dest   The destination vertex
+     * @return Edge with given Source and destination vertexes
+     */
     @Override
     public Edge getEdge(int source, int dest) {
         Node n = findNode(source,dest);
         return (n == null? null :n.edge);
     }
 
+    /**
+     * edgeIterator
+     * @param source The source vertex
+     * @return Iterator with Edge class
+     */
     @Override
     public Iterator<Edge> edgeIterator(int source) {
         return new GraphIterator(source);
@@ -191,7 +284,10 @@ public class ExtendedGraph extends AbstractGraph{
         return n;
     }
 
-
+    /**
+     * Inserts a vertex to head Node source and destinations
+     * @param source source vertex
+     */
     public void insertVertex(int source) {
         Node temp = head;
         //Gets pred of position of node will be insert
@@ -224,6 +320,10 @@ public class ExtendedGraph extends AbstractGraph{
         setNumV(getNumV() + 1);
     }
 
+    /**
+     * Delete all Edges in the given source
+     * @param source Source will be deleted
+     */
     public void deleteVertex(int source) {
         Node left = findRowAndColumn(source,0 )[1];
         Node top = findRowAndColumn(0,source)[0];
@@ -241,6 +341,11 @@ public class ExtendedGraph extends AbstractGraph{
         setNumV(getNumV() - 1);
     }
 
+    /**
+     * Breath First Search with starting vertex
+     * @param start Starting Vertex
+     * @return Parent int array
+     */
     public int[] breathFirstSearch(int start){
         Queue<Integer> theQueue = new LinkedList<Integer>();
         //Declare array parent and initialize its elements to -1
@@ -278,6 +383,12 @@ public class ExtendedGraph extends AbstractGraph{
         return parent;
     }
 
+    /**
+     * Depth First Search
+     * @param startingIndex Starting Index
+     * @param discoveryOrder Discovery Order
+     * @param finishOrder Finish Order
+     */
     public void depthFirstSearch(int startingIndex,  int [] discoveryOrder, int [] finishOrder) {
         int n = getNumV();
         int finishIndex;
@@ -297,6 +408,15 @@ public class ExtendedGraph extends AbstractGraph{
         }
     }
 
+    /**
+     * Depth First Search private method
+     * @param startingIndex Starting index
+     * @param visited Visited boolean array
+     * @param discoveryOrder int array discover order
+     * @param parent Parent array
+     * @param finishOrder int array finish order
+     * @param finishIndex finish index
+     */
     private void dFS(int startingIndex, boolean[] visited , int[] discoveryOrder, int[] parent, int[] finishOrder, int finishIndex){
         // Let s be a stack, then push the start vertex onto it
         int discoverIndex = 0;
@@ -324,9 +444,19 @@ public class ExtendedGraph extends AbstractGraph{
 
     }
 
+    /**
+     * Graph Iterator class that implements Iterator with Edge generic type
+     */
     private static class GraphIterator implements Iterator<Edge>{
-
+        /**
+         * Node that holds left Nodes
+         */
         Node node;
+
+        /**
+         * Constructor of Iterator
+         * @param source Source
+         */
         GraphIterator(int source){
             node = head;
             for (int i = 0; i< source;i++){
@@ -361,6 +491,10 @@ public class ExtendedGraph extends AbstractGraph{
         }
     }
 
+    /**
+     * toString method that prints all Edges in the Graph
+     * @return String with all edges
+     */
     @Override
     public String toString(){
        StringBuilder sb = new StringBuilder();

@@ -1,6 +1,5 @@
 /**
  * Edge class for implementing graphs. Vertices are represented by the type int
- * @author Jacob / Koffman & Wolfgang
  *
  */
 public class Edge {
@@ -51,6 +50,7 @@ public class Edge {
 	 * Compares two edges for equality. Edges are equal if their source and destination vertices are the same. 
 	 *    Weight is not considered.
 	 * @param e The edge we are comparing to.
+	 * @return if two edges' source and destination are equal, returns true, otherwise false
 	 */
 	public boolean equals(Edge e){
 		return (this.source == e.source && this.dest == e.dest);

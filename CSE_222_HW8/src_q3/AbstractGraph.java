@@ -8,7 +8,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * Abstract base class for graphs. A graph is a set of vertices
  * and a set of edges. Vertices are represented by integers from 0 to n - 1.
  * Edges are ordered pairs of vertices.
- * @author Jacob / Koffman & Wolfgang
  *
  */
 public abstract class AbstractGraph implements Graph {
@@ -88,22 +87,10 @@ public abstract class AbstractGraph implements Graph {
 	 * @param isDirected true if the Graph is to be a directed graph
 	 * @param type Flag for whether the graph is implemented with an adjacency list or an adjacency matrix
 	 * @return A graph from the user's chosen file
-	 * @throws IlegalArgumentException if type is neither "Matrix" nor "List"
+	 *
 	 */
-	public static Graph createGraph(boolean isDirected, String type) throws IOException {
-		Scanner sc = null;
-		JFileChooser chooser = new JFileChooser(); //a file chooser
-		chooser.setFileFilter(new FileNameExtensionFilter("Text files", "txt")); //for txt files
-		int returnVal = chooser.showOpenDialog(chooser); //show the dialog to OPEN
-		if(returnVal == JFileChooser.APPROVE_OPTION){ //if they picked something
-			try {
-				sc = new Scanner(chooser.getSelectedFile()); //parse it with Scanner
-			} catch(Exception e) {
-				System.out.println("Error loading from file: "+e);
-				e.printStackTrace();
-			}
-		}
-		return createGraph(sc, isDirected, type);
+	public static Graph createGraph(boolean isDirected, String type){
+		return null;
 	}
 	
 	/**
@@ -115,11 +102,11 @@ public abstract class AbstractGraph implements Graph {
 	 * @param type The string "Matrix" if an adjacency matrix is to be created, 
 	 * 		       and the string "List" if an adjacency list is to be created.
 	 * @return The Graph from the data file
-	 * @throws IlegalArgumentException if type is neither "Matrix" nor "List"
+	 *
 	 */
 	public static Graph createGraph(Scanner scan, 
 									boolean isDirected, 
-									String type) throws IOException {
+									String type) {
 		int numV = scan.nextInt();
 		scan.nextLine(); //move to the next line
 		AbstractGraph returnValue = null;

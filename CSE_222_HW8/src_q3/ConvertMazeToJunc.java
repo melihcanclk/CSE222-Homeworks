@@ -4,10 +4,18 @@ import java.io.IOException;
 import java.util.*;
 
 public class ConvertMazeToJunc {
+    /**
+     * Comparable Point class
+     */
     private static class Point implements Comparable<Point>{
         Integer x;
         Integer y;
 
+        /**
+         * Constructor of Point Class
+         * @param x x parameter
+         * @param y y parameter
+         */
         public Point(int x, int y) {
             this.x = x;
             this.y = y;
@@ -107,6 +115,10 @@ public class ConvertMazeToJunc {
             return false;
         }
 
+        /**
+         * toString method of point
+         * @return String point
+         */
         @Override
         public String toString() {
             return "Point{" +
@@ -165,17 +177,31 @@ public class ConvertMazeToJunc {
 
         }
     }
+
+    /**
+     * Distance class that holds two Point class variable and distance between them
+     */
     private static class Distance{
         Point firstPoint;
         Point secondPoint;
         int distance;
 
+        /**
+         * Constructor of Distance class
+         * @param firstPoint first Point
+         * @param secondPoint Second Point
+         * @param distance Distance between first point and second point (Weight)
+         */
         public Distance(Point firstPoint, Point secondPoint, int distance) {
             this.firstPoint = firstPoint;
             this.secondPoint = secondPoint;
             this.distance = distance;
         }
     }
+
+    /**
+     * Comperable Edge class
+     */
     private static class EdgeWithComparable extends Edge implements Comparable<Edge>{
 
         /**
@@ -255,7 +281,12 @@ public class ConvertMazeToJunc {
     private static boolean [][] sol;
     private static boolean [][] isJunc;
 
-    public static char[][] read(Scanner scan){
+    /**
+     * method that reads given text file
+     * @param scan Scanner for .txt file given as compilation parameter
+     * @return char[][] that keeps maze with binary datas
+     */
+    private static char[][] read(Scanner scan){
         ArrayList<String> array = new ArrayList<>();
         int sizex = 0;
         while (scan.hasNextLine()){
@@ -273,6 +304,12 @@ public class ConvertMazeToJunc {
         return charArray;
 
     }
+
+    /**
+     * Converts maze to Map junctions
+     * @param charArray Maze
+     * @return Map that every junction represented as an integer
+     */
     public static Map<Point, Integer> convert(char[][] charArray){
         sol = new boolean[charArray.length][charArray[0].length];
         isJunc = new boolean[charArray.length][charArray[0].length];
@@ -285,7 +322,8 @@ public class ConvertMazeToJunc {
         for(Distance p : distArr){
             pointSet.add(p.firstPoint);
             pointSet.add(p.secondPoint);
-            System.out.println("(" + p.firstPoint.x + " " + p.firstPoint.y + ") (" + p.secondPoint.x + " " + p.secondPoint.y + ") " + p.distance);
+            // Prints all junctions and distances
+            //  System.out.println("(" + p.firstPoint.x + " " + p.firstPoint.y + ") (" + p.secondPoint.x + " " + p.secondPoint.y + ") " + p.distance);
         }
         Map<Point,Integer> map = new LinkedHashMap<>();
         int i = 0;
@@ -294,7 +332,7 @@ public class ConvertMazeToJunc {
             i++;
         }
         try {
-            FileWriter myWriter = new FileWriter("src_q3/graphWillBeRead.txt");
+            FileWriter myWriter = new FileWriter("graphWillBeRead.txt");
             myWriter.write(String.valueOf(pointSet.size()) + "\n");
             List<EdgeWithComparable> edgeList = new ArrayList<>();
             for(Point p :pointSet){
@@ -338,6 +376,11 @@ public class ConvertMazeToJunc {
     public static void findJunctions(char[][] maze, int x, int y, Stack<Point> pointStack, ArrayList<Distance> dist, int distCounter){
         ArrayList<Point> points = isJunction(maze, x, y);
         sol[y][x] = true;
+        if(x == X - 1 && y == Y - 1){
+            Point firstPoint = pointStack.peek();
+            Point secondPoint = new Point(x,y);
+            dist.add(new Distance(firstPoint,secondPoint,distCounter));
+        }
         if(points.size() != 1 ){
             isJunc[y][x] = true;
             Point firstPoint = pointStack.pop();
@@ -348,14 +391,18 @@ public class ConvertMazeToJunc {
                 }
             if(points.size() != 0){
                 dist.add(new Distance(firstPoint,secondPoint,distCounter));
-            }else{
-                if(isOut(y,x-1) && isJunc[y][x-1]){
+            }else if(firstPoint.x == x  && firstPoint.y == y){
+                distCounter = 0;
+                return;
+            }
+            else{
+                if(isIn(x-1,y) && isJunc[y][x-1]){
                     dist.add(new Distance(firstPoint,new Point(secondPoint.x - 1, secondPoint.y),distCounter+1));
-                } else if(isOut(y,x+1) && isJunc[y][x+1]){
+                } else if(isIn(x+1,y) && isJunc[y][x+1]){
                     dist.add(new Distance(firstPoint,new Point(secondPoint.x + 1, secondPoint.y),distCounter+1));
-                } else if(isOut(y+1,x) && isJunc[y+1][x]){
+                } else if(isIn(x,y+1) && isJunc[y+1][x]){
                     dist.add(new Distance(firstPoint,new Point(secondPoint.x, secondPoint.y + 1),distCounter+1));
-                } else if(isOut(y-1,x) && isJunc[y-1][x]){
+                } else if(isIn(x,y-1) && isJunc[y-1][x]){
                     dist.add(new Distance(firstPoint,new Point(secondPoint.x, secondPoint.y - 1),distCounter+1));
                 } else{
                     dist.add(new Distance(firstPoint,secondPoint,distCounter));
@@ -366,22 +413,16 @@ public class ConvertMazeToJunc {
         }
         for (Point point : points) {
             findJunctions(maze, point.x, point.y, pointStack, dist, distCounter + 1);
-            if(isDone(maze))
-                return;
         }
     }
 
-    private static boolean isDone(char[][] maze) {
-        for(int i = 0; i< sol.length;i++){
-            for(int j = 0; j < sol[0].length;j++){
-                if(!sol[i][j] || maze[i][j] == '0'){
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
+    /**
+     * Check if given cell is a junction or not
+     * @param charArray Maze
+     * @param x x position at Maze
+     * @param y y position at Maze
+     * @return Arraylist of Point class that holds Points that program can go
+     */
     private static ArrayList<Point> isJunction(char[][] charArray, int x, int y){
         ArrayList<Point> counter = new ArrayList<>();
         for(int i = 0; i< control.length;i++){
@@ -394,19 +435,34 @@ public class ConvertMazeToJunc {
         return counter;
     }
 
-
+    /**
+     * Returns if given positions are safe and not gone
+     * @param x x position
+     * @param y y position
+     * @return Returns if given positions are safe and not gone
+     */
     private static boolean isSafe(int x, int y)
     {
         // if (x, y outside maze) return false
-        return (x >= 0 && x < X && y >= 0 && y < Y && !sol[y][x]);
+        return (isIn(x,y) && !sol[y][x]);
     }
 
-    private static boolean isOut(int x, int y)
+    /**
+     * Returns given positions are inside of Maze
+     * @param x x position
+     * @param y y position
+     * @return given positions are inside of Maze
+     */
+    private static boolean isIn(int x, int y)
     {
         // if (x, y outside maze) return false
         return (x >= 0 && x < X && y >= 0 && y < Y);
     }
 
+    /**
+     * Main function that performs Breath First Search in the book
+     * @param arg argument that taken from command line
+     */
     public static void mainFunc(String arg) {
         int numV = 0; // The number of vertices.
         Graph theMaze = null;
@@ -416,7 +472,7 @@ public class ConvertMazeToJunc {
             Scanner scan = new Scanner(new File(arg));
             char [][] readCharArray = ConvertMazeToJunc.read(scan);
             returnMap = ConvertMazeToJunc.convert(readCharArray);
-            scan = new Scanner(new File("src_q3/graphWillBeRead.txt"));
+            scan = new Scanner(new File("graphWillBeRead.txt"));
             theMaze = AbstractGraph.createGraph(scan, false, "List");
             numV = theMaze.getNumV();
         } catch (IOException ex) {
@@ -425,10 +481,11 @@ public class ConvertMazeToJunc {
             System.exit(1);
         }
         //Perform breadth-first search
-        int[] parent = BreadthFirstSearch.breadthFirstSearch(theMaze, returnMap.get(new Point(X-1, Y-1)));
+        int x = returnMap.get(new Point(X-1, Y-1));
+        int[] parent = BreadthFirstSearch.breadthFirstSearch(theMaze, x);
         //Construct the path
         Stack thePath = new Stack();
-        int v = 0;
+        int v =0;
         while(parent[v] != -1){
             thePath.push(new Integer(v));
             v = parent[v];
@@ -445,6 +502,15 @@ public class ConvertMazeToJunc {
             System.out.println(figureOut.pop());
         }
     }
+
+    /**
+     * Get key of a given value at map
+     * @param map Map that will be searched
+     * @param value Value that will be look up
+     * @param <K> K generic Type
+     * @param <V> V generic Type
+     * @return  key of a given value at map
+     */
     public static <K, V> K getKey(Map<K, V> map, V value) {
         for (K key : map.keySet()) {
             if (value.equals(map.get(key))) {

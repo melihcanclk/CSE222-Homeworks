@@ -1,10 +1,7 @@
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 /**
  * Class to implement a breadth-first search algorithm
- * @author Jacob / Koffman & Wolfgang
  *
  */
 public class BreadthFirstSearch {
